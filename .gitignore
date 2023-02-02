@@ -1,7 +1,7 @@
 *.pyc
 __pycache__/
 
-.Notes.pages
+./Notes.pages
 
 instance/
 

@@ -16,6 +16,20 @@
         <li><a href="/sign-up">Sign Up</a></li>
       </ul> 
     </nav>
+    <!-- this block flashes messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for message in messages %}
+      <div role="alert"> 
+        {{ message }} 
+        <button type="button" class="close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      {% endfor %}
+    {% endif %}
+    {% endwith %}
+
     <div>
       <!--this can be overwritten in child files to add content-->
       {% block content %}
