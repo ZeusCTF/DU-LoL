@@ -47,7 +47,7 @@ def sign_up():
         password1 = request.form.get('password1')
         password2 = request.form.get('password2')
         
-
+        #checks for first instance of email
         user = User.query.filter_by(email=email).first()
         if user:
             flash('Email already exists', category='error')
@@ -57,11 +57,18 @@ def sign_up():
         elif password1 != password2:
             flash('passwords don\'t match', category='error')
         else:
+            #seperates userid from email
+            username = email.split('@')
+            #update this with admin/coach admin usernames
+            if username[0] == 'testing':
+                adminStatus = True
+            else:
+                adminStatus = False
             #creates a db object to enter into the db
-            new_user = User(email=email, userName='placeholder', password=generate_password_hash(password1, method='sha256'))
+            new_user = User(email=email, userName=username[0], password=generate_password_hash(password1, method='sha256'), isAdmin=adminStatus)
             db.session.add(new_user)
             db.session.commit()
             flash('Account created successfully', category='success')
-            login_user(user, remember=True)
             return redirect(url_for('views.index'))
+        
     return render_template('sign_up.html', user=current_user)

@@ -1,6 +1,6 @@
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template, request, redirect, url_for
 from flask_login import login_required, current_user
-from .models import Announcement
+from .models import Announcement, User
 from . import db
 
 
@@ -19,6 +19,6 @@ def index():
         db.session.add(new_announcement)
         db.session.commit()
     #user=current_user allows us to reference the current user
-    return render_template("home.html", user=current_user)
+    return render_template("home.html", user=current_user, acc=current_user.userName, adminStatus=current_user.isAdmin)
 
 

@@ -9,6 +9,7 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(150), unique=True)
     password = db.Column(db.String(150))
     userName = db.Column(db.String(150))
+    isAdmin = db.Column(db.Boolean())
     announcement = db.relationship('Announcement')
 
 class Announcement(db.Model):

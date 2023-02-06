@@ -23,7 +23,9 @@ def create_app():
     app.register_blueprint(auth, url_prefix='/')
 
     #makes sure the db models are created
-    from .models import User,Announcement
+    from .models import User
+    from .models import Announcement
+
     #https://stackoverflow.com/questions/73968584/flask-sqlalchemy-db-create-all-got-an-unexpected-keyword-argument-app
     #sql alchemy now requires an active Flask app context
     with app.app_context():
