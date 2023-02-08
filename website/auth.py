@@ -46,6 +46,7 @@ def sign_up():
         email = request.form.get('email')
         password1 = request.form.get('password1')
         password2 = request.form.get('password2')
+        team = request.form.get('team')
         
         #checks for first instance of email
         user = User.query.filter_by(email=email).first()
@@ -65,7 +66,7 @@ def sign_up():
             else:
                 adminStatus = False
             #creates a db object to enter into the db
-            new_user = User(email=email, userName=username[0], password=generate_password_hash(password1, method='sha256'), isAdmin=adminStatus)
+            new_user = User(email=email, userName=username[0], password=generate_password_hash(password1, method='sha256'), isAdmin=adminStatus, playerTeam=team)
             db.session.add(new_user)
             db.session.commit()
             flash('Account created successfully', category='success')

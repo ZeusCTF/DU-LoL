@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %} Base {% endblock %}</title>
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='nav.css') }}">
+    {% block css %}
+    {% endblock %}
 </head>
 <body>
     <nav>
@@ -13,10 +15,11 @@
       <ul>
         <li><a href="/">Home</a></li>
         <li><a href="/logout">Logout</a></li>
-
-        <div id="backupNav">
         <li><a href="/login">Login</a></li>
         <li><a href="/sign-up">Sign Up</a></li>
+        {% if user.playerTeam == 'league' %}
+        <li><a href="/LoL">DU LoL</a></li>
+        {% endif %}
         </div>
 
       </ul> 
