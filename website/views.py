@@ -9,7 +9,10 @@ from . import db
 views = Blueprint('views', __name__)
 
 
-@views.route('/', methods=['GET', 'POST'])
+@views.route('/landing.html')
+def landing():
+    return render_template("landing.html", user=current_user)
+
 #have to be logged in to access the homepage
 @login_required
 def index():

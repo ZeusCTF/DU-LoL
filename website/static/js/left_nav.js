@@ -1,3 +1,4 @@
+
 function toggleLeftNav() {
     let leftNav = document.querySelector(".main-left-nav");
 

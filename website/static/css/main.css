@@ -1,0 +1,177 @@
+/*General All Page Styling*/
+:root {
+  /*COLOR SCHEME*/
+  --white: rgb(255,255,255);
+  --black: rgb(0,0,0);
+  --blackTrans: rgb(0,0,0, .6);
+  --red: rgb(172, 5, 5);
+  --redTrans: rgba(246, 37, 24, .8);
+}
+
+body {
+  position: absolute;
+  margin: 0;
+  top:0;
+  width: 100vw;
+  min-height: 100vh;
+  background-color: var(--black);
+  color: var(--white);
+}
+
+a:hover, button:hover {
+  cursor: pointer;
+}
+
+
+/*Mobile, Tablet, Desktop, hide/show display*/
+.show-from-left {
+  transform: translateX(100vw);
+}
+
+.show-on-tablet, .show-on-desktop {
+  display: none !important;
+}
+
+.show-on-mobile {
+  display: block !important;
+}
+
+@media (min-width: 768px) {
+  .show-on-mobile, .show-on-desktop {
+    display: none !important;
+  }
+  
+  .show-on-tablet {
+    display: block !important;
+  }
+}
+
+@media (min-width: 1022px) {
+  .show-on-mobile, .show-on-tablet {
+    display: none !important;
+  }
+  
+  .show-on-desktop {
+    display: block !important;
+  }
+}
+
+
+
+
+
+
+
+/*Main header nav styling*/
+.main-header-nav {
+  width: 100%;
+  background-color: var(--red);
+  display: block;
+  text-align: center;
+  z-index: 1000;
+}
+
+.container-header-title {
+  color: var(--black);
+  font-size: 2rem;
+  padding-top: 1rem;
+  font-weight: 600;
+}
+
+.container-header-nav ul {
+  list-style-type: none;
+  margin: auto;
+  padding: 0;
+  overflow: hidden;
+  width: fit-content;
+}
+
+.container-header-nav li {
+  float: left;
+}
+
+.container-header-nav li a {
+  display: block;
+  color: var(--black);
+  text-align: center;
+  padding: 1rem;
+  text-decoration: none;
+}
+
+.container-header-nav li a:hover {
+  background-color: var(--blackTrans);
+}
+
+
+
+
+/*Main left nav toggle button*/
+.container-left-nav-toggle {
+  z-index: 500;
+  width: 100%;
+  position: absolute;
+  margin-top: 2rem;
+}
+
+.wrapper-left-nav-toggle {
+  background-color: var(--red);
+  width: 2rem;
+  height: 2rem;
+  border-radius: 10px;
+  margin-left: 2rem;
+  text-align: center;
+}
+
+.wrapper-left-nav-toggle button {
+  width: 2rem;
+  height: 2rem;
+}
+
+/*Main left nav menu*/
+.main-left-nav {
+  width: 100vw;
+  min-height: 100vh;
+  position: absolute;
+  top: 0;
+  left: -100vw;
+  z-index: 1000;
+  background-color: var(--blackTrans);
+  text-align: center;
+  transition: all .5s;
+}
+
+.container-left-nav {
+  width: 80vw;
+  height: 100vh;
+  background-color: var(--red);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.container-left-nav .container-header-title {
+  font-size: 1.5rem;
+  border-bottom: 1px solid var(--black);
+  padding-bottom: 1rem;
+}
+
+.container-left-nav .container-header-nav ul {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.container-left-nav .container-header-nav ul li {
+  font-size: 1.3rem;
+}
+
+.wrapper-left-nav-close {
+  font-size: 1.3rem;
+  margin-bottom: 3rem;
+  padding: 1rem;
+}
+
+.wrapper-left-nav-close:hover {
+  cursor: pointer;
+  background-color: var(--blackTrans);
+}
