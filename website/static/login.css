@@ -1,0 +1,41 @@
+.container-login {
+    width: 60vw;
+    background-color: var(--redTrans);
+    margin: auto;
+    padding: 1.5rem;
+    margin-top: 5rem;
+    color: var(--black);
+    border-radius: 25px;
+}
+
+.container-login h3 {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+.container-login form {
+    display: block;
+}
+
+.container-login form div {
+    display: flex;
+    flex-direction: column;
+}
+
+.container-login div label {
+    font-size: 1.5rem;
+    text-decoration: solid 1px underline var(--black);
+}
+
+input[type=email], input[type=password] {
+    padding: 1rem;
+    width: 80%;
+    margin: 1rem 0;
+    font-size: 1rem;
+}
+
+.container-login-button {
+    width: fit-content;
+    margin: auto;
+}

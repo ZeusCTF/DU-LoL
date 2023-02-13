@@ -1,0 +1,57 @@
+/*General All Page Styling*/
+:root {
+  /*COLOR SCHEME*/
+  --black: rgb(0,0,0);
+  --blackTrans: rgb(0,0,0, .6);
+  --red: rgb(172, 5, 5);
+  --redTrans: rgba(246, 37, 24, .8);
+}
+
+body {
+  position: absolute;
+  margin: 0;
+  top:0;
+  width: 100vw;
+  min-height: 100vh;
+  background-color: var(--black);
+  color: var(--black);
+}
+
+
+/*Main header styling - incl all pages*/
+.main-header {
+  width: 100%;
+  background-color: var(--red);
+  display: block;
+  text-align: center;
+}
+
+.container-header-title {
+  color: var(--black);
+  font-size: 1.5rem;
+  padding-top: 1rem;
+}
+
+.container-header-nav ul {
+    list-style-type: none;
+    margin: auto;
+    padding: 0;
+    overflow: hidden;
+    width: fit-content;
+  }
+  
+  .container-header-nav li {
+    float: left;
+  }
+  
+  .container-header-nav li a {
+    display: block;
+    color: var(--black)
+    text-align: center;
+    padding: 1rem;
+    text-decoration: none;
+  }
+  
+  .container-header-nav li a:hover {
+    background-color: var(--blackTrans);
+  }
