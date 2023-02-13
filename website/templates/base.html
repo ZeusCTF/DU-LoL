@@ -22,12 +22,17 @@
       </div>
       <div class = "container-header-nav">
         <ul>
+          
           <li><a href="/">Home</a></li>
-          <li><a href="/logout">Logout</a></li>
+          {% if user.is_authenticated == False %}
           <li><a href="/login">Login</a></li>
           <li><a href="/sign-up">Sign Up</a></li>
+          {% endif %}
+          {% if user.is_authenticated %}
+          <li><a href="/logout">Logout</a></li>
           {% if user.playerTeam == 'league' %}
           <li><a href="/LoL">DU LoL</a></li>
+          {% endif %}
           {% endif %}
           </div>
         </ul> 
