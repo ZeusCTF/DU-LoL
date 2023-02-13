@@ -9,12 +9,14 @@
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='main.css') }}">
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='login.css') }}">
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='base.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src = "{{ url_for('static',filename='left_nav.js') }}"></script>
     {% block css %}
     {% endblock %}
 </head>
 <body>
 
-    <nav class = "main-header">
+    <nav class = "main-header-nav show-on-tablet show-on-desktop">
       <div class = "container-header-title">
         <h1>Davenport University LoL</h1>
       </div>
@@ -29,6 +31,36 @@
           {% endif %}
           </div>
         </ul> 
+      </div>
+    </nav>
+
+    <section class = "container-left-nav-toggle show-on-mobile">
+      <div class = "wrapper-left-nav-toggle">
+        <button onclick = "toggleLeftNav()"><i class="fa-solid fa-bars"></i></button>
+      </div>
+    </section>
+
+    <nav class = "main-left-nav show-on-mobile">
+      <div class = "container-left-nav">
+        <div>
+          <div class = "container-header-title">
+            <h1>Davenport University LoL</h1>
+          </div>
+          <div class = "container-header-nav">
+            <ul>
+              <li><a href="/">Home</a></li>
+              <li><a href="/logout">Logout</a></li>
+              <li><a href="/login">Login</a></li>
+              <li><a href="/sign-up">Sign Up</a></li>
+              {% if user.playerTeam == 'league' %}
+              <li><a href="/LoL">DU LoL</a></li>
+              {% endif %}
+            </ul> 
+          </div>
+        </div>
+        <div class = "wrapper-left-nav-close">
+          <button onclick = "toggleLeftNav()">Close Menu</button>
+        </div>
       </div>
     </nav>
 
