@@ -17,6 +17,10 @@ body {
   color: var(--black);
 }
 
+a:hover {
+  cursor: pointer;
+}
+
 
 /*Main header styling - incl all pages*/
 .main-header {
@@ -28,8 +32,9 @@ body {
 
 .container-header-title {
   color: var(--black);
-  font-size: 1.5rem;
+  font-size: 2rem;
   padding-top: 1rem;
+  font-weight: 600;
 }
 
 .container-header-nav ul {
@@ -46,7 +51,7 @@ body {
   
   .container-header-nav li a {
     display: block;
-    color: var(--black)
+    color: var(--black);
     text-align: center;
     padding: 1rem;
     text-decoration: none;
