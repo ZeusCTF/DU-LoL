@@ -22,7 +22,7 @@ def login():
             if check_password_hash(user.password, password):
                 flash('Logged in successfully', category='success')
                 login_user(user, remember=True)
-                return redirect(url_for('views.index'))
+                return redirect(url_for('views.landing'))
             else:
                 flash('Incorrect password', category='error')
         else:
@@ -38,7 +38,7 @@ def logout():
     logout_user()
     return redirect(url_for('auth.login'))
 
-#route for logging out
+#route for signing up
 @auth.route('/sign-up', methods=['GET','POST'])
 def sign_up():
     if request.method == 'POST':
@@ -70,6 +70,6 @@ def sign_up():
             db.session.add(new_user)
             db.session.commit()
             flash('Account created successfully', category='success')
-            return redirect(url_for('views.index'))
+            return redirect(url_for('views.landing'))
         
     return render_template('sign_up.html', user=current_user)

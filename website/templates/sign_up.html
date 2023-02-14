@@ -2,38 +2,45 @@
 {% block title %} Sign-Up {% endblock %}
 {% block css %} <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='sign_up.css') }}"> {% endblock %}
 {% block content %}
-<form method="POST">
-    <h3 align="center">Sign Up</h3>
-    <div>
-        <label for="email">Email Address</label>
-        <!-- The name field is important here, this is what the info is called that gets passed to the backend -->
-        <input
-            type="email"
-            id="email"
-            name="email"
-            placeholder="Enter DU email"
-    </div>
-    <div>
-            <label for="password1">Password</label>
+<section class = "container-signup">
+    <h3>Sign Up</h3>
+    <form method="POST" >
+        <div>
+            <label for="email">Email Address</label>
+            <!-- The name field is important here, this is what the info is called that gets passed to the backend -->
+            <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="Enter DU email">
+        </div>
+        <div>
+                <label for="password1">Password</label>
+                <input
+                    type="password"
+                    id="password1"
+                    name="password1"
+                    placeholder="Enter your password">
+        </div>
+        <div>
+            <label for="password2">Confirm Password</label>
             <input
                 type="password"
-                id="password1"
-                name="password1"
-                placeholder="Enter your password"
-    </div>
-    <div>
-        <label for="password2">Password</label>
-        <input
-            type="password"
-            id="password2"
-            name="password2"
-            placeholder="Confirm your password"
-    </div>
-    <br />
-    <div>
-        <input type="checkbox" id="team" name="team" value="league">
-        <label for="team"> League of Legends </label>
-        <br>
-    </div> 
-    <button type="submit">Submit</button>
+                id="password2"
+                name="password2"
+                placeholder="Confirm your password">
+        </div>
+        </br>
+        <div>
+            <label for="team">Select your team</label>
+            <select name="team" id="team">
+                <option value="league">League of Legends</option>
+                <option value="csgo">CS:GO</option>
+                <option value="smash">Super Smash Bros</option>
+            </select>
+        </div> 
+        <div class = "container-signup-button">
+            <button type="submit">Sign Up</button>
+        </div>
+</section>
 {% endblock %}

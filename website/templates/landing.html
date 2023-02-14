@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% block title %} Landing {% endblock %}
 {% block content %}
+<<<<<<< Updated upstream
 <section class = "container-login">
     <form method="POST">
         <h3>Login</h3>
@@ -25,5 +26,15 @@
             <button type="submit">Test Successful</button>
         </div>
     </form>
+=======
+<section class = "container-logo">
+    <div class = "wrapper-logo-img">
+        <img src = "{{ url_for('static',filename='/images/DULogo.jpg') }}">
+    </div>
+    <div class = "wrapper-logo-text">
+        <h1>Davenport University</h1>
+        <h2>Esports</h2>
+    </div>
+>>>>>>> Stashed changes
 </section>
 {% endblock %}

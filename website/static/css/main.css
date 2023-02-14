@@ -64,6 +64,12 @@ a:hover, button:hover {
 
 /*Main header nav styling*/
 .main-header-nav {
+<<<<<<< Updated upstream
+=======
+  position: absolute;
+  top: 0;
+  left: 0;
+>>>>>>> Stashed changes
   width: 100%;
   background-color: var(--red);
   display: block;
@@ -78,6 +84,23 @@ a:hover, button:hover {
   font-weight: 600;
 }
 
+<<<<<<< Updated upstream
+=======
+.container-header-title h1 {
+  text-decoration: underline solid 1px var(--black);
+}
+
+.container-header-nav {
+  display: flex;
+  justify-content: space-between;
+}
+
+.container-header-nav div {
+  width: fit-content;
+  padding: 0 2rem;
+}
+
+>>>>>>> Stashed changes
 .container-header-nav ul {
   list-style-type: none;
   margin: auto;
@@ -92,7 +115,10 @@ a:hover, button:hover {
 
 .container-header-nav li a {
   display: block;
+<<<<<<< Updated upstream
   color: var(--black);
+=======
+>>>>>>> Stashed changes
   text-align: center;
   padding: 1rem;
   text-decoration: none;
@@ -171,7 +197,16 @@ a:hover, button:hover {
   padding: 1rem;
 }
 
+<<<<<<< Updated upstream
 .wrapper-left-nav-close:hover {
+=======
+.left-nav-bottom div ul li {
+  font-size: 1.3rem;
+  padding: 1rem;
+}
+
+.wrapper-left-nav-close:hover, .left-nav-bottom div ul li:hover {
+>>>>>>> Stashed changes
   cursor: pointer;
   background-color: var(--blackTrans);
 }
