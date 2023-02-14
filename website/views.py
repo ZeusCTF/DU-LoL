@@ -24,6 +24,11 @@ def index():
     #user=current_user allows us to reference the current user
     return render_template("home.html", user=current_user, acc=current_user.userName, adminStatus=current_user.isAdmin)
 
+@views.route('/announcements')
+@login_required
+def announcements():
+    return render_template("announcements.html", user=current_user, acc=current_user.userName)
+
 @views.route('/LoL')
 @login_required
 def DULoL():

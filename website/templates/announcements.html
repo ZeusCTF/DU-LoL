@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %} Login {% endblock %}
+{% block content %}
+<div class = "container-announcements">
+    <section class = "container-post-announcements">
+        <h2>Create an Announcement</h2>
+        <form>
+            <div class = "wrapper-announcements-content">
+                <textarea name = "announcementMsg" id="announcementMsg" Placeholder = "Write your announcement here..."></textarea>
+            </div>
+            <div class = "wrapper-announcements-button">
+                <button>Post Announcement</button>
+            </div>
+        </form>
+    </section>
+    
+    <section class = "container-view-announcements">
+        <ul class = "wrapper-announcements">
+            <li>This is an announcement!</li>
+            <li>This is an announcement!</li>
+            <li>This is an announcement!</li>
+            <li>This is an announcement!</li>
+            <li>This is a really long announcement! This is a really long announcement!
+                This is a really long announcement! This is a really long announcement!
+                This is a really long announcement! This is a really long announcement!
+                This is a really long announcement! This is a really long announcement!
+                This is a really long announcement! This is a really long announcement!
+                This is a really long announcement! This is a really long announcement!
+                This is a really long announcement! This is a really long announcement!
+                This is a really long announcement! This is a really long announcement!
+            </li>
+            <li>This is an announcement!</li>
+            <li>This is an announcement!</li>
+            <li>This is an announcement!</li>
+        </ul>
+    </section>
+</div>
+
+{% endblock %}

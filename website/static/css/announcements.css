@@ -1,0 +1,119 @@
+/*General page styling*/
+.container-announcements {
+    display: flex;
+    flex-direction: column;
+    margin: 0 5vw;
+    width: 100%;
+    min-height: 80vh;
+    gap: 5vw;
+    padding: 1rem 0 5rem 0;
+}
+
+
+
+/*Create announcements*/
+.container-post-announcements {
+    width: 90vw;
+    min-height: 40vh;
+    background-color: blue;
+    padding: 1rem 0;
+    border-radius: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    text-align: center;
+}
+
+.container-post-announcements form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    width: 80%;
+    height: 75%;
+    padding: 1rem;
+    border: 2px solid var(--black);
+    border-radius: 25px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.container-post-announcements h2 {
+    font-size: 2rem;
+}
+
+.wrapper-announcements-content {
+    height: 90%;
+    margin-bottom: 1rem;
+}
+
+.wrapper-announcements-button {
+    height: 10%;
+    width: fit-content;
+    margin: auto;
+    margin-bottom: 1rem;
+}
+
+.wrapper-announcements-button button {
+    padding: .8rem;
+    background-color: gray;
+    border-radius: 25px;
+}
+
+textarea {
+    min-height: 20vh;
+    height: 90%;
+    width: 100%;
+    background-color: var(--black);
+    color: var(--white);
+    text-align: left;
+    padding: .5rem;
+}
+
+
+
+
+
+/*View announcements*/
+.container-view-announcements {
+    width: 90vw;
+    height: 80%;
+    background-color: var(--redTrans);
+    overflow-x: hidden;
+    overflow-y: scroll;
+    border-radius: 25px;
+}
+
+.wrapper-announcements {
+    min-width: 100%;
+    min-height: 100%;
+}
+
+.wrapper-announcements li {
+    font-size: 1.3rem;
+    color: var(--white);
+    padding: 1rem;
+    margin: 1rem;
+    background-color: var(--black);
+    border-radius: 25px;
+}
+
+
+@media (min-width: 1022px) {
+    .container-announcements {
+        flex-direction: row;
+        height: 80vh;
+        padding: 0;
+    }
+
+    /*Create announcements*/
+    .container-post-announcements {
+        width: 25vw;
+        height: 80%;
+    }
+
+    /*View announcements*/
+    .container-view-announcements {
+        width: 60vw;
+        height: 80%;
+    }
+}

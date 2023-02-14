@@ -16,6 +16,21 @@ body {
   min-height: 100vh;
   background-color: var(--black);
   color: var(--white);
+  overflow-x: hidden;
+}
+
+.container-base-content {
+  width: 100vw;
+  min-height: calc(100vh - 100px);
+  max-height: fit-content;
+  margin-top: 100px;
+}
+
+@media (min-width: 768px) {
+  .container-base-content {
+    min-height: calc(100vh - 175px);
+    margin-top: 175px;
+  }
 }
 
 a:hover, button:hover {
@@ -33,7 +48,8 @@ a:hover, button:hover {
 }
 
 .show-on-mobile {
-  display: block !important;
+  display: flex !important;
+  flex-direction: column;
 }
 
 @media (min-width: 768px) {
@@ -42,7 +58,8 @@ a:hover, button:hover {
   }
   
   .show-on-tablet {
-    display: block !important;
+    display: flex !important;
+    flex-direction: column;
   }
 }
 
@@ -52,7 +69,8 @@ a:hover, button:hover {
   }
   
   .show-on-desktop {
-    display: block !important;
+    display: flex !important;
+    flex-direction: column;
   }
 }
 
@@ -68,8 +86,11 @@ a:hover, button:hover {
   top: 0;
   left: 0;
   width: 100%;
+  min-height: 125px;
   background-color: var(--red);
-  display: block;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
   text-align: center;
   z-index: 1000;
 }
