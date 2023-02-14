@@ -1,32 +1,6 @@
 {% extends "base.html" %}
 {% block title %} Landing {% endblock %}
 {% block content %}
-<<<<<<< Updated upstream
-<section class = "container-login">
-    <form method="POST">
-        <h3>Login</h3>
-        <div>
-            <label for="email">Email Address</label>
-            <!-- The name field is important here, this is what the info is called that gets passed to the backend -->
-            <input
-                type="email"
-                id="email"
-                name="email"
-                placeholder="Enter DU email">
-        </div>
-        <div>
-                <label for="password">Password</label>
-                <input
-                    type="password"
-                    id="password"
-                    name="password"
-                    placeholder="Enter your password">
-        </div>
-        <div class = "container-login-button">
-            <button type="submit">Test Successful</button>
-        </div>
-    </form>
-=======
 <section class = "container-logo">
     <div class = "wrapper-logo-img">
         <img src = "{{ url_for('static',filename='/images/DULogo.jpg') }}">
@@ -35,6 +9,5 @@
         <h1>Davenport University</h1>
         <h2>Esports</h2>
     </div>
->>>>>>> Stashed changes
 </section>
 {% endblock %}

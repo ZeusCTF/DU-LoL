@@ -13,13 +13,6 @@ views = Blueprint('views', __name__)
 def landing():
     return render_template("landing.html", user=current_user)
 
-<<<<<<< Updated upstream
-@views.route('/landing.html')
-def landing():
-    return render_template("landing.html", user=current_user)
-
-=======
->>>>>>> Stashed changes
 #have to be logged in to access the homepage
 @login_required
 def index():

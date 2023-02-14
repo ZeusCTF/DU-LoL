@@ -8,12 +8,8 @@
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='/css/reset.css') }}">
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='/css/main.css') }}">
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='/css/login.css') }}">
-<<<<<<< Updated upstream
-    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='/css/base.css') }}">
-=======
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='/css/landing.css') }}">
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='/css/sign_up.css') }}">
->>>>>>> Stashed changes
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src = "{{ url_for('static',filename='/js/left_nav.js') }}"></script>
     {% block css %}
@@ -26,13 +22,8 @@
         <h1>Davenport University LoL</h1>
       </div>
       <div class = "container-header-nav">
-<<<<<<< Updated upstream
         <ul>
-          
-<<<<<<< Updated upstream
-=======
           <li><a href="landing.html">Landing</a></li>
->>>>>>> Stashed changes
           <li><a href="/">Home</a></li>
           {% if user.is_authenticated == False %}
           <li><a href="/login">Login</a></li>
@@ -46,7 +37,6 @@
           {% endif %}
           </div>
         </ul> 
-=======
         <div>
           <ul>
             <li><a href="/">Home</a></li>
@@ -74,7 +64,6 @@
             {% endif %}
           </ul>
         </div>
->>>>>>> Stashed changes
       </div>
     </nav>
 
