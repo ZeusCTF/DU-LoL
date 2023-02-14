@@ -1,0 +1,56 @@
+.container-login {
+    width: 80vw;
+    background-color: var(--redTrans);
+    margin: auto;
+    padding: 1.5rem;
+    margin-top: 5rem;
+    color: var(--black);
+    border-radius: 25px;
+}
+
+.container-login h3 {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+}
+
+.container-login form {
+    display: block;
+}
+
+.container-login form div {
+    display: flex;
+    flex-direction: column;
+}
+
+.container-login div label {
+    font-size: 1.5rem;
+    text-decoration: solid 1px underline var(--black);
+}
+
+input[type=email], input[type=password] {
+    padding: .8rem;
+    width: 100%;
+    margin: 1rem 0;
+    font-size: 1rem;
+    background-color: antiquewhite;
+}
+
+.container-login-button {
+    width: fit-content;
+    margin: auto;
+}
+
+.container-login-button button {
+    padding: .5rem 1rem;
+    font-size: 1rem;
+    border-radius: 50px;
+    background-color: antiquewhite;
+    transition: background-color .25s ease-in-out;
+}
+
+.container-login-button button:hover {
+    background-color: rgb(184, 183, 183);
+    cursor: pointer;
+}

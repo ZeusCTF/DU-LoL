@@ -1,0 +1,31 @@
+.container-logo {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+}
+
+.wrapper-logo-img {
+    width: fit-content;
+    margin: 0 auto;
+}
+
+.wrapper-logo-img img {
+    border-radius: 50%;
+    max-height: 40vh;
+}
+
+.wrapper-logo-text {
+    font-size: 3rem;
+    text-align: center;
+    width: 100%;
+}
+
+@media (min-width: 768px) {
+    .container-logo {
+        height: 80vh;
+        margin-top: 15vh;
+    }
+}
