@@ -9,25 +9,20 @@ from . import db
 views = Blueprint('views', __name__)
 
 @views.route('/')
-@views.route('/landing.html')
 def landing():
     return render_template("landing.html", user=current_user)
 
 #have to be logged in to access the homepage
+@views.route('/announcements', methods=['GET','POST'])
 @login_required
-def index():
+def announcements():
     if request.method == 'POST':
-        announcement = request.form.get('announcement')
+        announcement = request.form.get('announcementMsg')
         new_announcement = Announcement(data=announcement, team=current_user.playerTeam)
         db.session.add(new_announcement)
         db.session.commit()
     #user=current_user allows us to reference the current user
-    return render_template("home.html", user=current_user, acc=current_user.userName, adminStatus=current_user.isAdmin)
-
-@views.route('/announcements')
-@login_required
-def announcements():
-    return render_template("announcements.html", user=current_user, acc=current_user.userName)
+    return render_template("announcements.html", user=current_user, acc=current_user.userName, adminStatus=current_user.isAdmin)
 
 @views.route('/LoL')
 @login_required
