@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block title %} DU LoL {% endblock %}
+{% block content %}
+
+{% if user.is_authenticated %}
+<!--Need to update to admin status true but it wasn't working-->
+{% if adminStatus != True %}
+<section class = "container-vods-upload">
+
+</section>
+{% endif %}
+{% endif %}
+
+<section class = "container-vods-display">
+    <div class = "video-placeholder">
+
+    </div>
+    <div class = "video-placeholder">
+
+    </div>
+    <div class = "video-placeholder">
+
+    </div>
+    <div class = "video-placeholder">
+
+    </div>
+    <div class = "video-placeholder">
+
+    </div>
+    <div class = "video-placeholder">
+
+    </div>
+    <div class = "video-placeholder">
+
+    </div>
+    <div class = "video-placeholder">
+
+    </div>
+    <div class = "video-placeholder">
+
+    </div>
+    <div class = "video-placeholder">
+
+    </div>
+    <div class = "video-placeholder">
+
+    </div>
+    <div class = "video-placeholder">
+
+    </div>
+    <div class = "video-placeholder">
+
+    </div>
+    <div class = "video-placeholder">
+
+    </div>
+    <div class = "video-placeholder">
+
+    </div>
+    <div class = "video-placeholder">
+
+    </div>
+</section>
+{% endblock %}

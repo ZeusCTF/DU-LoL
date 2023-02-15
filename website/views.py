@@ -28,3 +28,8 @@ def announcements():
 @login_required
 def DULoL():
     return render_template("LoL.html", user=current_user, acc=current_user.userName)
+
+@views.route('/vods')
+@login_required
+def vods():
+    return render_template("vods.html", user=current_user, acc=current_user.userName)
