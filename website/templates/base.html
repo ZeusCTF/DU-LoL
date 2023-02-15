@@ -11,6 +11,7 @@
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='/css/landing.css') }}">
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='/css/sign_up.css') }}">
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='/css/announcements.css') }}">
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='/css/LoL.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src = "{{ url_for('static',filename='/js/left_nav.js') }}"></script>
     {% block css %}
@@ -31,10 +32,16 @@
             {% endif %}
             {% if user.is_authenticated %}
             {% if user.playerTeam == 'league' %}
-            <li><a href="/LoL">DU LoL</a></li>
             <li><a href="#">Schedule</a></li>
             <li><a href="/announcements">Announcements</a></li>
-            <li><a href="#">Player Stats</a></li>
+            {% if adminStatus != True %}
+            <li><a href="/LoL">Player Profile</a></li>
+            {% endif %}
+            {% endif %}
+            {% endif %}
+            {% if user.is_authenticated %}
+            {% if adminStatus == True %}
+            <li><a href="#">Roster Stats</a></li>
             {% endif %}
             {% endif %}
           </ul>
@@ -73,10 +80,16 @@
                 {% endif %}
                 {% if user.is_authenticated %}
                 {% if user.playerTeam == 'league' %}
-                <li><a href="/LoL">DU LoL</a></li>
                 <li><a href="#">Schedule</a></li>
                 <li><a href="/announcements">Announcements</a></li>
-                <li><a href="#">Player Stats</a></li>
+                {% if adminStatus != True %}
+                <li><a href="/LoL">Player Profile</a></li>
+                {% endif %}
+                {% endif %}
+                {% endif %}
+                {% if user.is_authenticated %}
+                {% if adminStatus == True %}
+                <li><a href="#">Roster Stats</a></li>
                 {% endif %}
                 {% endif %}
               </ul>

@@ -1,0 +1,108 @@
+/*General LoL Styling*/
+.container-user-info {
+    width: 80vw;
+    height: fit-content;
+    background-color: var(--redTrans);
+    margin: auto;
+    padding: 1rem 0;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+
+/*User Header Display*/
+.container-user-header {
+    display: flex;
+    text-align: center;
+    padding: 0 1rem;
+}
+
+.wrapper-user-img {
+    height: 150px;
+    width: 150px;
+    background-color: orange;
+    border: 3px solid var(--black);
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.wrapper-user-desc {
+    height: fit-content;
+    margin-top: auto;
+    margin-bottom: auto;
+    padding-left: 1rem;
+}
+
+
+
+
+
+/*Player Announcements*/
+.container-profile-announcements {
+    width: 90%;
+    max-height: 40vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    margin: auto;
+    border: 2px solid var(--black);
+}
+
+.container-profile-announcements ul li {
+    font-size: 1.3rem;
+    color: var(--white);
+    padding: 1rem;
+    margin: 1rem;
+    background-color: var(--black);
+    border-radius: 25px;
+}
+
+
+
+
+
+/*Player Schedule*/
+.container-profile-schedule {
+    width: 90%;
+    margin: auto;
+    height: 450px;
+    border: 2px solid var(--black);
+}
+
+
+
+
+/*Player Stats*/
+.container-profile-stats {
+    width: 90%;
+    margin: auto;
+    height: 450px;
+    border: 2px solid var(--black);
+}
+
+/*Responsive Layouts*/
+
+@media (min-width: 768px) {
+    .container-user-header {
+        justify-content: center;
+    }
+}
+
+@media (min-width: 1022px) {
+    .container-user-info {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto auto auto;
+    }
+
+    .container-profile-announcements {
+        max-height: 80%;
+        grid-row: span 2;
+    }
+
+    .container-profile-stats {
+        grid-column: span 2;
+    }
+}

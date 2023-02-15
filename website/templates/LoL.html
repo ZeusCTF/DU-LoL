@@ -1,7 +1,32 @@
 {% extends "base.html" %}
 {% block title %} DU LoL {% endblock %}
 {% block content %}
-{% for announcement in user.announcement %}
-<li>{{ announcement.data }}</li>
-{% endfor %}
+<section class = "container-user-info">
+    <div class = "container-user-header">
+        <div class = "wrapper-user-img">
+        
+        </div>
+        <div class = "wrapper-user-desc">
+            <h1>First Last</h1>
+            <h2>Summoner Name</h2>
+        </div>
+    </div>
+    
+    <div class = "container-profile-announcements">
+        <ul>
+            {% for announcement in user.announcement %}
+            <li>{{ announcement.data }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class = "container-profile-schedule">
+        <h1>Schedule is inserted here</h1>
+    </div>
+
+    <div class = "container-profile-stats">
+        <h1>Stats are inserted here</h1>
+    </div>
+    
+</section>
 {% endblock %}
