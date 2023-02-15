@@ -2,6 +2,7 @@ from flask import Blueprint, render_template, request, redirect, url_for
 from flask_login import login_required, current_user
 from .models import Announcement, User
 from . import db
+from .googCal import pullEvent
 
 
 
@@ -27,7 +28,7 @@ def announcements():
 @views.route('/LoL')
 @login_required
 def DULoL():
-    return render_template("LoL.html", user=current_user, acc=current_user.userName)
+    return render_template("LoL.html", user=current_user, acc=current_user.userName, events=[pullEvent()])
 
 @views.route('/vods')
 @login_required
