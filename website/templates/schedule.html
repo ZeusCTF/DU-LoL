@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %} schedule {% endblock %}
+{% block content %}
+<section class = "container-calendar">
+    <h1>CALENDAR IS INSERTED HERE</h1>
+    {% for event in events %}
+    {{ events }}
+    {% endfor %}
+</section>
+
+<script>
+    selectLinks("schedule");
+</script>
+{% endblock %}

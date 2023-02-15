@@ -34,3 +34,8 @@ def DULoL():
 @login_required
 def vods():
     return render_template("vods.html", user=current_user, acc=current_user.userName)
+
+@views.route('/schedule')
+@login_required
+def schedule():
+    return render_template("schedule.html", user=current_user, acc=current_user.userName, events=[pullEvent()])

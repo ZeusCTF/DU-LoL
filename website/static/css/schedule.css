@@ -1,0 +1,16 @@
+/*General Calendar Styling*/
+.container-calendar {
+    width: 90%;
+    height: calc(100vh - 125px);
+    border: 1px solid orange;
+    background-color: var(--black);
+    margin: auto;
+    margin-bottom: 1rem;
+}
+
+@media (min-width: 768px)
+{
+    .container-calendar {
+        height: calc(100vh - 225px);
+    }
+}

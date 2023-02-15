@@ -90,7 +90,7 @@ a:hover, button:hover {
   background-color: var(--red);
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: space-between;
   text-align: center;
   z-index: 1000;
 }
