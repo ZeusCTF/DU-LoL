@@ -44,6 +44,9 @@ def sign_up():
     if request.method == 'POST':
         #getting email/password data from the request
         email = request.form.get('email')
+        firstName = request.form.get('firstName')
+        lastName = request.form.get('lastName')
+        ign = request.form.get('ign')
         password1 = request.form.get('password1')
         password2 = request.form.get('password2')
         team = request.form.get('team')
@@ -66,7 +69,7 @@ def sign_up():
             else:
                 adminStatus = False
             #creates a db object to enter into the db
-            new_user = User(email=email, userName=username[0], password=generate_password_hash(password1, method='sha256'), isAdmin=adminStatus, playerTeam=team)
+            new_user = User(email=email, userName=username[0], firstName = firstName, lastName = lastName, ign = ign,  password=generate_password_hash(password1, method='sha256'), isAdmin=adminStatus, playerTeam=team)
             db.session.add(new_user)
             db.session.commit()
             flash('Account created successfully', category='success')

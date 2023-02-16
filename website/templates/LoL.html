@@ -7,15 +7,15 @@
         
         </div>
         <div class = "wrapper-user-desc">
-            <h1>First Last</h1>
-            <h2>Summoner Name</h2>
+            <h1>{{user.firstName}} {{user.lastName}}</h1>
+            <h2>{{user.ign}}</h2>
         </div>
     </div>
     
     <div class = "container-profile-announcements">
         <ul>
             {% for announcement in user.announcement %}
-            <li>{{ announcement.data }}</li>
+            <li class = "announcement-wrapper">{{ announcement.data }} </br> <span class = "timestamps">{{ announcement.date }}</span></li>
             {% endfor %}
         </ul>
     </div>
