@@ -52,8 +52,9 @@ def pullEvent():
         # Prints the start and name of the next 10 events
         for event in events:
             start = event['start'].get('dateTime', event['start'].get('date'))
+            print(event['summary'], event['start'].get('date'))
             return start, event['summary']
-
+        
     except HttpError as error:
         print('An error occurred: %s' % error)
 
@@ -77,16 +78,16 @@ def addEvent(summary, startTime, endTime):
         event = {
             'summary': f'{summary}',
             'start': {
-                'dateTime': f'{startTime}',
-                'timeZone': 'America/Los_Angeles',
+                'date': f'{startTime}'
             },
             'end': {
                             #this format 2023-02-16T17:00:00-07:00
-                'dateTime': f'{endTime}',
-                'timeZone': 'America/Los_Angeles',
+                'date': f'{endTime}'
             }}
 
         event = service.events().insert(calendarId='primary', body=event).execute()
         print('Event created: %s' % (event.get('htmlLink')))
     except HttpError as error:
         print('An error occurred: %s' % error)
+#addEvent('testycles', '2023-02-16', '2023-02-17')
+pullEvent()
