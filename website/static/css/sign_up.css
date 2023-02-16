@@ -29,7 +29,7 @@
     text-decoration: solid 1px underline var(--black);
 }
 
-input[type=email], input[type=password], #team {
+input[type=text], input[type=email], input[type=password], #team {
     padding: .8rem;
     width: 100%;
     margin: 1rem 0;

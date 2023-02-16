@@ -18,6 +18,7 @@
     display: flex;
     text-align: center;
     padding: 0 1rem;
+    justify-content: center;
 }
 
 .wrapper-user-img {
@@ -34,6 +35,8 @@
     margin-top: auto;
     margin-bottom: auto;
     padding-left: 1rem;
+    font-size: 1.5rem;
+    font-weight: 600;
 }
 
 
@@ -44,6 +47,9 @@
 .container-profile-announcements {
     width: 90%;
     max-height: 40vh;
+    min-height: 20vh;
+    display: flex;
+    flex-direction: column;
     overflow-y: scroll;
     overflow-x: hidden;
     margin: auto;
@@ -53,12 +59,11 @@
 .container-profile-announcements ul li {
     font-size: 1.3rem;
     color: var(--white);
-    padding: 1rem;
-    margin: 1rem;
+    padding: 1rem 1rem 2rem 1rem;
+    margin: 1rem 1rem;
     background-color: var(--black);
     border-radius: 25px;
 }
-
 
 
 
@@ -85,8 +90,9 @@
 /*Responsive Layouts*/
 
 @media (min-width: 768px) {
-    .container-user-header {
-        justify-content: center;
+    .wrapper-user-desc {
+        font-size: 2.5rem;
+        margin-left: 1.5rem;
     }
 }
 
@@ -94,12 +100,19 @@
     .container-user-info {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        grid-template-rows: auto auto auto;
+    }
+
+    .container-user-header {
+        grid-column: span 2;
+    }
+
+    .wrapper-user-desc {
+        font-size: 3rem;
+        margin-left: 2rem;
     }
 
     .container-profile-announcements {
-        max-height: 80%;
-        grid-row: span 2;
+        max-height: 450px;
     }
 
     .container-profile-stats {

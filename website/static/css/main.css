@@ -33,9 +33,23 @@ body {
   }
 }
 
+
+
+
+
+/*Hover*/
 a:hover, button:hover {
   cursor: pointer;
 }
+
+
+
+
+
+
+
+
+
 
 
 /*Mobile, Tablet, Desktop, hide/show display*/
@@ -90,7 +104,7 @@ a:hover, button:hover {
   background-color: var(--red);
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: space-between;
   text-align: center;
   z-index: 1000;
 }
@@ -138,6 +152,13 @@ a:hover, button:hover {
 .container-header-nav li a:hover {
   background-color: var(--blackTrans);
 }
+
+
+
+
+
+
+
 
 
 
@@ -216,4 +237,29 @@ a:hover, button:hover {
 .wrapper-left-nav-close:hover, .left-nav-bottom div ul li:hover {
   cursor: pointer;
   background-color: var(--blackTrans);
+}
+
+
+
+
+
+
+
+
+
+
+
+/*ANNOUNCEMENTS*/
+
+/*Timestamps*/
+.timestamps {
+  font-size: .8rem;
+  float: right;
+}
+
+
+/*announcement-wrapper*/
+.announcement-wrapper
+{
+  word-wrap: break-word;
 }
