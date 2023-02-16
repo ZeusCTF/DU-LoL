@@ -8,7 +8,8 @@
         </div>
         <div class = "wrapper-user-desc">
             <h1>{{user.firstName}} {{user.lastName}}</h1>
-            <h2>{{user.ign}}</h2>
+            <!--!LEAVE ON PAGE! getLoLStats.js must pull info-->
+            <h2 id="ign" style="display: none !important;">{{user.ign}}</h2>
         </div>
     </div>
     
@@ -28,11 +29,25 @@
     </div>
 
     <div class = "container-profile-stats">
-        <h1>Stats are inserted here</h1>
+        <div class = "wrapper-summoner-icon">
+            <img id="sumIcon" src = "">
+        </div>
+        <div class = "container-summoner-info">
+            <div class = "wrapper-summoner-info">
+                <h1>Summoner Name:</h1>
+                <h1 id = "sumName"></h1>
+                <h2>Summoner Level:</h2>
+                <h2 id = "sumLevel"></h2>
+            </div>
+        </div>
+        <div class = "container-match-history">
+
+        </div>
     </div>
     
 </section>
 
+<script defer onload = "getPlayer()" src = "{{ url_for('static',filename='/js/getLoLStats.js') }}"></script>
 <script>
     selectLinks("profile");
 </script>

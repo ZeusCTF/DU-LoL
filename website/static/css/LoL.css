@@ -83,9 +83,45 @@
 .container-profile-stats {
     width: 90%;
     margin: auto;
-    height: 450px;
+    height: fit-content;
+    border: 2px solid var(--black);
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 1rem;
+    text-align: center;
+}
+
+.wrapper-summoner-icon {
+    display: flex;
+    max-width: 80%;
+    justify-content: center;
+    align-content: center;
+    border: 2px solid var(--black);
+    margin: auto;
+}
+
+.container-summoner-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    font-size: 1.2rem;
     border: 2px solid var(--black);
 }
+
+.wrapper-summoner-info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: .5rem;
+    padding: 1rem;
+}
+
+.container-match-history {
+    min-height: 150px;
+    min-width: 150px;
+    border: 2px solid var(--black);
+}
+
 
 /*Responsive Layouts*/
 
