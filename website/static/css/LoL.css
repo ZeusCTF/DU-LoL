@@ -94,7 +94,8 @@
 
 .wrapper-summoner-icon {
     display: flex;
-    max-width: 80%;
+    width: 80%;
+    max-width: 150px;
     justify-content: center;
     align-content: center;
     border: 2px solid var(--black);
@@ -122,6 +123,26 @@
     border: 2px solid var(--black);
 }
 
+.wrapper-match-history {
+    width: 90%;
+    margin: auto;
+}
+
+.wrapper-match-history div {
+    margin: 1rem 0;
+    padding: 1rem 0;
+    background-color: var(--black);
+}
+
+/*JS inserted*/
+.container-history-participants {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto auto auto auto;
+    grid-auto-flow: column;
+    gap: .5rem;
+}
+
 
 /*Responsive Layouts*/
 
@@ -129,6 +150,14 @@
     .wrapper-user-desc {
         font-size: 2.5rem;
         margin-left: 1.5rem;
+    }
+
+    .container-profile-stats {
+        grid-template-columns: auto auto;
+    }
+
+    .container-match-history {
+        grid-column: span 2;
     }
 }
 
