@@ -1,6 +1,6 @@
 const statContainer = document.querySelector(".container-profile-stats");
 
-const API_KEY = "RGAPI-64bf4914-2bce-4b32-a667-8ae44e058d6a";
+const API_KEY = "";
 
 const playerIGN = document.getElementById("ign").innerHTML;
 
