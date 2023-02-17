@@ -16,6 +16,8 @@ const currentPlayer = {
     "soloTier": "",
     "flexRank": "",
     "flexTier": "",
+    "weekWins": 0,
+    "weekLosses": 0
 }
 
 class playerObj {
@@ -109,6 +111,32 @@ async function getSummonerRankInfo(id) {
             console.log("Solo 5v5 detected");
             console.log(currentPlayer.soloTier);
             console.log(currentPlayer.soloRank);
+            let soloInfoContainer = document.querySelector(".container-summoner-info");
+
+            let soloQueueRankCont = document.createElement("div");
+            soloQueueRankCont.classList.add("center-all-content");
+            soloQueueRankCont.classList.add("container-current-rank");
+            let soloQueueRankImg = document.createElement("img");
+            let soloQueueRankImgFullSrc = "static/images/emblem-" + currentPlayer.soloTier + ".png";
+            soloQueueRankImg.src = soloQueueRankImgFullSrc;
+
+            let rankDispContainer = document.createElement("div");
+            rankDispContainer.style.display = "flex";
+            rankDispContainer.style.flexDirection = "column";
+            rankDispContainer.style.textAlign = "left";
+            let soloQueueRank = document.createElement("p");
+            let rankTypeHeader = document.createElement("p");
+
+            rankTypeHeader.innerHTML = "Solo Queue";
+            soloQueueRank.innerHTML = currentPlayer.soloTier + ": " + currentPlayer.soloRank;
+
+            rankDispContainer.append(rankTypeHeader);
+            rankDispContainer.append(soloQueueRank);
+
+            soloQueueRankCont.append(soloQueueRankImg);
+            soloQueueRankCont.append(rankDispContainer);
+
+            soloInfoContainer.append(soloQueueRankCont);
         }
 
         //get flex rank information object
@@ -119,6 +147,32 @@ async function getSummonerRankInfo(id) {
             console.log("Flex rank detected");
             console.log(currentPlayer.flexTier);
             console.log(currentPlayer.flexRank);
+            let flexInfoContainer = document.querySelector(".container-summoner-info");
+
+            let flexQueueRankCont = document.createElement("div");
+            flexQueueRankCont.classList.add("center-all-content");
+            flexQueueRankCont.classList.add("container-current-rank");
+            let flexQueueRankImg = document.createElement("img");
+            let flexQueueRankImgFullSrc = "static/images/emblem-" + currentPlayer.flexTier + ".png";
+            flexQueueRankImg.src = flexQueueRankImgFullSrc;
+
+            let rankDispContainer = document.createElement("div");
+            rankDispContainer.style.display = "flex";
+            rankDispContainer.style.flexDirection = "column";
+            rankDispContainer.style.textAlign = "left";
+            let flexQueueRank = document.createElement("p");
+            let rankTypeHeader = document.createElement("p");
+
+            rankTypeHeader.innerHTML = "Flex Queue";
+            flexQueueRank.innerHTML = currentPlayer.flexTier + ": " + currentPlayer.flexRank;
+
+            rankDispContainer.append(rankTypeHeader);
+            rankDispContainer.append(flexQueueRank);
+
+            flexQueueRankCont.append(flexQueueRankImg);
+            flexQueueRankCont.append(rankDispContainer);
+
+            flexInfoContainer.append(flexQueueRankCont);
         }
     })
 
@@ -284,11 +338,19 @@ function buildLobbyContainer(matchData, queueType) {
         //check win/loss for current player profile
         if(player.puuid == currentPlayer.puuid) {
             if(player.win) {
+                if(queueType == "Solo Queue"){
+                    currentPlayer.weekWins += 1;
+                }
                 gameIdContainer.style.backgroundColor = "green";
             } else{
+                if(queueType == "Solo Queue"){
+                    currentPlayer.weekLosses += 1;
+                }
                 gameIdContainer.style.backgroundColor = "red";
             }
         }
+        updateWeeklySQTracker();
+        console.log("Calculated win-loss: " + currentPlayer.weekWins + " " + currentPlayer.weekLosses);
 
         //compile data
         let playerContainer = document.createElement("div");
@@ -306,4 +368,22 @@ function buildLobbyContainer(matchData, queueType) {
 
     //insert built list item into history wrapper
     historyWrapper.append(div);
+}
+
+function updateWeeklySQTracker() {
+    var totalGames = 0;
+
+    //pull locations of elements to update
+    let progBar = document.querySelector(".sq-progress-bar");
+    let sqAmount = document.getElementById("sqAmount");
+    let sqWinLoss = document.getElementById("sqWinLoss");
+
+    totalGames = currentPlayer.weekWins + currentPlayer.weekLosses;
+
+    progWidth = (totalGames / 20)*100;
+    progBar.style.width = progWidth + "%";
+
+    sqAmount.innerHTML = totalGames + " / 20 games played";
+    
+    sqWinLoss.innerHTML = currentPlayer.weekWins + " Wins / " + currentPlayer.weekLosses + " Losses";
 }

@@ -12,7 +12,6 @@
     margin-bottom: 1rem;
 }
 
-
 .wrapper-profile-section-header {
     font-size: 1.5rem;
     font-weight: 600;
@@ -23,6 +22,27 @@
     padding: 1rem;
     text-align: center;
     border-bottom: 1px solid var(--white);
+}
+
+.center-all-content {
+    display: flex;
+    width: 90%;
+    margin: auto;
+}
+
+.center-all-content p {
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: .5rem;
+}
+
+.container-current-rank {
+    padding: 1rem 0;
+}
+
+.container-current-rank img {
+    height: 100px;
+    width: 150px;
 }
 
 
@@ -132,6 +152,36 @@
     padding: 1rem;
 }
 
+.container-weekly-sq-tracking {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    margin: auto;
+    padding: 1rem 0;
+    border: 2px solid var(--white);
+    justify-content: space-evenly;
+}
+
+.container-weekly-sq-tracking p, .container-weekly-sq-tracking h1 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    line-height: 4rem;
+}
+
+.sq-tracking-bar {
+    width: 90%;
+    height: 1.5rem;
+    margin: auto;
+    background-color: var(--red);
+    border: 2px solid var(--white);
+}
+
+.sq-progress-bar {
+    width: 1%;
+    height: calc(1.5rem - 4px);
+    background-color: green;
+}
+
 .container-solo-match-history, .container-flex-match-history {
     width: 100%;
     margin: 0;
@@ -226,7 +276,7 @@
        margin: auto !important;
     }
 
-    .container-solo-match-history, .container-flex-match-history, .wrapper-profile-section-header {
+    .container-solo-match-history, .container-flex-match-history, .wrapper-profile-section-header, .container-weekly-sq-tracking {
         grid-column: span 2;
     }
 
