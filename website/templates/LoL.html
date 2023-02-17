@@ -14,6 +14,9 @@
     </div>
     
     <div class = "container-profile-announcements">
+        <div class = "wrapper-profile-section-header">
+            <h2>Recent Announcements</h2>
+        </div>
         <ul>
             {% for announcement in user.announcement %}
             <li class = "announcement-wrapper">{{ announcement.data }} </br> <span class = "timestamps">{{ announcement.date }}</span></li>
@@ -22,13 +25,18 @@
     </div>
 
     <div class = "container-profile-schedule">
-        <h1>Schedule is inserted here</h1>
+        <div class = "wrapper-profile-section-header">
+            <h2>Upcoming Events</h2>
+        </div>
         {% for event in events %}
         {{ events }}
         {% endfor %}
     </div>
 
     <div class = "container-profile-stats">
+        <div class = "wrapper-profile-section-header">
+            <h2>Summoner Stats</h2>
+        </div>
         <div class = "wrapper-summoner-icon">
             <img id="sumIcon" src = "">
         </div>
@@ -40,11 +48,19 @@
                 <h2 id = "sumLevel"></h2>
             </div>
         </div>
-        <div class = "container-match-history">
+        <div class = "container-solo-match-history">
             <div class = "wrapper-match-history-header">
-                <h1>Last 20 Games</h1>
+                <h1>Last 10 Solo Queue Games</h1>
             </div>
-            <div class = "wrapper-match-history">
+            <div class = "wrapper-match-history" id="soloQueueWrapper">
+
+            </div>
+        </div>
+        <div class = "container-flex-match-history">
+            <div class = "wrapper-match-history-header">
+                <h1>Last 10 Flex Queue Games</h1>
+            </div>
+            <div class = "wrapper-match-history" id="flexQueueWrapper">
 
             </div>
         </div>

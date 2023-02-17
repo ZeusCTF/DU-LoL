@@ -1,6 +1,9 @@
 const statContainer = document.querySelector(".container-profile-stats");
 
-const API_KEY = "RGAPI-495c6905-df51-4f0f-bf3d-22d956786dea";
+const API_KEY = "RGAPI-d59c9950-d2b0-462e-a8b5-2754daba3efa";
+
+var soloQueueMatches = new Array();
+var flexQueueMatches = new Array();
 
 const currentPlayer = {
     "ign": "",
@@ -12,7 +15,7 @@ const currentPlayer = {
     "soloRank": "",
     "soloTier": "",
     "flexRank": "",
-    "flexTier": ""
+    "flexTier": "",
 }
 
 class playerObj {
@@ -130,42 +133,107 @@ async function getMatchHistoryIds(puuid) {
     let matchList = await fetchMatchList.json();
     console.log(matchList);
 
-    //read matches
-    for(var i = 0; i < matchList.length; i++)
-    {
-        readMatchID(matchList[i]);
-    }
+    readMatchIDs(matchList);
+
+    //read solo queue
+    
 }
 
 
-async function readMatchID(matchID)
+async function readMatchIDs(matchList)
 {
-    //get match data from match ID
-    APICallString = "https://americas.api.riotgames.com/lol/match/v5/matches/" + matchID + "?api_key=" + API_KEY;
-    console.log("APICallString: " + APICallString);
+    var soloQueueTracker = 0;
+    var flexQueueTracker = 0;
 
-    const fetchMatchObj = await fetch(APICallString);
-    let matchData = await fetchMatchObj.json();
-    console.log(matchData);
+    for(const matchID of matchList) {
+        //get match data from match ID
+        APICallString = "https://americas.api.riotgames.com/lol/match/v5/matches/" + matchID + "?api_key=" + API_KEY;
+        console.log("APICallString: " + APICallString);
 
+        const fetchMatchObj = await fetch(APICallString);
+        let matchData = await fetchMatchObj.json();
+        console.log(matchData);
+
+        if(matchData.info.queueId == 420) {
+            console.log("Found solo queue game");
+            if(soloQueueTracker < 10)
+            {
+                soloQueueMatches[soloQueueTracker] = matchData;
+                soloQueueTracker++;
+                
+            } else {
+                console.log("Max solo queue games reached");
+            }
+            
+        } else if(matchData.info.queueId == 440) {
+            console.log("Found flex queue game");
+            if(flexQueueTracker < 10)
+            {
+                flexQueueMatches[flexQueueTracker] = matchData;
+                flexQueueTracker++;
+            } else {
+                console.log("Max flex queue games reached");
+            }
+        }
+    }
+    
+    //building solo queue lobbies
+    for(let i = 0; i < soloQueueMatches.length; i++)
+    {
+        buildLobbyContainer(soloQueueMatches[i], "Solo Queue");
+    }
+
+    //building solo queue lobbies
+    for(let i = 0; i < flexQueueMatches.length; i++)
+    {
+        buildLobbyContainer(flexQueueMatches[i], "Flex Queue");
+    }
+
+    /*
+    console.log("Building solo queue matches");
+    //create solo queue lobbies
+    for(let i = 0; i < soloQueueMatches.length; i++)
+    {
+        buildLobbyContainer(soloQueueMatches[i], "Solo Queue");
+    }
+
+    console.log("Building flex queue matches");
+    //create flex queue lobbies
+    for(let i = 0; i < flexQueueMatches.length; i++)
+    {  
+        buildLobbyContainer(flexQueueMatches[i], "Flex Queue");
+    } 
+    */
+}
+
+function buildLobbyContainer(matchData, queueType) {
     //pull match data that's wanted
     let gameID = matchData.info.gameId;
     let lobbyParticipants = matchData.info.participants;
 
-    //get containers to put in display
-    const historyWrapper = document.querySelector(".wrapper-match-history");
 
-    //li to insert each match into ul
+    //get containers to put in display
+    if (queueType == "Solo Queue")
+        historyWrapper = document.getElementById("soloQueueWrapper");
+    if (queueType == "Flex Queue")
+        historyWrapper = document.getElementById("flexQueueWrapper");
+
+    //container to insert each match into
     let div = document.createElement("div");
     div.style.display = "flex";
     div.style.flexDirection = "column";
     //convert data to html
     //game ID
     let gameIdContainer = document.createElement("div");
+    gameIdContainer.style.width = "90%";
+    gameIdContainer.style.marginLeft = "auto";
+    gameIdContainer.style.marginRight = "auto";
     let gameIDDisplay = document.createElement("p");
 
-    gameIDDisplay.innerHTML = "Game ID: " + gameID;
-    gameIDDisplay.classList.add("class");
+    gameIDDisplay.innerHTML = queueType;
+
+    gameIDDisplay.innerHTML += ": " + gameID;
+    
 
     gameIdContainer.append(gameIDDisplay);
 
@@ -188,9 +256,8 @@ async function readMatchID(matchID)
         participantPfp.src = "http://ddragon.leagueoflegends.com/cdn/13.3.1/img/profileicon/" + part.profileIcon + ".png";
         //match info
         let participantWrapper = document.createElement("div");
-        participantWrapper.style.display = "flex";
-        participantWrapper.style.flexDirection = "column";
-        participantWrapper.style.maxWidth = "fit-content";
+        participantWrapper.classList.add("wrapper-lobby-player-information");
+        
 
         let participant = document.createElement("p");
         participant.innerHTML = part.ign;
@@ -209,13 +276,19 @@ async function readMatchID(matchID)
         participantWrapper.append(kda);
 
         let playerWrapper = document.createElement("div");
-        playerWrapper.style.width = "fit-content";
-        playerWrapper.style.display = "flex";
-        playerWrapper.style.margin = "auto";
-        playerWrapper.style.gap = "1rem";
+        playerWrapper.classList.add("wrapper-lobby-player-desc");
 
         playerWrapper.append(participantPfp)
         playerWrapper.append(participantWrapper);
+
+        //check win/loss for current player profile
+        if(player.puuid == currentPlayer.puuid) {
+            if(player.win) {
+                gameIdContainer.style.backgroundColor = "green";
+            } else{
+                gameIdContainer.style.backgroundColor = "red";
+            }
+        }
 
         //compile data
         let playerContainer = document.createElement("div");
@@ -224,7 +297,7 @@ async function readMatchID(matchID)
         playerContainer.append(playerWrapper);
         
         //display data
-        participantContainer.append(playerContainer);
+        participantContainer.append(playerWrapper);
     })
 
     //place created items into list item
@@ -234,4 +307,3 @@ async function readMatchID(matchID)
     //insert built list item into history wrapper
     historyWrapper.append(div);
 }
-
