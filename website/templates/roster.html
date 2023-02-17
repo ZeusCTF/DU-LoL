@@ -2,15 +2,29 @@
 {% block title %} Roster {% endblock %}
 {% block content %}
 <section class = "container-roster-cards">
+    <!--Potential solution - creating a separate roster DB with enough info to pull data?-->
+    <div>
+        <form method="POST">
+            <select name="team" id="team">
+                <option value="League of Legends">League of Legends</option>
+                <option value="CS:GO">CS:GO</option>
+                <option value="Super Smash Bros">Super Smash Bros</option>
+            </select>
+            <input type = "text" name = "member1">
+            <input type = "text" name = "member2">
+            <input type = "text" name = "member3">
+            <input type = "text" name = "member4">
+            <input type = "text" name = "member5">
+            <button type = "submit">Submit Roster</button>
+        </form>
+    </div>
     <div class = "wrapper-rc-header">
-        <h1>{{user.playerTeam}} Roster</h1>
+        <h1>{{user.firstName}}'s Roster</h1>
     </div>
     <div>
         <!--Still working on logic.  Should loop all users then display if team matches-->
         <ul>
-            {% for player in user.User %}
-                
-            {% endfor %}
+            
         </ul>
     </div>
 </section>

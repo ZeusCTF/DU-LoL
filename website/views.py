@@ -5,7 +5,6 @@ from . import db
 from .googCal import pullEvent
 
 
-
 #setting up gen blueprint for the app
 views = Blueprint('views', __name__)
 
@@ -33,14 +32,23 @@ def DULoL():
 @views.route('/vods')
 @login_required
 def vods():
-    return render_template("vods.html", user=current_user, acc=current_user.userName)
+    return render_template("vods.html", user=current_user, acc=current_user.userName, adminStatus=current_user.isAdmin)
 
 @views.route('/schedule')
 @login_required
 def schedule():
-    return render_template("schedule.html", user=current_user, acc=current_user.userName, events=[pullEvent()])
+    return render_template("schedule.html", user=current_user, acc=current_user.userName, adminStatus=current_user.isAdmin, events=[pullEvent()])
 
 @views.route('/roster')
 @login_required
 def roster():
+    userBase = db.session.query(User).filter(User.playerTeam == 'League of Legends')
+    testUserBase = ["tim", "sam", "bill"]
+    roster = []
+    #somehow pass roster data to pull onto page
+    for player in userBase:
+        if(player.playerTeam == current_user.playerTeam):
+            roster.append(player)
+        print(player.playerTeam)
+        print(testUserBase[0])
     return render_template("roster.html", user=current_user, acc=current_user.userName)
