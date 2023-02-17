@@ -180,6 +180,7 @@
     width: 1%;
     height: calc(1.5rem - 4px);
     background-color: green;
+    transition: width .5s;
 }
 
 .container-solo-match-history, .container-flex-match-history {

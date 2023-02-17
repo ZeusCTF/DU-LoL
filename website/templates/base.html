@@ -15,8 +15,10 @@
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='/css/vods.css') }}">
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='/css/schedule.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='/css/roster.css') }}">
     <script src = "{{ url_for('static',filename='/js/left_nav.js') }}"></script>
     <script src = "{{ url_for('static',filename='/js/current_page.js') }}"></script>
+    <script src = "{{ url_for('static',filename='/js/getRoster.js') }}"></script>
     {% block css %}
     {% endblock %}
 </head>
@@ -33,19 +35,17 @@
             {% if user.is_authenticated == False %}
             <li><a href="#" class = "nav-link" id = "interestForm">Student Interest Form</a></li>
             {% endif %}
-            {% if user.is_authenticated %}
-            {% if user.playerTeam == 'league' %}
             <li><a href="/schedule" class = "nav-link" id="schedule">Schedule</a></li>
             <li><a href="/announcements" class = "nav-link" id="announcements">Announcements</a></li>
             <li><a href="/vods" class = "nav-link" id="vods">Vods</a></li>
-            {% if adminStatus != True %}
+            {% if user.is_authenticated == True %}
+            {% if adminStatus == False %}
             <li><a href="/LoL" class = "nav-link" id="profile">Player Profile</a></li>
             {% endif %}
             {% endif %}
-            {% endif %}
-            {% if user.is_authenticated %}
-            {% if adminStatus == True %}
-            <li><a href="#" class = "nav-link" id="roster">Roster Stats</a></li>
+            {% if user.is_authenticated == True %}
+            {% if adminStatus != False %}
+            <li><a href="/roster" class = "nav-link" id="roster">Roster Stats</a></li>
             {% endif %}
             {% endif %}
           </ul>
@@ -57,6 +57,7 @@
             <li><a href="/sign-up" class = "nav-link" id="sign_up">Sign Up</a></li>
             {% endif %}
             {% if user.is_authenticated %}
+            <li><a href="/LoL">{{user.firstName}} {{user.lastName}}</a></li>
             <li><a href="/logout">Logout</a></li>
             {% endif %}
           </ul>
@@ -80,21 +81,19 @@
               <ul>
                 <li><a href="/" class = "nav-link" id="home">Home</a></li>
                 {% if user.is_authenticated == False %}
-                <li><a href="#" class = "nav-link" id="interestForm">Student Interest Form</a></li>
+                <li><a href="#" class = "nav-link" id = "interestForm">Student Interest Form</a></li>
                 {% endif %}
-                {% if user.is_authenticated %}
-                {% if user.playerTeam == 'league' %}
                 <li><a href="/schedule" class = "nav-link" id="schedule">Schedule</a></li>
                 <li><a href="/announcements" class = "nav-link" id="announcements">Announcements</a></li>
                 <li><a href="/vods" class = "nav-link" id="vods">Vods</a></li>
-                {% if adminStatus != True %}
+                {% if user.is_authenticated == True %}
+                {% if adminStatus == False %}
                 <li><a href="/LoL" class = "nav-link" id="profile">Player Profile</a></li>
                 {% endif %}
                 {% endif %}
-                {% endif %}
-                {% if user.is_authenticated %}
-                {% if adminStatus == True %}
-                <li><a href="#" class = "nav-link" id="roster">Roster Stats</a></li>
+                {% if user.is_authenticated == True %}
+                {% if adminStatus != False %}
+                <li><a href="/roster" class = "nav-link" id="roster">Roster Stats</a></li>
                 {% endif %}
                 {% endif %}
               </ul>
@@ -109,6 +108,7 @@
               <li><a href="/sign-up" class = "nav-link" id="sign_up">Sign Up</a></li>
               {% endif %}
               {% if user.is_authenticated %}
+              <li><a href="/LoL">{{user.firstName}} {{user.lastName}}</a></li>
               <li><a href="/logout">Logout</a></li>
               {% endif %}
             </ul>

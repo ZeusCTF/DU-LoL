@@ -39,3 +39,8 @@ def vods():
 @login_required
 def schedule():
     return render_template("schedule.html", user=current_user, acc=current_user.userName, events=[pullEvent()])
+
+@views.route('/roster')
+@login_required
+def roster():
+    return render_template("roster.html", user=current_user, acc=current_user.userName)

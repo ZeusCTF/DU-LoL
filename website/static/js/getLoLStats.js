@@ -282,6 +282,9 @@ function buildLobbyContainer(matchData, queueType) {
     gameIdContainer.style.width = "90%";
     gameIdContainer.style.marginLeft = "auto";
     gameIdContainer.style.marginRight = "auto";
+    gameIdContainer.style.color = "var(--black)";
+    gameIdContainer.style.fontSize = "1.5rem";
+    gameIdContainer.style.fontWeight = "600";
     let gameIDDisplay = document.createElement("p");
 
     gameIDDisplay.innerHTML = queueType;

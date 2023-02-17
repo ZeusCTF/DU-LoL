@@ -1,0 +1,20 @@
+/*general roster formatting*/
+.container-roster-cards {
+    width: 90%;
+    min-height: 80vh;
+    margin: auto;
+    background-color: var(--redTrans);
+    border-radius: 25px;
+    padding: 1rem 0;
+}
+
+/*header*/
+.wrapper-rc-header {
+    width: 90%;
+    background-color: var(--black);
+    border-radius: 25px;
+    margin: auto;
+    font-size: 1.5rem;
+    text-align: center;
+    padding: 1rem 0;
+}

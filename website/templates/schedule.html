@@ -3,7 +3,7 @@
 {% block content %}
 
 <main class = "container-schedule">
-    {% if adminStatus != True %}
+    {% if adminStatus == True %}
     <section class = "container-create-event">
         <h2>Create an Event</h2>
         <form method="POST">

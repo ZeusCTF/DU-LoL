@@ -2,11 +2,10 @@
 .container-announcements {
     display: flex;
     flex-direction: column;
-    margin: 0 5vw;
+    margin: auto;
     width: 100%;
     min-height: 80vh;
     gap: 5vw;
-    padding: 1rem 0 5rem 0;
 }
 
 
@@ -76,6 +75,7 @@ textarea {
 /*View announcements*/
 .container-view-announcements {
     width: 90vw;
+    margin: auto;
     max-height: 80vh;
     min-height: 20vh;
     background-color: var(--redTrans);
