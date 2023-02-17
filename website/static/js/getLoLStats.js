@@ -157,7 +157,8 @@ async function readMatchID(matchID)
 
     //li to insert each match into ul
     let div = document.createElement("div");
-
+    div.style.display = "flex";
+    div.style.flexDirection = "column";
     //convert data to html
     //game ID
     let gameIdContainer = document.createElement("div");
@@ -186,15 +187,42 @@ async function readMatchID(matchID)
         let participantPfp = document.createElement("img");
         participantPfp.src = "http://ddragon.leagueoflegends.com/cdn/13.3.1/img/profileicon/" + part.profileIcon + ".png";
         //match info
+        let participantWrapper = document.createElement("div");
+        participantWrapper.style.display = "flex";
+        participantWrapper.style.flexDirection = "column";
+        participantWrapper.style.maxWidth = "fit-content";
+
         let participant = document.createElement("p");
-        participant.innerHTML = (part.ign + " " + part.champName + " " + part.champLevel + " " + 
-            part.teamPosition + " " + part.kills + " " + part.deaths + " " + part.assists);
+        participant.innerHTML = part.ign;
+        let champStats = document.createElement("p");
+        champStats.innerHTML = (part.champName + " lvl: " + part.champLevel);
         
+        let position = document.createElement("p");
+        position.innerHTML = part.teamPosition;
+
+        let kda = document.createElement("p");
+        kda.innerHTML = (part.kills + "/" + part.deaths + "/" + part.assists);
+
+        participantWrapper.append(participant);
+        participantWrapper.append(champStats);
+        participantWrapper.append(position);
+        participantWrapper.append(kda);
+
+        let playerWrapper = document.createElement("div");
+        playerWrapper.style.width = "fit-content";
+        playerWrapper.style.display = "flex";
+        playerWrapper.style.margin = "auto";
+        playerWrapper.style.gap = "1rem";
+
+        playerWrapper.append(participantPfp)
+        playerWrapper.append(participantWrapper);
+
         //compile data
         let playerContainer = document.createElement("div");
-        playerContainer.classList.add("container-match-player")
-        playerContainer.append(participantPfp);
-        playerContainer.append(participant);
+        playerContainer.classList.add("container-match-player");
+        
+        playerContainer.append(playerWrapper);
+        
         //display data
         participantContainer.append(playerContainer);
     })
