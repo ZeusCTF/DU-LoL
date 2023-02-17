@@ -12,8 +12,34 @@ const currentPlayer = {
     "soloRank": "",
     "soloTier": "",
     "flexRank": "",
-    "flexTier": "",
+    "flexTier": ""
+}
 
+class playerObj {
+    puuid = "";
+    profileIcon = "";
+    ign = "";
+    summonerLevel = 0;
+    champName = "";
+    champLevel = 0;
+    teamPosition = "";
+    kills = 0;
+    deaths = 0;
+    assists = 0;
+
+    constructor(puuid, profileIcon, ign, summonerLevel, champName, champLevel, teamPosition, 
+                    kills, deaths, assists) {
+        this.puuid = puuid;
+        this.profileIcon = profileIcon;
+        this.ign = ign;
+        this.summonerLevel = summonerLevel;
+        this.champName = champName;
+        this.champLevel = champLevel;
+        this.teamPosition = teamPosition;
+        this.kills = kills;
+        this.deaths = deaths;
+        this.assists = assists;
+    }
 }
 
 async function getPlayer() {
@@ -48,7 +74,7 @@ async function getPlayer() {
 
     //set summoner name
     let sumName = document.getElementById("sumName");
-    sumName.innerHTML = currentPlayer.summonerName;
+    sumName.innerHTML = currentPlayer.ign;
     
     //set summoner level
     let sumLevel = document.getElementById("sumLevel");
@@ -147,10 +173,30 @@ async function readMatchID(matchID)
     participantContainer.classList.add("container-history-participants");
 
     lobbyParticipants.forEach(player => {
-        let participant = document.createElement("p");
-        participant.innerHTML = player.summonerName;
+        //build 10 player objects
+        const part = new playerObj(player.puuid, player.profileIcon, player.summonerName, 
+            player.summonerLevel, player.championName, player.champLevel, player.teamPosition, player.kills, player.deaths,
+            player.assists);
 
-        participantContainer.append(participant);
+        console.log("Created player: " + player.puuid, player.profileIcon, player.summonerName, 
+            player.championName, player.champLevel, player.teamPosition, player.kills, player.deaths,
+            player.assists);
+        //compile data information for display
+        //summoner icons
+        let participantPfp = document.createElement("img");
+        participantPfp.src = "http://ddragon.leagueoflegends.com/cdn/13.3.1/img/profileicon/" + part.profileIcon + ".png";
+        //match info
+        let participant = document.createElement("p");
+        participant.innerHTML = (part.ign + " " + part.champName + " " + part.champLevel + " " + 
+            part.teamPosition + " " + part.kills + " " + part.deaths + " " + part.assists);
+        
+        //compile data
+        let playerContainer = document.createElement("div");
+        playerContainer.classList.add("container-match-player")
+        playerContainer.append(participantPfp);
+        playerContainer.append(participant);
+        //display data
+        participantContainer.append(playerContainer);
     })
 
     //place created items into list item
