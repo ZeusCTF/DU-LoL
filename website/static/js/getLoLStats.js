@@ -1,6 +1,6 @@
 const statContainer = document.querySelector(".container-profile-stats");
 
-const API_KEY = "RGAPI-d59c9950-d2b0-462e-a8b5-2754daba3efa";
+const API_KEY = "RGAPI-b2020167-aae6-44d4-8e20-5a31dde4afb8";
 
 var soloQueueMatches = new Array();
 var flexQueueMatches = new Array();
@@ -117,7 +117,10 @@ async function getSummonerRankInfo(id) {
             soloQueueRankCont.classList.add("center-all-content");
             soloQueueRankCont.classList.add("container-current-rank");
             let soloQueueRankImg = document.createElement("img");
-            let soloQueueRankImgFullSrc = "static/images/emblem-" + currentPlayer.soloTier + ".png";
+
+            //let srcURL = "{{ url_for('static',filename='/images/emblem-" + currentPlayer.soloTier.toLowerCase() + ".png') }}"
+            let srcURL = "../static/images/emblem-" + currentPlayer.soloTier.toLowerCase() + ".png";
+            let soloQueueRankImgFullSrc = srcURL;
             soloQueueRankImg.src = soloQueueRankImgFullSrc;
 
             let rankDispContainer = document.createElement("div");
@@ -152,8 +155,10 @@ async function getSummonerRankInfo(id) {
             let flexQueueRankCont = document.createElement("div");
             flexQueueRankCont.classList.add("center-all-content");
             flexQueueRankCont.classList.add("container-current-rank");
+
             let flexQueueRankImg = document.createElement("img");
-            let flexQueueRankImgFullSrc = "static/images/emblem-" + currentPlayer.flexTier + ".png";
+            let srcURL = "../static/images/emblem-" + currentPlayer.flexTier.toLowerCase() + ".png";
+            let flexQueueRankImgFullSrc = srcURL;
             flexQueueRankImg.src = flexQueueRankImgFullSrc;
 
             let rankDispContainer = document.createElement("div");

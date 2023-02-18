@@ -5,28 +5,34 @@
     <!--Potential solution - creating a separate roster DB with enough info to pull data?-->
     <div>
         <form method="POST">
-            <select name="team" id="team">
-                <option value="League of Legends">League of Legends</option>
-                <option value="CS:GO">CS:GO</option>
-                <option value="Super Smash Bros">Super Smash Bros</option>
-            </select>
-            <input type = "text" name = "member1">
-            <input type = "text" name = "member2">
-            <input type = "text" name = "member3">
-            <input type = "text" name = "member4">
-            <input type = "text" name = "member5">
-            <button type = "submit">Submit Roster</button>
+            <input type = "text" name = "uid" Placeholder = "Player uid..." style="color: black">
+            <button type = "submit">Submit Uid</button>
         </form>
     </div>
-    <div class = "wrapper-rc-header">
+    <div class = "container-rc">
         <h1>{{user.firstName}}'s Roster</h1>
+        <table class = "container-roster">
+            <tr>
+                <th>UID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Summoner Name</th>
+                <th>Team</th>
+                <th>Stats</th>
+            </tr>
+            {% for player in rost %}
+            <tr>
+                <td id="P1id">{{player.id}}</td>
+                <td>{{player.firstName}}</td>
+                <td>{{player.lastName}}</td>
+                <td>{{player.sumName}}</td>
+                <td>{{player.team}}</td>
+                <td id="viewP1"><a href="/LoLCoach/{{player.id}}">View Stats</a></td>
+            </tr>
+            {% endfor %}
+        </table>
     </div>
-    <div>
-        <!--Still working on logic.  Should loop all users then display if team matches-->
-        <ul>
-            
-        </ul>
-    </div>
+    
 </section>
 
 <script>

@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for
+from flask import Blueprint, render_template, request, session, redirect, url_for
 from flask_login import login_required, current_user
 from .models import Announcement, User
 from . import db
@@ -42,13 +42,33 @@ def schedule():
 @views.route('/roster')
 @login_required
 def roster():
-    userBase = db.session.query(User).filter(User.playerTeam == 'League of Legends')
-    testUserBase = ["tim", "sam", "bill"]
-    roster = []
-    #somehow pass roster data to pull onto page
-    for player in userBase:
-        if(player.playerTeam == current_user.playerTeam):
-            roster.append(player)
-        print(player.playerTeam)
-        print(testUserBase[0])
-    return render_template("roster.html", user=current_user, acc=current_user.userName)
+        #replace hard coded rosterID list with roster db column in user
+    rosterID = [1, 1, 1, 1, 1]
+    roster = list()
+    for id in rosterID:
+        user = User.query.get(id)
+        player = {
+            "id": user.id,
+            "firstName": user.firstName,
+            "lastName": user.lastName,
+            "sumName": user.ign,
+            "team": user.playerTeam,
+        }
+        roster.append(player)
+    #start session to hold roster with player objects
+    session['roster_data'] = roster
+    return render_template("roster.html", user=current_user, acc=current_user.userName, rost=roster)
+
+@views.route('/LoLCoach/<int:pid>')
+@login_required
+def LoLCoach(pid):
+    uid = pid
+    index = 0
+    currentRoster = session.get("roster_data", None)
+    for player in currentRoster:
+        if player.get(id) == uid:
+            break
+        else:
+            index = index + 1
+
+    return render_template("LoLCoach.html", user=current_user, acc=current_user.userName, player=currentRoster[index-1])

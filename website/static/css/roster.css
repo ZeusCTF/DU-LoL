@@ -9,12 +9,31 @@
 }
 
 /*header*/
-.wrapper-rc-header {
-    width: 90%;
+.container-rc {
+    width: 95%;
     background-color: var(--black);
     border-radius: 25px;
     margin: auto;
-    font-size: 1.5rem;
+    font-size: 1rem;
     text-align: center;
     padding: 1rem 0;
+}
+
+.container-rc table {
+    width: 95%;
+    margin: auto;
+    background-color: var(--red);
+    color: var(--black);
+    border: 2px solid var(--white);
+    padding: 4px;
+    gap: 1rem;
+}
+
+th, td {
+    padding: 1rem 0;
+    text-align: center;
+}
+
+.container-rc table tr:first-child {
+    border-bottom: 2px solid var(--black);
 }
