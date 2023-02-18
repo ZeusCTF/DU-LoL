@@ -22,3 +22,12 @@ class Announcement(db.Model):
     date = db.Column(db.DateTime(timezone=True), default=func.now())
     #creates a foriegn key relationship to associate all announcements with the Player Team attribute
     team = db.Column(db.Integer, db.ForeignKey('user.playerTeam'))
+
+class Roster(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    coach = db.Column(db.String(150))
+    member1 = db.Column(db.String(150))
+    member2 = db.Column(db.String(150))
+    member3 = db.Column(db.String(150))
+    member4 = db.Column(db.String(150))
+    member5 = db.Column(db.String(150))

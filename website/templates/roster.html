@@ -3,12 +3,53 @@
 {% block content %}
 <section class = "container-roster-cards">
     <!--Potential solution - creating a separate roster DB with enough info to pull data?-->
-    <div>
-        <form method="POST">
-            <input type = "text" name = "uid" Placeholder = "Player uid..." style="color: black">
-            <button type = "submit">Submit Uid</button>
-        </form>
-    </div>
+    <section class = "container-get-roster">
+        <h3>Sign Up</h3>
+        <form method="POST" >
+            <div>
+                <label for="member1">Member 1 UID</label>
+                <input
+                    type="text"
+                    id="member1"
+                    name="member1"
+                    placeholder="Member 1 UID...">
+            </div>
+            <div>
+                <label for="member2">Member 2 UID</label>
+                <input
+                    type="text"
+                    id="member2"
+                    name="member2"
+                    placeholder="Member 2 UID...">
+            </div>
+            <div>
+                <label for="member3">Member 3 UID</label>
+                <input
+                    type="text"
+                    id="member3"
+                    name="member3"
+                    placeholder="Member 3 UID...">
+            </div>
+            <div>
+                <label for="member4">Member 4 UID</label>
+                <input
+                    type="text"
+                    id="member4"
+                    name="member4"
+                    placeholder="Member 4 UID...">
+            </div>
+            <div>
+                <label for="member5">Member 5 UID</label>
+                <input
+                    type="text"
+                    id="member5"
+                    name="member5"
+                    placeholder="Member 5 UID...">
+            </div>
+            <div class = "container-signup-button">
+                <button type="submit">Add Member</button>
+            </div>
+    </section>
     <div class = "container-rc">
         <h1>{{user.firstName}}'s Roster</h1>
         <table class = "container-roster">

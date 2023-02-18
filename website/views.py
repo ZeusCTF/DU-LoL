@@ -39,11 +39,29 @@ def vods():
 def schedule():
     return render_template("schedule.html", user=current_user, acc=current_user.userName, adminStatus=current_user.isAdmin, events=[pullEvent()])
 
-@views.route('/roster')
+@views.route('/roster', methods=['GET','POST'])
 @login_required
 def roster():
-        #replace hard coded rosterID list with roster db column in user
+    #build coach's roster
+    if request.method == 'POST':
+        #getting email/password data from the request
+        member1 = request.form.get('member1')
+        member2 = request.form.get('member2')
+        member3 = request.form.get('member3')
+        member4 = request.form.get('member4')
+        member5 = request.form.get('member5')
+        
+        
+        #creates a db object to enter into the db
+        new_roster = db.Roster(coach=current_user.userName, member1=member1, member2=member2, member3=member3, member4=member4, member5=member5)
+        db.session.add(new_roster)
+        db.session.commit()
+        return redirect(url_for('views.roster'))
+    
+    
     rosterID = [1, 1, 1, 1, 1]
+    #replace hard coded rosterID list with roster tables that have coach name match
+    #coachRost = db.Roster.query.filter(current_user.userName)
     roster = list()
     for id in rosterID:
         user = User.query.get(id)
