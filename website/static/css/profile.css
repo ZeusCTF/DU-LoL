@@ -1,8 +1,15 @@
 /*General Styling*/
+.container-user-info {
+    display: flex;
+    flex-direction: column;
+}
 
-
-
-
+.container-info-header {
+    display: flex;
+    text-align: center;
+    padding: 0 1rem;
+    justify-content: center;
+}
 
 /*User Data display*/
 .container-profile-userdata {

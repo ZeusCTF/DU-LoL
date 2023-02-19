@@ -21,6 +21,7 @@ class Announcement(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     data = db.Column(db.String(10000))
     date = db.Column(db.DateTime(timezone=True), default=func.now())
+    author = db.Column(db.String(150))
     #creates a foriegn key relationship to associate all announcements with the Player Team attribute
     team = db.Column(db.Integer, db.ForeignKey('user.playerTeam'))
 

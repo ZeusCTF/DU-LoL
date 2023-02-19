@@ -10,7 +10,7 @@ views = Blueprint('views', __name__)
 
 @views.route('/')
 def landing():
-    return render_template("landing.html", user=current_user)
+    return render_template("landing.html", user=current_user, adminStatus=current_user.isAdmin)
 
 #have to be logged in to access the homepage
 @views.route('/announcements', methods=['GET','POST'])
@@ -18,7 +18,7 @@ def landing():
 def announcements():
     if request.method == 'POST':
         announcement = request.form.get('announcementMsg')
-        new_announcement = Announcement(data=announcement, team=current_user.playerTeam)
+        new_announcement = Announcement(data=announcement, team=current_user.playerTeam, author=current_user.firstName + " " + current_user.lastName)
         db.session.add(new_announcement)
         db.session.commit()
     #user=current_user allows us to reference the current user
@@ -78,12 +78,12 @@ def roster():
     print("test completed")
     #start session to hold roster with player objects
     session['roster_data'] = rosterPlayers
-    return render_template("roster.html", user=current_user, acc=current_user.userName, rostList=rosterPlayers)
+    return render_template("roster.html", user=current_user, acc=current_user.userName, adminStatus=current_user.isAdmin, rostList=rosterPlayers)
 
 @views.route('/LoL')
 @login_required
 def DULoL():
-    return render_template("LoL.html", user=current_user, acc=current_user.userName, events=[pullEvent()])
+    return render_template("LoL.html", user=current_user, acc=current_user.userName, adminStatus=current_user.isAdmin, events=[pullEvent()])
 
 @views.route('/vods')
 @login_required
@@ -99,6 +99,10 @@ def schedule():
 @login_required
 def profile():
     return render_template("profile.html", user=current_user, acc=current_user.userName, adminStatus=current_user.isAdmin)
+
+@views.route('/contact')
+def contact():
+    return render_template("contact.html", user=current_user)
 
 @views.route('/LoLCoach/<int:pid>')
 @login_required

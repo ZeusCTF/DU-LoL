@@ -14,8 +14,10 @@ const currentPlayer = {
     "puuid": "",
     "soloRank": "",
     "soloTier": "",
+    "soloLP": 0,
     "flexRank": "",
     "flexTier": "",
+    "flexLP": 0,
     "weekWins": 0,
     "weekLosses": 0
 }
@@ -107,10 +109,12 @@ async function getSummonerRankInfo(id) {
         if(rankQueue.queueType == "RANKED_SOLO_5x5") {
             currentPlayer.soloTier = rankQueue.tier;
             currentPlayer.soloRank = rankQueue.rank;
+            currentPlayer.soloLP = rankQueue.leaguePoints;
 
             console.log("Solo 5v5 detected");
             console.log(currentPlayer.soloTier);
             console.log(currentPlayer.soloRank);
+            console.log(currentPlayer.soloLP);
             let soloInfoContainer = document.querySelector(".container-summoner-info");
 
             let soloQueueRankCont = document.createElement("div");
@@ -131,7 +135,7 @@ async function getSummonerRankInfo(id) {
             let rankTypeHeader = document.createElement("p");
 
             rankTypeHeader.innerHTML = "Solo Queue";
-            soloQueueRank.innerHTML = currentPlayer.soloTier + ": " + currentPlayer.soloRank;
+            soloQueueRank.innerHTML = currentPlayer.soloTier + ": " + currentPlayer.soloRank + " " + currentPlayer.soloLP + " LP";
 
             rankDispContainer.append(rankTypeHeader);
             rankDispContainer.append(soloQueueRank);
@@ -146,10 +150,12 @@ async function getSummonerRankInfo(id) {
         if(rankQueue.queueType == "RANKED_FLEX_SR") {
             currentPlayer.flexTier = rankQueue.tier;
             currentPlayer.flexRank = rankQueue.rank;
+            currentPlayer.flexLP = rankQueue.leaguePoints;
 
             console.log("Flex rank detected");
             console.log(currentPlayer.flexTier);
             console.log(currentPlayer.flexRank);
+            console.log(currentPlayer.flexLP);
             let flexInfoContainer = document.querySelector(".container-summoner-info");
 
             let flexQueueRankCont = document.createElement("div");
@@ -169,7 +175,7 @@ async function getSummonerRankInfo(id) {
             let rankTypeHeader = document.createElement("p");
 
             rankTypeHeader.innerHTML = "Flex Queue";
-            flexQueueRank.innerHTML = currentPlayer.flexTier + ": " + currentPlayer.flexRank;
+            flexQueueRank.innerHTML = currentPlayer.flexTier + ": " + currentPlayer.flexRank  + " " + currentPlayer.flexLP + " LP";
 
             rankDispContainer.append(rankTypeHeader);
             rankDispContainer.append(flexQueueRank);
@@ -247,22 +253,6 @@ async function readMatchIDs(matchList)
     {
         buildLobbyContainer(flexQueueMatches[i], "Flex Queue");
     }
-
-    /*
-    console.log("Building solo queue matches");
-    //create solo queue lobbies
-    for(let i = 0; i < soloQueueMatches.length; i++)
-    {
-        buildLobbyContainer(soloQueueMatches[i], "Solo Queue");
-    }
-
-    console.log("Building flex queue matches");
-    //create flex queue lobbies
-    for(let i = 0; i < flexQueueMatches.length; i++)
-    {  
-        buildLobbyContainer(flexQueueMatches[i], "Flex Queue");
-    } 
-    */
 }
 
 function buildLobbyContainer(matchData, queueType) {

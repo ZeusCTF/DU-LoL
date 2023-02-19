@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block title %} Contact {% endblock %}
+{% block content %}
+<section class = "container-contact">
+    <form method="POST">
+        <h3>Contact Us</h3>
+        <div>
+            <label for="name">Name</label>
+            <!-- The name field is important here, this is what the info is called that gets passed to the backend -->
+            <input
+                type="text"
+                id="name"
+                name="name"
+                placeholder="Enter your name...">
+        </div>
+        <div>
+            <label for="email">Email Address</label>
+            <!-- The name field is important here, this is what the info is called that gets passed to the backend -->
+            <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="Enter DU email">
+        </div>
+        <div>
+            <label for="phone">Phone Number</label>
+            <!-- The name field is important here, this is what the info is called that gets passed to the backend -->
+            <input
+                type="text"
+                id="phone"
+                name="phone"
+                placeholder="Enter phone number...">
+        </div>
+        <div>
+            <label for="sbjct">Subject</label>
+            <!-- The name field is important here, this is what the info is called that gets passed to the backend -->
+            <input
+                type="text"
+                id="sbjct"
+                name="sbjct"
+                placeholder="Enter subject...">
+        </div>
+        <div>
+            <label for="msg">Message</label>
+            <!-- The name field is important here, this is what the info is called that gets passed to the backend -->
+            <textarea id="msg" name="msg" placeholder="Enter your message..."></textarea>
+        </div>
+        
+        <div class = "container-contact-button">
+            <button type="submit">Send</button>
+        </div>
+    </form>
+</section>
+
+<script>
+    selectLinks("contactForm");
+</script>
+{% endblock %}

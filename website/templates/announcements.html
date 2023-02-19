@@ -18,7 +18,15 @@
     <section class = "container-view-announcements">
         <ul class = "wrapper-announcements">
             {% for announcement in user.announcement %}
-            <li class = "announcement-wrapper">{{ announcement.data }} </br> <span class = "timestamps">{{ announcement.date }}</span></li>
+            <li class = "announcement-wrapper">
+                <div class = "wrapper-announcement-data">
+                    {{ announcement.data }}
+                </div>
+                <div class = "wrapper-announcement-metadata">
+                    {{ announcement.date }}
+                    <button type="button" class="delete-announcement">Delete Announcement</button>
+                </div>
+            </li>
             {% endfor %}
         </ul>
     </section>
