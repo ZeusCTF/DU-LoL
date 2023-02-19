@@ -61,6 +61,7 @@
                 <th>Team</th>
                 <th>Stats</th>
             </tr>
+            <!--
             {% for player in rost %}
             <tr>
                 <td id="P1id">{{player.id}}</td>
@@ -70,7 +71,15 @@
                 <td>{{player.team}}</td>
                 <td id="viewP1"><a href="/LoLCoach/{{player.id}}">View Stats</a></td>
             </tr>
-            {% endfor %}
+            {% endfor %}-->
+            <tr>
+                <td id="P1id">{{rost[3].id}}</td>
+                <td>{{rost[3].firstName}}</td>
+                <td>{{rost[3].lastName}}</td>
+                <td>{{rost[3].sumName}}</td>
+                <td>{{rost[3].team}}</td>
+                <td id="viewP1"><a href="/LoLCoach/{{player.id}}">View Stats</a></td>
+            </tr>
         </table>
     </div>
     

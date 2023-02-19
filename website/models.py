@@ -15,6 +15,7 @@ class User(db.Model, UserMixin):
     isAdmin = db.Column(db.Boolean())
     playerTeam = db.Column(db.String(150))
     announcement = db.relationship('Announcement')
+    roster = db.relationship('Roster')
 
 class Announcement(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -25,9 +26,9 @@ class Announcement(db.Model):
 
 class Roster(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    coach = db.Column(db.String(150))
-    member1 = db.Column(db.String(150))
-    member2 = db.Column(db.String(150))
-    member3 = db.Column(db.String(150))
-    member4 = db.Column(db.String(150))
-    member5 = db.Column(db.String(150))
+    member1 = db.Column(db.Integer)
+    member2 = db.Column(db.Integer)
+    member3 = db.Column(db.Integer)
+    member4 = db.Column(db.Integer)
+    member5 = db.Column(db.Integer)
+    coach = db.Column(db.Integer, db.ForeignKey('user.id'))
