@@ -26,6 +26,7 @@ class Announcement(db.Model):
 
 class Roster(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(150))
     member1 = db.Column(db.Integer)
     member2 = db.Column(db.Integer)
     member3 = db.Column(db.Integer)

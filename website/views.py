@@ -30,6 +30,7 @@ def roster():
     #build coach's roster
     if request.method == 'POST':
         #getting member uid data from the request
+        name = request.form.get('rosterName')
         member1 = request.form.get('member1')
         member2 = request.form.get('member2')
         member3 = request.form.get('member3')
@@ -37,29 +38,47 @@ def roster():
         member5 = request.form.get('member5')
         
         #creates a db object to enter into the db
-        new_roster = Roster(coach=current_user.id, member1=member1, member2=member2, member3=member3, member4=member4, member5=member5)
+        new_roster = Roster(name=name, member1=member1, member2=member2, member3=member3, member4=member4, member5=member5, coach=current_user.id)
         db.session.add(new_roster)
         db.session.commit()
 
-    rosterIDs = [2, 2, 1, 1, 1]
+    rosterIDs = []
+    rosterNames = list()
     #replace hard coded rosterID list with roster tables that have coach name match
-    #coachRost = db.select(Roster.member1, Roster.member2, Roster.member3, Roster.member4, Roster.member5).where(Roster.coach == current_user.id)
-    #for member in coachRost:
-    #    rosterIDs.append(member.id)
+    coachRosters = Roster.query.all()
+    if coachRosters:
+        for roster in coachRosters:
+            if(roster.coach == current_user.id):
+                rosterNames.append(roster.name)
+
+                idList = [roster.member1, roster.member2, roster.member3, roster.member4, roster.member5]
+                rosterIDs.append(idList)
+
     rosterPlayers = list()
-    for pid in rosterIDs:
-        tempPlayer = User.query.get(pid)
-        player = {
-            "id": tempPlayer.id,
-            "firstName": tempPlayer.firstName,
-            "lastName": tempPlayer.lastName,
-            "sumName": tempPlayer.ign,
-            "team": tempPlayer.playerTeam
-        }
-        rosterPlayers.append(player)
+    currentRoster = list()
+    rosterIndex = 0
+    for rostidlist in rosterIDs:
+        for id in rostidlist:
+            tempPlayer = User.query.get(id)
+            player = {
+                "id": tempPlayer.id,
+                "roster": rosterNames[rosterIndex],
+                "firstName": tempPlayer.firstName,
+                "lastName": tempPlayer.lastName,
+                "sumName": tempPlayer.ign,
+                "team": tempPlayer.playerTeam
+            }
+            currentRoster.append(player)
+        rosterPlayers.append(currentRoster)
+        rosterIndex += 1    
+        currentRoster = []
+
+    for name in rosterNames:
+        print(name)
+    print("test completed")
     #start session to hold roster with player objects
     session['roster_data'] = rosterPlayers
-    return render_template("roster.html", user=current_user, acc=current_user.userName, rost=rosterPlayers)
+    return render_template("roster.html", user=current_user, acc=current_user.userName, rostList=rosterPlayers)
 
 @views.route('/LoL')
 @login_required
@@ -76,16 +95,17 @@ def vods():
 def schedule():
     return render_template("schedule.html", user=current_user, acc=current_user.userName, adminStatus=current_user.isAdmin, events=[pullEvent()])
 
+@views.route('/profile')
+@login_required
+def profile():
+    return render_template("profile.html", user=current_user, acc=current_user.userName, adminStatus=current_user.isAdmin)
+
 @views.route('/LoLCoach/<int:pid>')
 @login_required
 def LoLCoach(pid):
     uid = pid
-    index = 0
-    currentRoster = session.get("roster_data", None)
-    for player in currentRoster:
-        if player.get(id) == uid:
-            break
-        else:
-            index = index + 1
+    selectedPlayer = User.query.get(uid)
 
-    return render_template("LoLCoach.html", user=current_user, acc=current_user.userName, player=currentRoster[index-1])
+
+
+    return render_template("LoLCoach.html", user=current_user, acc=current_user.userName, player=selectedPlayer)

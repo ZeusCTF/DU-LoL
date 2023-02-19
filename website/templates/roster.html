@@ -3,9 +3,17 @@
 {% block content %}
 <section class = "container-roster-cards">
     <!--Potential solution - creating a separate roster DB with enough info to pull data?-->
-    <section class = "container-get-roster">
-        <h3>Sign Up</h3>
+    <section class = "container-create-roster">
+        <h3>Create a Roster</h3>
         <form method="POST" >
+            <div>
+                <label for="rosterName">Roster Name</label>
+                <input
+                    type="text"
+                    id="rosterName"
+                    name="rosterName"
+                    placeholder="Roster name...">
+            </div>
             <div>
                 <label for="member1">Member 1 UID</label>
                 <input
@@ -51,7 +59,10 @@
             </div>
     </section>
     <div class = "container-rc">
-        <h1>{{user.firstName}}'s Roster</h1>
+        <h1>{{user.firstName}}'s Rosters</h1>
+        
+        {% for rost in rostList %}
+        <h1>{{ rost[0].roster }}</h1>
         <table class = "container-roster">
             <tr>
                 <th>UID</th>
@@ -61,7 +72,6 @@
                 <th>Team</th>
                 <th>Stats</th>
             </tr>
-            <!--
             {% for player in rost %}
             <tr>
                 <td id="P1id">{{player.id}}</td>
@@ -71,16 +81,9 @@
                 <td>{{player.team}}</td>
                 <td id="viewP1"><a href="/LoLCoach/{{player.id}}">View Stats</a></td>
             </tr>
-            {% endfor %}-->
-            <tr>
-                <td id="P1id">{{rost[3].id}}</td>
-                <td>{{rost[3].firstName}}</td>
-                <td>{{rost[3].lastName}}</td>
-                <td>{{rost[3].sumName}}</td>
-                <td>{{rost[3].team}}</td>
-                <td id="viewP1"><a href="/LoLCoach/{{player.id}}">View Stats</a></td>
-            </tr>
+            {% endfor %}
         </table>
+        {% endfor %}
     </div>
     
 </section>

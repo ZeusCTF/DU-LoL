@@ -8,7 +8,36 @@
     padding: 1rem 0;
 }
 
-/*header*/
+/*Roster creation form*/
+.container-create-roster {
+    width: 90%;
+    margin: auto;
+    background-color: var(--black);
+    border-radius: 25px;
+    margin-bottom: 1rem;
+    padding: 1rem 0;
+    text-align: center;
+}
+
+.container-create-roster form div {
+    width: 80%;
+    margin: auto;
+    text-align: left;
+    color: var(--black);
+}
+
+.container-create-roster form div label {
+    color: var(--white);
+}
+
+.container-signup-button {
+    text-align: center !important;
+}
+
+
+
+
+/*ROSTER DISPLAY*/
 .container-rc {
     width: 95%;
     background-color: var(--black);
@@ -17,6 +46,16 @@
     font-size: 1rem;
     text-align: center;
     padding: 1rem 0;
+}
+
+.container-rc h1:first-child {
+    font-size: 2rem;
+}
+
+.container-rc h1 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    padding: 1rem;
 }
 
 .container-rc table {
@@ -32,6 +71,10 @@
 th, td {
     padding: 1rem 0;
     text-align: center;
+}
+
+.container-rc table tr:nth-child(even) {
+    background-color: rgba(0,0,0,.3);
 }
 
 .container-rc table tr:first-child {

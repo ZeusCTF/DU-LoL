@@ -1,0 +1,17 @@
+/*General Styling*/
+
+
+
+
+
+/*User Data display*/
+.container-profile-userdata {
+    width: 90%;
+    margin: auto;
+    background-color: var(--black);
+    padding: 0 1rem;
+}
+
+.container-profile-userdata h1 {
+    margin: 1rem 0;
+}
