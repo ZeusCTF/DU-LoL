@@ -17,9 +17,21 @@
         <div class = "wrapper-profile-section-header">
             <h2>Recent Announcements</h2>
         </div>
-        <ul>
+        <ul class = "wrapper-announcements">
             {% for announcement in user.announcement %}
-            <li class = "announcement-wrapper">{{ announcement.data }} </br> <span class = "timestamps">{{ announcement.date }}</span></li>
+            <li class = "announcement-wrapper">
+                <div class = "wrapper-announcement-data">
+                    <p>{{ announcement.data }}</p>
+                </div>
+                <div class = "wrapper-announcement-metadata">
+                    <p>{{ announcement.authorName }}</p>
+                    <p>{{ announcement.team }}</p>
+                    <p>{{ announcement.date }}</p>
+                    {% if user.isAdmin == 1 %}
+                    <button type="button" class="delete-announcement" onclick="deleteAnnouncement(this, 'announcements')" id = "announcement{{ announcement.id }}">Delete Announcement</button>
+                    {% endif %}
+                </div>
+            </li>
             {% endfor %}
         </ul>
     </div>

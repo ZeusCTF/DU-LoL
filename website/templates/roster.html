@@ -83,6 +83,9 @@
             </tr>
             {% endfor %}
         </table>
+        <div class = "wrapper-delete-roster">
+            <button type="button" class="delete-roster" onclick="deleteObj(this, 'roster')" id = "roster{{ rost[0].rosterID }}">Delete Roster</button>
+        </div>
         {% endfor %}
     </div>
     

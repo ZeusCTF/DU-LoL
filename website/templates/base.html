@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src = "{{ url_for('static',filename='/js/left_nav.js') }}"></script>
     <script src = "{{ url_for('static',filename='/js/current_page.js') }}"></script>
-    
+    <script src = "{{ url_for('static',filename='/js/deleteDBObj.js') }}"></script>
     {% block css %}
     {% endblock %}
 </head>
@@ -48,7 +48,7 @@
             {% endif %}
             {% endif %}
             {% if user.is_authenticated == True %}
-            {% if adminStatus == 1 %}
+            {% if user.isAdmin == 1 %}
             <li><a href="/roster" class = "nav-link" id="roster">Roster Stats</a></li>
             {% endif %}
             {% endif %}
@@ -98,7 +98,7 @@
                 {% endif %}
                 {% endif %}
                 {% if user.is_authenticated == True %}
-                {% if adminStatus == 1 %}
+                {% if user.isAdmin == 1 %}
                 <li><a href="/roster" class = "nav-link" id="roster">Roster Stats</a></li>
                 {% endif %}
                 {% endif %}

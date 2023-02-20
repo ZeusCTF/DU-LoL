@@ -1,8 +1,9 @@
-from flask import Blueprint, render_template, request, session, redirect, url_for
+from flask import Blueprint, render_template, request, session, redirect, url_for, jsonify
 from flask_login import login_required, current_user
 from .models import Announcement, User, Roster
 from . import db
 from .googCal import pullEvent
+import json
 
 
 #setting up gen blueprint for the app
@@ -10,7 +11,7 @@ views = Blueprint('views', __name__)
 
 @views.route('/')
 def landing():
-    return render_template("landing.html", user=current_user, adminStatus=current_user.isAdmin)
+    return render_template("landing.html", user=current_user)
 
 #have to be logged in to access the homepage
 @views.route('/announcements', methods=['GET','POST'])
@@ -18,11 +19,27 @@ def landing():
 def announcements():
     if request.method == 'POST':
         announcement = request.form.get('announcementMsg')
-        new_announcement = Announcement(data=announcement, team=current_user.playerTeam, author=current_user.firstName + " " + current_user.lastName)
+        new_announcement = Announcement(data=announcement, team=current_user.playerTeam, authorName=current_user.firstName + " " + current_user.lastName, author=current_user.id)
         db.session.add(new_announcement)
         db.session.commit()
     #user=current_user allows us to reference the current user
     return render_template("announcements.html", user=current_user, acc=current_user.userName, adminStatus=current_user.isAdmin)
+
+@views.route('/delete-announcements', methods=['POST'])
+@login_required
+def delete_announcements():
+    announcement = json.loads(request.data)
+    print(announcement)
+    announcementId = announcement['deleteID']
+    print(announcementId)
+    announcement = Announcement.query.get(announcementId)
+    print(announcement)
+    if announcement:
+        if announcement.author == current_user.id:
+            db.session.delete(announcement)
+            db.session.commit()
+
+    return jsonify({}) 
 
 @views.route('/roster', methods=['GET', 'POST'])
 @login_required
@@ -42,7 +59,10 @@ def roster():
         db.session.add(new_roster)
         db.session.commit()
 
+    #playerIDs in roster
     rosterIDs = []
+    #Roster UID's
+    rosterUIDs = []
     rosterNames = list()
     #replace hard coded rosterID list with roster tables that have coach name match
     coachRosters = Roster.query.all()
@@ -50,6 +70,7 @@ def roster():
         for roster in coachRosters:
             if(roster.coach == current_user.id):
                 rosterNames.append(roster.name)
+                rosterUIDs.append(roster.id)
 
                 idList = [roster.member1, roster.member2, roster.member3, roster.member4, roster.member5]
                 rosterIDs.append(idList)
@@ -63,6 +84,7 @@ def roster():
             player = {
                 "id": tempPlayer.id,
                 "roster": rosterNames[rosterIndex],
+                "rosterID":rosterUIDs[rosterIndex],
                 "firstName": tempPlayer.firstName,
                 "lastName": tempPlayer.lastName,
                 "sumName": tempPlayer.ign,
@@ -79,6 +101,22 @@ def roster():
     #start session to hold roster with player objects
     session['roster_data'] = rosterPlayers
     return render_template("roster.html", user=current_user, acc=current_user.userName, adminStatus=current_user.isAdmin, rostList=rosterPlayers)
+
+@views.route('/delete-roster', methods=['POST'])
+@login_required
+def delete_roster():
+    roster = json.loads(request.data)
+    print(roster)
+    rosterId = roster['deleteID']
+    print(rosterId)
+    roster = Roster.query.get(rosterId)
+    print(roster)
+    if roster:
+        if roster.coach == current_user.id:
+            db.session.delete(roster)
+            db.session.commit()
+
+    return jsonify({}) 
 
 @views.route('/LoL')
 @login_required
@@ -112,4 +150,4 @@ def LoLCoach(pid):
 
 
 
-    return render_template("LoLCoach.html", user=current_user, acc=current_user.userName, player=selectedPlayer)
+    return render_template("LoLCoach.html", user=current_user, acc=current_user.userName, adminStatus=current_user.isAdmin, player=selectedPlayer)

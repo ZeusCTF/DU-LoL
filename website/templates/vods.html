@@ -3,9 +3,14 @@
 {% block content %}
 
 {% if user.is_authenticated %}
-{% if adminStatus == True %}
+{% if adminStatus == 1 %}
 <section class = "container-vods-upload">
-
+    <div class = "wrapper-vods-upload-header">
+        <h1>Upload VOD</h1>
+    </div>
+    <form>
+            
+    </form>
 </section>
 {% endif %}
 {% endif %}

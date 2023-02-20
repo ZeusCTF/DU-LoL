@@ -14,7 +14,7 @@
 .container-post-announcements {
     width: 90vw;
     min-height: 40vh;
-    background-color: blue;
+    background-color: var(--red);
     padding: 1rem 0;
     border-radius: 25px;
     display: flex;
@@ -67,6 +67,7 @@ textarea {
     color: var(--white);
     text-align: left;
     padding: .5rem;
+    border: 2px solid var(--black);
 }
 
 
@@ -97,6 +98,13 @@ textarea {
     margin: 1rem;
     background-color: var(--black);
     border-radius: 25px;
+}
+
+.wrapper-announcement-data {
+    border: 2px solid var(--white);
+    border-radius: 25px;
+    padding: 1rem;
+    margin-bottom: 1rem;
 }
 
 .wrapper-announcement-metadata {

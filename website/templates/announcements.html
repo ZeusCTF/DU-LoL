@@ -20,11 +20,15 @@
             {% for announcement in user.announcement %}
             <li class = "announcement-wrapper">
                 <div class = "wrapper-announcement-data">
-                    {{ announcement.data }}
+                    <p>{{ announcement.data }}</p>
                 </div>
                 <div class = "wrapper-announcement-metadata">
-                    {{ announcement.date }}
-                    <button type="button" class="delete-announcement">Delete Announcement</button>
+                    <p>{{ announcement.authorName }}</p>
+                    <p>{{ announcement.team }}</p>
+                    <p>{{ announcement.date }}</p>
+                    {% if user.isAdmin == 1 %}
+                    <button type="button" class="delete-announcement" onclick="deleteObj(this, 'announcements')" id = "announcements{{ announcement.id }}">Delete Announcement</button>
+                    {% endif %}
                 </div>
             </li>
             {% endfor %}
