@@ -1,0 +1,40 @@
+/*GENERAL CONTACT STYLING*/
+
+/*Contact form*/
+.container-contact {
+    width: 80%;
+    margin: auto;
+    background-color: var(--red);
+    padding: 1rem;
+    border-radius: 25px;
+    text-align: center;
+    font-size: 1.3rem;
+}
+
+.container-contact form h3 {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.container-contact form div {
+    margin-bottom: 1rem;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+}
+
+.container-contact form div input, textarea {
+    color: var(--black);
+}
+
+.container-contact-button {
+    text-align: center !important; 
+}
+
+textarea {
+    margin-top: 1rem;
+    background-color:  antiquewhite;
+    padding: 1rem;
+    min-height: 40vh;
+}

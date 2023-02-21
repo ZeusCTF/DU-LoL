@@ -1,0 +1,104 @@
+/*general roster formatting*/
+.container-roster-cards {
+    width: 90%;
+    min-height: 80vh;
+    margin: auto;
+    background-color: var(--redTrans);
+    border-radius: 25px;
+    padding: 1rem 0;
+}
+
+/*Roster creation form*/
+.container-create-roster {
+    width: 90%;
+    margin: auto;
+    background-color: var(--black);
+    border-radius: 25px;
+    margin-bottom: 1rem;
+    padding: 1rem 0;
+    text-align: center;
+}
+
+#createRosHeader {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.container-create-roster form div {
+    width: 80%;
+    margin: auto;
+    text-align: left;
+    color: var(--black);
+}
+
+.container-create-roster form div label {
+    color: var(--white);
+}
+
+.container-signup-button {
+    text-align: center !important;
+}
+
+
+
+
+/*ROSTER DISPLAY*/
+.container-rc {
+    width: 95%;
+    background-color: var(--black);
+    border-radius: 25px;
+    margin: auto;
+    font-size: 1rem;
+    text-align: center;
+    padding: 1rem 0;
+}
+
+.container-rc h1:first-child {
+    font-size: 2rem;
+}
+
+.container-rc h1 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    padding: 1rem;
+}
+
+.container-rc table {
+    width: 95%;
+    margin: auto;
+    background-color: var(--red);
+    color: var(--black);
+    border: 2px solid var(--white);
+    padding: 4px;
+    gap: 1rem;
+}
+
+th, td {
+    padding: 1rem 0;
+    text-align: center;
+}
+
+.container-rc table tr:nth-child(even) {
+    background-color: rgba(0,0,0,.3);
+}
+
+.container-rc table tr:first-child {
+    border-bottom: 2px solid var(--black);
+}
+
+.wrapper-delete-roster {
+    padding: 1rem 0;
+}
+
+.wrapper-delete-roster button {
+    padding: .5rem 1rem;
+    font-size: 1.5rem;
+    border: 2px solid var(--white);
+    border-radius: 25px;
+    transition: background-color .5s;
+}
+
+.wrapper-delete-roster button:hover {
+    background-color: rgb(49, 49, 49);
+}

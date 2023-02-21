@@ -25,6 +25,7 @@ def create_app():
     #makes sure the db models are created
     from .models import User
     from .models import Announcement
+    from .models import Roster
 
     #https://stackoverflow.com/questions/73968584/flask-sqlalchemy-db-create-all-got-an-unexpected-keyword-argument-app
     #sql alchemy now requires an active Flask app context

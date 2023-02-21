@@ -15,10 +15,23 @@ class User(db.Model, UserMixin):
     isAdmin = db.Column(db.Boolean())
     playerTeam = db.Column(db.String(150))
     announcement = db.relationship('Announcement')
+    roster = db.relationship('Roster')
 
 class Announcement(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     data = db.Column(db.String(10000))
     date = db.Column(db.DateTime(timezone=True), default=func.now())
+    authorName = db.Column(db.String(150))
     #creates a foriegn key relationship to associate all announcements with the Player Team attribute
     team = db.Column(db.Integer, db.ForeignKey('user.playerTeam'))
+    author = db.Column(db.Integer)
+
+class Roster(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(150))
+    member1 = db.Column(db.Integer)
+    member2 = db.Column(db.Integer)
+    member3 = db.Column(db.Integer)
+    member4 = db.Column(db.Integer)
+    member5 = db.Column(db.Integer)
+    coach = db.Column(db.Integer, db.ForeignKey('user.id'))

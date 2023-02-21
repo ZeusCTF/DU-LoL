@@ -12,6 +12,39 @@
     margin-bottom: 1rem;
 }
 
+.wrapper-profile-section-header {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--white);
+    background-color: var(--black);
+    width: 100%;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    text-align: center;
+    border-bottom: 1px solid var(--white);
+}
+
+.center-all-content {
+    display: flex;
+    width: 90%;
+    margin: auto;
+}
+
+.center-all-content p {
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: .5rem;
+}
+
+.container-current-rank {
+    padding: 1rem 0;
+}
+
+.container-current-rank img {
+    height: 100px;
+    width: 150px;
+}
+
 
 /*User Header Display*/
 .container-user-header {
@@ -83,9 +116,148 @@
 .container-profile-stats {
     width: 90%;
     margin: auto;
-    height: 450px;
-    border: 2px solid var(--black);
+    height: fit-content;
+    background-color: var(--black);
+    display: grid;
+    grid-template-columns: 100%;
+    gap: 1rem;
+    padding: 1rem 0;
+    text-align: center;
+    flex-wrap: wrap;
 }
+
+.wrapper-summoner-icon {
+    display: flex;
+    width: 80%;
+    max-width: 150px;
+    justify-content: center;
+    align-content: center;
+    border: 2px solid var(--white);
+    margin: auto;
+    flex-wrap: wrap;
+}
+
+.container-summoner-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    font-size: 1.2rem;
+    border: 2px solid var(--white);
+}
+
+.wrapper-summoner-info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: .5rem;
+    padding: 1rem;
+}
+
+.container-weekly-sq-tracking {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    margin: auto;
+    padding: 1rem 0;
+    border: 2px solid var(--white);
+    justify-content: space-evenly;
+}
+
+.container-weekly-sq-tracking p, .container-weekly-sq-tracking h1 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    line-height: 4rem;
+}
+
+.sq-tracking-bar {
+    width: 90%;
+    height: 1.5rem;
+    margin: auto;
+    background-color: var(--red);
+    border: 2px solid var(--white);
+}
+
+.sq-progress-bar {
+    width: 1%;
+    height: calc(1.5rem - 4px);
+    background-color: green;
+    transition: width .5s;
+}
+
+.container-solo-match-history, .container-flex-match-history {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    max-height: 80vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    border: 2px solid var(--white);
+}
+
+.wrapper-match-history-header {
+    background-color: var(--black);
+    font-size: 1.5rem;
+    width: 90%;
+    margin: auto;
+    margin-top: 1rem;
+    padding: 1rem 0;
+}
+
+.wrapper-match-history {
+    width: 100%;
+}
+
+.wrapper-match-history div {
+    margin: 1rem 0;
+    padding: 1rem 0;
+}
+
+/*JS inserted*/
+.container-history-participants {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(5, auto);
+    grid-auto-flow: column;
+    justify-content: center !important;
+    align-content: center !important;
+    gap: .5rem;
+    background-image: linear-gradient(to right, blue , red);
+}
+
+.container-match-player {
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 1rem;
+    justify-content: center;
+    align-content: center;
+}
+
+.wrapper-lobby-player-information {
+    display: flex;
+    flex-direction: column;
+    max-width: fit-content;
+}
+
+.wrapper-lobby-player-desc {
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-self: center;
+    align-self: center;
+    gap: 1rem;
+    background-color: var(--black);
+}
+
+.wrapper-lobby-player-desc img {
+    height: 50px;
+    width: 50px;
+    margin: auto;
+}
+
+.container-match-player p {
+    margin: auto;
+}
+
 
 /*Responsive Layouts*/
 
@@ -93,6 +265,25 @@
     .wrapper-user-desc {
         font-size: 2.5rem;
         margin-left: 1.5rem;
+    }
+
+    .container-profile-stats {
+        grid-template-columns: auto auto;
+        padding: 1rem;
+    }
+
+    .container-history-participants {
+       width: 90%;
+       margin: auto !important;
+    }
+
+    .container-solo-match-history, .container-flex-match-history, .wrapper-profile-section-header, .container-weekly-sq-tracking {
+        grid-column: span 2;
+    }
+
+    .wrapper-lobby-player-desc {
+        flex-direction: row;
+        padding: 1rem !important;
     }
 }
 

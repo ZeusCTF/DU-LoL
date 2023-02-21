@@ -1,0 +1,24 @@
+/*General Styling*/
+.container-user-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.container-info-header {
+    display: flex;
+    text-align: center;
+    padding: 0 1rem;
+    justify-content: center;
+}
+
+/*User Data display*/
+.container-profile-userdata {
+    width: 90%;
+    margin: auto;
+    background-color: var(--black);
+    padding: 0 1rem;
+}
+
+.container-profile-userdata h1 {
+    margin: 1rem 0;
+}

@@ -3,10 +3,14 @@
 {% block content %}
 
 {% if user.is_authenticated %}
-<!--Need to update to admin status true but it wasn't working-->
-{% if adminStatus != True %}
+{% if adminStatus == 1 %}
 <section class = "container-vods-upload">
-
+    <div class = "wrapper-vods-upload-header">
+        <h1>Upload VOD</h1>
+    </div>
+    <form>
+            
+    </form>
 </section>
 {% endif %}
 {% endif %}

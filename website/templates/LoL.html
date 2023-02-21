@@ -8,31 +8,93 @@
         </div>
         <div class = "wrapper-user-desc">
             <h1>{{user.firstName}} {{user.lastName}}</h1>
-            <h2>{{user.ign}}</h2>
+            <!--!LEAVE ON PAGE! getLoLStats.js must pull info-->
+            <h2 id="ign" style="display: none">{{user.ign}}</h2>
         </div>
     </div>
     
     <div class = "container-profile-announcements">
-        <ul>
+        <div class = "wrapper-profile-section-header">
+            <h2>Recent Announcements</h2>
+        </div>
+        <ul class = "wrapper-announcements">
             {% for announcement in user.announcement %}
-            <li class = "announcement-wrapper">{{ announcement.data }} </br> <span class = "timestamps">{{ announcement.date }}</span></li>
+            <li class = "announcement-wrapper">
+                <div class = "wrapper-announcement-data">
+                    <p>{{ announcement.data }}</p>
+                </div>
+                <div class = "wrapper-announcement-metadata">
+                    <p>{{ announcement.authorName }}</p>
+                    <p>{{ announcement.team }}</p>
+                    <p>{{ announcement.date }}</p>
+                    {% if user.isAdmin == 1 %}
+                    <button type="button" class="delete-announcement" onclick="deleteAnnouncement(this, 'announcements')" id = "announcement{{ announcement.id }}">Delete Announcement</button>
+                    {% endif %}
+                </div>
+            </li>
             {% endfor %}
         </ul>
     </div>
 
     <div class = "container-profile-schedule">
-        <h1>Schedule is inserted here</h1>
+        <div class = "wrapper-profile-section-header">
+            <h2>Upcoming Events</h2>
+        </div>
         {% for event in events %}
         {{ events }}
         {% endfor %}
     </div>
 
     <div class = "container-profile-stats">
-        <h1>Stats are inserted here</h1>
+        <div class = "wrapper-profile-section-header">
+            <h2>Summoner Stats</h2>
+        </div>
+        <div class = "wrapper-summoner-icon">
+            <img id="sumIcon" src = "">
+        </div>
+        <div class = "container-summoner-info">
+            <div class = "wrapper-summoner-info">
+                <h1>Summoner Name:</h1>
+                <h1 id = "sumName"></h1>
+                <h2>Summoner Level:</h2>
+                <h2 id = "sumLevel"></h2>
+            </div>
+        </div>
+        <div class = "container-weekly-sq-tracking">
+            <h1>Weekly Solo Queue Tracking</h1>
+            <div class = "sq-tracking-bar">
+                <div class = "sq-progress-bar">
+
+                </div>
+            </div>
+            <div class = "wrapper-sq-amount">
+                <p id="sqAmount">0 / 20 games played</p>
+            </div>
+            <div class = "wrapper-sq-winloss">
+                <p id="sqWinLoss">0 Wins / 0 Losses</p>
+            </div>
+        </div>
+        <div class = "container-solo-match-history">
+            <div class = "wrapper-match-history-header">
+                <h1>Last 10 Solo Queue Games</h1>
+            </div>
+            <div class = "wrapper-match-history" id="soloQueueWrapper">
+
+            </div>
+        </div>
+        <div class = "container-flex-match-history">
+            <div class = "wrapper-match-history-header">
+                <h1>Last 10 Flex Queue Games</h1>
+            </div>
+            <div class = "wrapper-match-history" id="flexQueueWrapper">
+
+            </div>
+        </div>
     </div>
     
 </section>
 
+<script defer onload = "getPlayer()" src = "{{ url_for('static',filename='/js/getLoLStats.js') }}"></script>
 <script>
     selectLinks("profile");
 </script>
