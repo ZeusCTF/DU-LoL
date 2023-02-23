@@ -24,26 +24,7 @@
     border-bottom: 1px solid var(--white);
 }
 
-.center-all-content {
-    display: flex;
-    width: 90%;
-    margin: auto;
-}
 
-.center-all-content p {
-    margin-top: auto;
-    margin-bottom: auto;
-    margin-left: .5rem;
-}
-
-.container-current-rank {
-    padding: 1rem 0;
-}
-
-.container-current-rank img {
-    height: 100px;
-    width: 150px;
-}
 
 
 /*User Header Display*/
@@ -150,6 +131,19 @@
     grid-template-columns: 1fr 1fr;
     gap: .5rem;
     padding: 1rem;
+}
+
+.container-current-ranks {
+    grid-column: span 2;
+    width: 70%;
+    margin: auto;
+}
+
+.container-rank-display {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    align-content: center;
 }
 
 .container-weekly-sq-tracking {

@@ -49,11 +49,55 @@ def pullEvent():
             
             return 'No upcoming events found.'
 
+        eventList = []
+
+        #https://developers.google.com/calendar/api/v3/reference/events#resource get events
         # Prints the start and name of the next 10 events
         for event in events:
-            start = event['start'].get('dateTime', event['start'].get('date'))
+            date = event['start'].get('dateTime', event['start'].get('date'))
+            summary = event['summary']
+            link = event['htmlLink']
+            try:
+                location = event['location']
+            except:
+                location = "unknown location"
+            
+            try:
+                description = event['description']
+            except:
+                description = "unknown description"
+
+            print("link")
+            print(link)
+            print(location)
+            print(description)
+
+
+            dateRes = isinstance(date, str)
+            sumRes = isinstance(summary, str)
+
+            print(dateRes)
+            print(sumRes)
+
+            newEvent = {
+                "date": date,
+                "sum": summary,
+                "desc": description,
+                "link": link,
+                "location": location
+            }
+
+            summary2 = newEvent.get('desc')
+            sumRes2 = isinstance(summary2, str)
+            print(sumRes2)
+
+            eventList.append(newEvent)
+
             print(event['summary'], event['start'].get('date'))
-            return start, event['summary']
+            print("Summary: " + summary)
+            print("Date: " + date)
+            print(eventList)
+            return eventList
         
     except HttpError as error:
         print('An error occurred: %s' % error)

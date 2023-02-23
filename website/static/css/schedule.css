@@ -5,8 +5,53 @@
 }
 
 
-/*containers*/
-.container-calendar, .container-create-event {
+/*Calendar Styling*/
+.container-calendar {
+    width: 90%;
+    height: calc(100vh - 125px);
+    border: 1px solid var(--red);
+    background-color: var(--black);
+    margin: auto;
+    margin-bottom: 1rem;
+    border-radius: 25px;
+    padding: 1rem;
+}
+
+.event-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+.container-event-card {
+    width: 90%;
+    margin: auto;
+    border: 1px solid var(--white);
+    background-color: var(--red);
+    border-radius: 25px;
+    text-align: center;
+    padding: 1.5rem 0;
+}
+
+.event-card-header {
+    width: 100%;
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+.event-card-description {
+    width: 100%;
+    background-color: var(--black);
+    text-align: left;
+    min-height: 20vh;
+}
+
+.event-card-description p {
+    margin-left: 1rem;
+}
+
+
+/*Create Event Styling*/
+.container-create-event {
     width: 90%;
     height: calc(100vh - 125px);
     border: 1px solid orange;
@@ -27,13 +72,6 @@
     padding: 1rem;
 }
 
-
-
-/*Calendar Styling*/
-
-
-
-/*Create Event Styling*/
 .container-create-event form {
     background-color: var(--red);
     text-align: left;

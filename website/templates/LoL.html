@@ -41,7 +41,7 @@
             <h2>Upcoming Events</h2>
         </div>
         {% for event in events %}
-        {{ events }}
+        {{ event.id }}
         {% endfor %}
     </div>
 
@@ -58,6 +58,22 @@
                 <h1 id = "sumName"></h1>
                 <h2>Summoner Level:</h2>
                 <h2 id = "sumLevel"></h2>
+                <div class = "container-current-ranks">
+                    <div class = "container-rank-display">
+                        <img src = "../static/images/emblem-iron.png" id="soloRankIcon">
+                        <div style="display: flex; flex-direction: column; text-align: left; align-content: center; justify-content: center;">
+                            <p>Solo Queue</p>
+                            <p><span id="soloRank">Unknown</span>: <span id="soloLP">0</span> LP</p>
+                        </div>
+                    </div>
+                    <div class = "container-rank-display">
+                        <img src = "../static/images/emblem-iron.png" id="flexRankIcon">
+                        <div style="display: flex; flex-direction: column; text-align: left; align-content: center; justify-content: center;">
+                            <p>Flex Queue</p>
+                            <p><span id="flexRank">Unknown</span>: <span id="flexLP">0</span> LP</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class = "container-weekly-sq-tracking">

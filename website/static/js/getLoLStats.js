@@ -1,6 +1,6 @@
 const statContainer = document.querySelector(".container-profile-stats");
 
-const API_KEY = "RGAPI-ab3e31e9-9014-4841-83f6-cb626cc3b4a9";
+const API_KEY = "RGAPI-cdb313c6-4608-4011-94ef-3b2453bd2b1d";
 
 var soloQueueMatches = new Array();
 var flexQueueMatches = new Array();
@@ -115,35 +115,14 @@ async function getSummonerRankInfo(id) {
             console.log(currentPlayer.soloTier);
             console.log(currentPlayer.soloRank);
             console.log(currentPlayer.soloLP);
-            let soloInfoContainer = document.querySelector(".container-summoner-info");
 
-            let soloQueueRankCont = document.createElement("div");
-            soloQueueRankCont.classList.add("center-all-content");
-            soloQueueRankCont.classList.add("container-current-rank");
-            let soloQueueRankImg = document.createElement("img");
-
-            //let srcURL = "{{ url_for('static',filename='/images/emblem-" + currentPlayer.soloTier.toLowerCase() + ".png') }}"
             let srcURL = "../static/images/emblem-" + currentPlayer.soloTier.toLowerCase() + ".png";
             let soloQueueRankImgFullSrc = srcURL;
-            soloQueueRankImg.src = soloQueueRankImgFullSrc;
+            document.getElementById("soloRankIcon").src = soloQueueRankImgFullSrc;
 
-            let rankDispContainer = document.createElement("div");
-            rankDispContainer.style.display = "flex";
-            rankDispContainer.style.flexDirection = "column";
-            rankDispContainer.style.textAlign = "left";
-            let soloQueueRank = document.createElement("p");
-            let rankTypeHeader = document.createElement("p");
-
-            rankTypeHeader.innerHTML = "Solo Queue";
-            soloQueueRank.innerHTML = currentPlayer.soloTier + ": " + currentPlayer.soloRank + " " + currentPlayer.soloLP + " LP";
-
-            rankDispContainer.append(rankTypeHeader);
-            rankDispContainer.append(soloQueueRank);
-
-            soloQueueRankCont.append(soloQueueRankImg);
-            soloQueueRankCont.append(rankDispContainer);
-
-            soloInfoContainer.append(soloQueueRankCont);
+            document.getElementById("soloRank").innerText = currentPlayer.soloTier;
+            document.getElementById("soloLP").innerText = currentPlayer.soloLP;
+            //soloQueueRank.innerHTML = currentPlayer.soloTier + ": " + currentPlayer.soloRank + " " + currentPlayer.soloLP + " LP";
         }
 
         //get flex rank information object
@@ -156,34 +135,15 @@ async function getSummonerRankInfo(id) {
             console.log(currentPlayer.flexTier);
             console.log(currentPlayer.flexRank);
             console.log(currentPlayer.flexLP);
-            let flexInfoContainer = document.querySelector(".container-summoner-info");
 
-            let flexQueueRankCont = document.createElement("div");
-            flexQueueRankCont.classList.add("center-all-content");
-            flexQueueRankCont.classList.add("container-current-rank");
-
-            let flexQueueRankImg = document.createElement("img");
             let srcURL = "../static/images/emblem-" + currentPlayer.flexTier.toLowerCase() + ".png";
             let flexQueueRankImgFullSrc = srcURL;
-            flexQueueRankImg.src = flexQueueRankImgFullSrc;
+            document.getElementById("flexRankIcon").src = flexQueueRankImgFullSrc;
 
-            let rankDispContainer = document.createElement("div");
-            rankDispContainer.style.display = "flex";
-            rankDispContainer.style.flexDirection = "column";
-            rankDispContainer.style.textAlign = "left";
-            let flexQueueRank = document.createElement("p");
-            let rankTypeHeader = document.createElement("p");
+            document.getElementById("flexRank").innerText = currentPlayer.flexTier;
+            document.getElementById("flexLP").innerText = currentPlayer.flexLP;
 
-            rankTypeHeader.innerHTML = "Flex Queue";
-            flexQueueRank.innerHTML = currentPlayer.flexTier + ": " + currentPlayer.flexRank  + " " + currentPlayer.flexLP + " LP";
-
-            rankDispContainer.append(rankTypeHeader);
-            rankDispContainer.append(flexQueueRank);
-
-            flexQueueRankCont.append(flexQueueRankImg);
-            flexQueueRankCont.append(rankDispContainer);
-
-            flexInfoContainer.append(flexQueueRankCont);
+            //flexQueueRank.innerHTML = currentPlayer.flexTier + ": " + currentPlayer.flexRank  + " " + currentPlayer.flexLP + " LP";
         }
     })
 

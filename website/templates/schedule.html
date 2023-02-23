@@ -1,46 +1,36 @@
 {% extends "base.html" %}
 {% block title %} schedule {% endblock %}
 {% block content %}
-
-<main class = "container-schedule">
-    {% if adminStatus == True %}
-    <section class = "container-create-event">
-        <h2>Create an Event</h2>
-        <form method="POST">
-            <div>
-                <label for="title">Event Title</label>
-                <input type="text" name="title" placeholder="Event title...">
-            </div>
-            <div class = "wrapper-create-date">
-                <label for="startDate">Event Start Date</label>
-                <input type="date" name="startDate">
-                <label for="endDate">Event End Date</label>
-                <input type="date" name="endDate">
-            </div>
-            <div class = "wrapper-create-time">
-                <label for="startTime">Event Start Time</label>
-                <input type="time" name="startTime" min="00:00" max="24:00">
-                <label for="endTime">Event End Time</label>
-                <input type="time" name="endTime" min="00:00" max="24:00">
-            </div>
-            <div>
-                <label for="eventDetails">Event Details</label>
-                <textarea name = "eventDetails" id="eventDetails" Placeholder = "Provide a description of the event"></textarea>
-            </div>
-            <div class = "wrapper-announcements-button">
-                <button type="submit">Create Event</button> 
-            </div>
-        </form>
-    </section>
-    {% endif %}
-    <section class = "container-calendar">
-        <h1>CALENDAR IS INSERTED HERE</h1>
+<section class = "container-calendar">
+    <div class = "event-grid">
         {% for event in events %}
-        {{ events }}
+        <div class = "container-event-card">
+            {% for data in event %}
+            <div class = "event-card-header">
+                <h2>Title</h2>
+            </div>
+            <div class = "event-card-description">
+                <p>Event Summary: {{ data.sum }}</p>
+                <p>Event Description: {{ data.desc }}</p>
+                <p>Event Location: {{ data.location }}</p>
+                <p>Event Date: {{ data.date }}</p>
+                <a href="{{ data.link }}">View Event</a>
+            </div>
+            {% endfor %}
+        </div>
         {% endfor %}
-    </section>
-</main>
-
+    </div>
+</section>
+{% if adminStatus == True %} 
+<h2>Create an Event</h2>
+<form method="POST">
+    
+    <textarea name = "eventDetails" id="eventDetails" Placeholder = "Provide a description of the event"></textarea>
+    <div class = "wrapper-announcements-button">
+        <button type="submit">Create Event</button> 
+    </div> 
+</form>
+{% endif %}
 <script>
     selectLinks("schedule");
 </script>
