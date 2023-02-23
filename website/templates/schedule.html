@@ -40,15 +40,69 @@
         {% endfor %}
     </div>
 </section>
-{% if adminStatus == True %} 
-<h2>Create an Event</h2>
-<form method="POST">
-    
-    <textarea name = "eventDetails" id="eventDetails" Placeholder = "Provide a description of the event"></textarea>
-    <div class = "wrapper-announcements-button">
-        <button type="submit">Create Event</button> 
-    </div> 
-</form>
+{% if adminStatus == True %}
+<section class = "container-create-event">
+    <h2>Create an Event</h2>
+    <form>
+        <div>
+            <label for="title">Event Title</label>
+            <input
+                type="text"
+                id="title"
+                name="title"
+                placeholder="Enter event title...">
+        </div>
+
+        <div>
+            <label for="startDate">Start Date</label>
+            <input
+                type="date"
+                id="startDate"
+                name="startDate">
+        </div>
+
+        <div>
+            <label for="endDate">End Date</label>
+            <input
+                type="date"
+                id="endDate"
+                name="endDate">
+        </div>
+
+        <div>
+            <label for="startTime">Start Time</label>
+            <input
+                type="time"
+                id="startTime"
+                name="startTime">
+        </div>
+
+        <div>
+            <label for="endTime">End Time</label>
+            <input
+                type="time"
+                id="endTime"
+                name="endTime">
+        </div>
+
+        <div>
+            <label for="location">Event Location</label>
+            <input
+                type="text"
+                id="location"
+                name="location"
+                placeholder="Enter event location...">
+        </div>
+
+        <div>
+            <label for="eventDetails">Event Details</label>
+            <textarea name = "eventDetails" id="eventDetails" Placeholder = "Provide a description of the event"></textarea>
+        </div>
+        <div class = "wrapper-event-button">
+            <button onclick="createCalEvent()">Create Event</button> 
+        </div> 
+    </form>
+</section>
 {% endif %}
 <script>
     selectLinks("schedule");

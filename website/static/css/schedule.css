@@ -92,7 +92,7 @@
 .container-create-event {
     width: 90%;
     height: calc(100vh - 125px);
-    border: 1px solid orange;
+    border: 1px solid var(--white);
     background-color: var(--black);
     margin: auto;
     margin-bottom: 1rem;
@@ -122,18 +122,35 @@
 }
 
 .container-create-event form div label {
-    color: black;
+    color: var(--black);
     font-size: 1rem;
     padding: .5rem 0;
+}
+
+.container-create-event form div input[type="text"] {
+    color: var(--black);
+    border: 1px solid var(--black);
 }
 
 .wrapper-create-date, .wrapper-create-time {
     display: flex;
 }
 
-.container-create-event .wrapper-announcements-button {
-    margin: auto;
-    margin-bottom: 1rem;
+.wrapper-event-button {
+    margin: auto !important;
+    margin-bottom: 1rem !important;
+    width: fit-content;
+}
+
+.wrapper-event-button button {
+    padding: .5rem 1rem;
+    background-color: var(--lightGray);
+    border-radius: 25px;
+    transition: background-color .5s;
+}
+
+.wrapper-event-button button:hover {
+    background-color: var(--darkGray);
 }
 
 /*Responsive Display*/

@@ -110,6 +110,9 @@ def pullEvent():
                 "endTime": endTime
             }
 
+            print("created new event:")
+            print(newEvent)
+
             eventList.append(newEvent)
 
             print(eventList)
@@ -118,7 +121,10 @@ def pullEvent():
     except HttpError as error:
         print('An error occurred: %s' % error)
 
-def addEvent(summary, startTime, endTime):
+def addEvent(newEvent):
+
+    print("googCal Add Event Call")
+
     if os.path.exists('token.json'):
         creds = Credentials.from_authorized_user_file('token.json', SCOPES)
     # If there are no (valid) credentials available, let the user log in.
@@ -127,7 +133,7 @@ def addEvent(summary, startTime, endTime):
             creds.refresh(Request())
         else:
             flow = InstalledAppFlow.from_client_secrets_file(
-                '/Users/barryallen/CodingProjects/DU-LoL/website/credentials.json', SCOPES)
+                'C:/xampp/htdocs/flask testing/client_secret.json', SCOPES)
             creds = flow.run_local_server(port=0)
         # Save the credentials for the next run
         with open('token.json', 'w') as token:
@@ -135,15 +141,27 @@ def addEvent(summary, startTime, endTime):
 
     try:
         service = build('calendar', 'v3', credentials=creds)
+
+        summary = newEvent.get('title')
+        startDate = newEvent.get('startDate')
+        endDate = newEvent.get('endDate')
+        startTime = newEvent.get('startTime')
+        endTime = newEvent.get('endTime')
+        location = newEvent.get('location')
+        eventDetails = newEvent.get('eventDetails')
+
         event = {
-            'summary': f'{summary}',
+            'summary': summary,
+            'location': location,
+            'description': eventDetails,
             'start': {
-                'date': f'{startTime}'
+                'dateTime': '2023-02-23T09:00:00-07:00',
             },
             'end': {
-                            #this format 2023-02-16T17:00:00-07:00
-                'date': f'{endTime}'
-            }}
+                'dateTime': '2023-02-23T17:00:00-07:00',
+            }
+        }
+
 
         event = service.events().insert(calendarId='primary', body=event).execute()
         print('Event created: %s' % (event.get('htmlLink')))
