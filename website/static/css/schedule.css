@@ -15,6 +15,7 @@
     margin-bottom: 1rem;
     border-radius: 25px;
     padding: 1rem;
+    overflow-y: scroll;
 }
 
 .event-grid {
@@ -36,17 +37,54 @@
     width: 100%;
     font-size: 2rem;
     font-weight: 600;
+    padding-bottom: 1rem;
 }
 
-.event-card-description {
+.event-card {
     width: 100%;
     background-color: var(--black);
     text-align: left;
-    min-height: 20vh;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 2rem 0;
 }
 
-.event-card-description p {
-    margin-left: 1rem;
+.event-card-description {
+    background-color: var(--white);
+    margin-top: 1rem;
+}
+
+.event-card p {
+    color: var(--black);
+    padding: 1rem;
+}
+
+.event-card a {
+    background-color: var(--lightGray);
+    padding: .5rem;
+    border-radius: 25px;
+    transition: background-color .5s;
+}
+
+.event-card a:hover {
+    background-color: var(--darkGray);
+}
+
+.event-card-section {
+    background-color: var(--redTrans);
+    width: 90%;
+    margin: auto;
+    border-radius: 25px;
+    padding-top: 1rem;
+    margin-top: 1rem;
+}
+
+.event-card-section h3 {
+    text-align: center;
+    font-weight: 600;
+    font-size: 1.3rem;
 }
 
 
@@ -104,5 +142,9 @@
 {
     .container-calendar {
         height: calc(100vh - 225px);
+    }
+
+    .event-grid {
+        grid-template-columns: 1fr 1fr;
     }
 }

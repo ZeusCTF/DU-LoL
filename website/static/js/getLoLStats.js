@@ -1,6 +1,6 @@
 const statContainer = document.querySelector(".container-profile-stats");
 
-const API_KEY = "RGAPI-cdb313c6-4608-4011-94ef-3b2453bd2b1d";
+const API_KEY = "";
 
 var soloQueueMatches = new Array();
 var flexQueueMatches = new Array();

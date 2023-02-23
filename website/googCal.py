@@ -29,7 +29,7 @@ def pullEvent():
             creds.refresh(Request())
         else:
             flow = InstalledAppFlow.from_client_secrets_file(
-                '/Users/barryallen/CodingProjects/DU-LoL/website/credentials.json', SCOPES)
+                'C:/xampp/htdocs/flask testing/client_secret.json', SCOPES)
             creds = flow.run_local_server(port=0)
         # Save the credentials for the next run
         with open('token.json', 'w') as token:
@@ -54,8 +54,18 @@ def pullEvent():
         #https://developers.google.com/calendar/api/v3/reference/events#resource get events
         # Prints the start and name of the next 10 events
         for event in events:
-            date = event['start'].get('dateTime', event['start'].get('date'))
-            summary = event['summary']
+            startDate = event['start'].get('dateTime', event['start'].get('date'))
+            beforeYr = startDate[5:]
+            year = startDate[0:4]
+            startDate = beforeYr + "-" + year
+
+            endDate = event['end'].get('dateTime', event['end'].get('date'))
+            beforeYr = endDate[5:]
+            year = endDate[0:4]
+            endDate = beforeYr + "-" + year
+
+            #summary = title
+            title = event['summary']
             link = event['htmlLink']
             try:
                 location = event['location']
@@ -67,35 +77,41 @@ def pullEvent():
             except:
                 description = "unknown description"
 
+            try:
+                startTime = event['start'].get('dateTime')
+                if startTime == "None":
+                    startTime = "unknown start time"
+            except:
+                startTime = "unknown start time"
+
+            try:
+                endTime = event['end'].get('dateTime')
+                if endTime == "None":
+                    endTime = "unknown start time"   
+            except:
+                endTime = "unknown end time"
+
+
+
             print("link")
             print(link)
             print(location)
             print(description)
-
-
-            dateRes = isinstance(date, str)
-            sumRes = isinstance(summary, str)
-
-            print(dateRes)
-            print(sumRes)
+            print(startTime)
 
             newEvent = {
-                "date": date,
-                "sum": summary,
+                "startDate": startDate,
+                "endDate": endDate,
+                "title": title,
                 "desc": description,
                 "link": link,
-                "location": location
+                "location": location,
+                "startTime": startTime,
+                "endTime": endTime
             }
-
-            summary2 = newEvent.get('desc')
-            sumRes2 = isinstance(summary2, str)
-            print(sumRes2)
 
             eventList.append(newEvent)
 
-            print(event['summary'], event['start'].get('date'))
-            print("Summary: " + summary)
-            print("Date: " + date)
             print(eventList)
             return eventList
         
