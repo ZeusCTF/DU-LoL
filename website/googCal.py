@@ -1,6 +1,6 @@
 from __future__ import print_function
 
-import datetime
+
 import os.path
 
 from google.auth.transport.requests import Request
@@ -14,51 +14,24 @@ SCOPES = ['https://www.googleapis.com/auth/calendar']
 
 
 def pullEvent():
-    """Shows basic usage of the Google Calendar API.
-    Prints the start and name of the next 10 events on the user's calendar.
-    """
-    creds = None
-    # The file token.json stores the user's access and refresh tokens, and is
-    # created automatically when the authorization flow completes for the first
-    # time.
+    creds=None
     if os.path.exists('token.json'):
-        creds = Credentials.from_authorized_user_file('token.json', SCOPES)
-    # If there are no (valid) credentials available, let the user log in.
-    if not creds or not creds.valid:
-        if creds and creds.expired and creds.refresh_token:
-            creds.refresh(Request())
-        else:
-            flow = InstalledAppFlow.from_client_secrets_file(
-                '/Users/barryallen/CodingProjects/DU-LoL/website/credentials.json', SCOPES)
-            creds = flow.run_local_server(port=0)
-        # Save the credentials for the next run
-        with open('token.json', 'w') as token:
-            token.write(creds.to_json())
+            creds = Credentials.from_authorized_user_file('token.json', SCOPES)
+    service = build('calendar', 'v3', credentials=creds)
+            # Call the Calendar API
+    page_token = None
+    totalEvents = list()
 
-    try:
-        service = build('calendar', 'v3', credentials=creds)
-        # Call the Calendar API
-        now = datetime.datetime.utcnow().isoformat() + 'Z'  # 'Z' indicates UTC time
-        print('Getting the upcoming 10 events')
-        events_result = service.events().list(calendarId='primary', timeMin=now,
-                                              maxResults=10, singleEvents=True,
-                                              orderBy='startTime').execute()
-        events = events_result.get('items', [])
-
-        if not events:
-            
-            return 'No upcoming events found.'
-
-        # Prints the start and name of the next 10 events
-        for event in events:
-            start = event['start'].get('dateTime', event['start'].get('date'))
-            print(event['summary'], event['start'].get('date'))
-            return start, event['summary']
+    while True:
+        events = service.events().list(calendarId='primary', pageToken=page_token).execute()
+        for event in events['items']:
+            totalEvents.append(event['start'].get('date'))
+            totalEvents.append((event['summary']))
+        page_token = events.get('nextPageToken')
+        if not page_token:
+            return totalEvents
         
-    except HttpError as error:
-        print('An error occurred: %s' % error)
-
-def addEvent(summary, startTime, endTime):
+def addEvent(summary, startTime):
     if os.path.exists('token.json'):
         creds = Credentials.from_authorized_user_file('token.json', SCOPES)
     # If there are no (valid) credentials available, let the user log in.
@@ -82,12 +55,10 @@ def addEvent(summary, startTime, endTime):
             },
             'end': {
                             #this format 2023-02-16T17:00:00-07:00
-                'date': f'{endTime}'
+                'date': '2999-02-17'
             }}
 
         event = service.events().insert(calendarId='primary', body=event).execute()
         print('Event created: %s' % (event.get('htmlLink')))
     except HttpError as error:
         print('An error occurred: %s' % error)
-#addEvent('testycles', '2023-02-16', '2023-02-17')
-pullEvent()

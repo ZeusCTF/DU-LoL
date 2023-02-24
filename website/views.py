@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, request, session, redirect, url_fo
 from flask_login import login_required, current_user
 from .models import Announcement, User, Roster
 from . import db
-from .googCal import pullEvent
+from .googCal import pullEvent, addEvent
 import json
 
 
@@ -128,10 +128,18 @@ def DULoL():
 def vods():
     return render_template("vods.html", user=current_user, acc=current_user.userName, adminStatus=current_user.isAdmin)
 
-@views.route('/schedule')
+@views.route('/schedule', methods=['GET','POST'])
 @login_required
 def schedule():
-    return render_template("schedule.html", user=current_user, acc=current_user.userName, adminStatus=current_user.isAdmin, events=[pullEvent()])
+    if request.method == 'POST':
+        eventDate = request.form.get('eventDate')
+        eventDetails = request.form.get('eventDetails')
+        print(eventDetails)
+        print(eventDate)
+        addEvent(eventDetails, eventDate)
+        return redirect(url_for('views.schedule'))
+    else:
+        return render_template("schedule.html", user=current_user, acc=current_user.userName, adminStatus=current_user.isAdmin, events=pullEvent())
 
 @views.route('/profile')
 @login_required

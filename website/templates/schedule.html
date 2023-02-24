@@ -2,10 +2,16 @@
 {% block title %} schedule {% endblock %}
 {% block content %}
 <section class = "container-calendar">
-    <h1>CALENDAR IS INSERTED HERE</h1>
-    {% for event in events %}
-    {{ events }}
-    {% endfor %}
+    <h1>Upcoming Events</h1>
+    <br/>
+    <ul>
+        {% for event in events %}
+        <li>{{ event }}</li>
+        {% if events.index(event) % 2 != 0 %}
+            <br/>
+        {% endif %}
+        {% endfor %}
+    </ul>
 </section>
 {% if adminStatus == True %} 
 <h2>Create an Event</h2>
@@ -15,8 +21,13 @@
     <div class = "wrapper-announcements-button">
         <button type="submit">Create Event</button> 
     </div> 
+
+    <label for="eventDate">Event Date</label>
+    <input type="date" id="eventDate" name="eventDate">
+    <input type="submit">
 </form>
 <script>
     selectLinks("schedule");
 </script>
+{% endif %}
 {% endblock %}
