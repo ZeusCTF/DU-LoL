@@ -4,8 +4,8 @@
 <section class = "container-calendar">
     <div class = "event-grid">
         {% for eventList in events %}
+        {% for event in eventList %}
         <div class = "container-event-card">
-            {% for event in eventList %}
             <div class = "event-card-header">
                 <h2>{{ event.title }}</h2>
             </div>
@@ -35,8 +35,8 @@
                     <a href="{{ event.link }}">View Event</a>                
                 </div>
             </div>
-            {% endfor %}
         </div>
+            {% endfor %}
         {% endfor %}
     </div>
 </section>

@@ -39,8 +39,10 @@ def pullEvent():
         service = build('calendar', 'v3', credentials=creds)
         # Call the Calendar API
         now = datetime.datetime.utcnow().isoformat() + 'Z'  # 'Z' indicates UTC time
+        print("Current time: " + now)
         print('Getting the upcoming 10 events')
         events_result = service.events().list(calendarId='primary', timeMin=now,
+                                              timeMax='2999-01-01T00:00:00Z',
                                               maxResults=10, singleEvents=True,
                                               orderBy='startTime').execute()
         events = events_result.get('items', [])
@@ -57,7 +59,7 @@ def pullEvent():
             startDate = event['start'].get('dateTime', event['start'].get('date'))
             beforeYr = startDate[5:]
             year = startDate[0:4]
-            startDate = beforeYr + "-" + year
+            dispStartDate = beforeYr + "-" + year
 
             endDate = event['end'].get('dateTime', event['end'].get('date'))
             beforeYr = endDate[5:]
@@ -110,13 +112,14 @@ def pullEvent():
                 "endTime": endTime
             }
 
-            print("created new event:")
+            print("retrieved new event:")
             print(newEvent)
 
             eventList.append(newEvent)
 
-            print(eventList)
-            return eventList
+        print("Finished event list:")    
+        print(eventList)
+        return eventList
         
     except HttpError as error:
         print('An error occurred: %s' % error)
@@ -150,15 +153,32 @@ def addEvent(newEvent):
         location = newEvent.get('location')
         eventDetails = newEvent.get('eventDetails')
 
+        print("string testing")
+        monthDay = startDate[5:]
+        year = startDate[0:5]
+
+        startDateTime = year + monthDay + "T" + startTime + ":00-07:00"
+        print(startDate)
+
+        monthDay = endDate[5:]
+        year = endDate[0:5]
+
+        endDateTime = year + monthDay + "T" + endTime + ":00-07:00"
+
+        print(endDate)
+        print(startTime)
+        print(endTime)
+        print(startDateTime)
+
         event = {
             'summary': summary,
             'location': location,
             'description': eventDetails,
             'start': {
-                'dateTime': '2023-02-23T09:00:00-07:00',
+                'dateTime': startDateTime,
             },
             'end': {
-                'dateTime': '2023-02-23T17:00:00-07:00',
+                'dateTime': endDateTime,
             }
         }
 
