@@ -3,6 +3,7 @@ from flask_login import login_required, current_user
 from .models import Announcement, User, Roster
 from . import db
 from .googCal import pullEvent, addEvent
+from .discordBot import send_announcement
 import json
 
 
@@ -23,6 +24,9 @@ def announcements():
         new_announcement = Announcement(data=announcement, team=current_user.playerTeam, authorName=current_user.firstName + " " + current_user.lastName, author=current_user.id)
         db.session.add(new_announcement)
         db.session.commit()
+
+        send_announcement(announcement)
+
     #user=current_user allows us to reference the current user
     return render_template("announcements.html", user=current_user, acc=current_user.userName, adminStatus=current_user.isAdmin)
 
