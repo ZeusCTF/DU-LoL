@@ -123,11 +123,6 @@ def delete_roster():
 def DULoL():
     return render_template("LoL.html", user=current_user, acc=current_user.userName, adminStatus=current_user.isAdmin, events=[pullEvent()])
 
-@views.route('/vods')
-@login_required
-def vods():
-    return render_template("vods.html", user=current_user, acc=current_user.userName, adminStatus=current_user.isAdmin)
-
 @views.route('/schedule', methods=['GET','POST'])
 @login_required
 def schedule():
