@@ -128,15 +128,18 @@ def delete_roster():
 def DULoL():
     return render_template("LoL.html", user=current_user, acc=current_user.userName, adminStatus=current_user.isAdmin, events=[pullEvent()])
 
-@views.route('/vods')
-@login_required
-def vods():
-    return render_template("vods.html", user=current_user, acc=current_user.userName, adminStatus=current_user.isAdmin)
-
-@views.route('/schedule')
+@views.route('/schedule', methods=['GET','POST'])
 @login_required
 def schedule():
-    return render_template("schedule.html", user=current_user, acc=current_user.userName, adminStatus=current_user.isAdmin, events=[pullEvent()])
+    if request.method == 'POST':
+        eventDate = request.form.get('eventDate')
+        eventDetails = request.form.get('eventDetails')
+        print(eventDetails)
+        print(eventDate)
+        addEvent(eventDetails, eventDate)
+        return redirect(url_for('views.schedule'))
+    else:
+        return render_template("schedule.html", user=current_user, acc=current_user.userName, adminStatus=current_user.isAdmin, events=pullEvent())
 
 @views.route('/add-cal-event', methods=['POST'])
 @login_required
