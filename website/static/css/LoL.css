@@ -254,6 +254,104 @@
 }
 
 
+/*general stat section styling*/
+.container-match-stats {
+    width: 90%;
+    max-height: 115px;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    border: 2px solid var(--white);
+    overflow-y: hidden;
+}
+
+.display-match-stats {
+    max-height: fit-content !important;
+    overflow-y: scroll !important;
+}
+
+.wrapper-stats-section, .container-ping-stats {
+    margin: 1rem auto !important;
+    padding: 0 1rem !important;
+    border: 2px solid var(--white);
+    width: 90%;
+    text-align: left;
+}
+
+.wrapper-stats-header {
+    text-align: center !important;
+    padding-bottom: 0 !important;
+}
+
+/*Stats section header*/
+.wrapper-stats-main-header {
+    display: flex;
+    width: 60%;
+    margin-left: auto !important;
+    margin-right: 2rem !important;
+    justify-content: space-between;
+}
+
+.wrapper-stats-main-header h3 {
+    font-size: 2rem;
+}
+
+/*item & gold stats*/
+.wrapper-item-display {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border: 1px solid var(--white);
+    gap: .5rem;
+    justify-content: center;
+    align-content: center;
+}
+
+.wrapper-stats-income {
+    text-align: center !important;
+}
+
+.wrapper-item-display img {
+    margin: auto;
+}
+
+.wrapper-summoner-spell-info {
+    display: flex;
+}
+
+.wrapper-summoner-spells {
+    width: 50%;
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    align-content: center;
+}
+
+/*macro stats*/
+.container-macro-stats {
+    border: 2px solid var(--red);
+    width: 90%;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+/*ping stats*/
+.wrapper-stats-header {
+    font-size: 1.5rem;
+    font-weight: 600;
+    text-decoration: 2px solid underline var(--white);
+    text-align: center !important;
+}
+
+.wrapper-ping-stats, .wrapper-stats-obj, .wrapper-stats-turret, .wrapper-stats-vision, 
+.wrapper-stats-combat {
+    font-size: 1.1rem;
+    display: grid;
+    grid-template-columns: auto auto;
+    text-align: left !important;
+    gap: .5rem;
+    padding: 0 1rem !important;
+    grid-auto-flow: row;
+}
+
 /*Responsive Layouts*/
 
 @media (min-width: 768px) {
@@ -279,6 +377,11 @@
     .wrapper-lobby-player-desc {
         flex-direction: row;
         padding: 1rem !important;
+    }
+
+    /*JS Inserts*/
+    .wrapper-ping-stats {
+        text-align: center !important;
     }
 }
 
