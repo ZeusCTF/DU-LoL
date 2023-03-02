@@ -5,11 +5,95 @@
 }
 
 
-/*containers*/
-.container-calendar, .container-create-event {
+/*Calendar Styling*/
+.container-calendar {
     width: 90%;
     height: calc(100vh - 125px);
-    border: 1px solid orange;
+    border: 1px solid var(--red);
+    background-color: var(--black);
+    margin: auto;
+    margin-bottom: 1rem;
+    border-radius: 25px;
+    padding: 1rem;
+    overflow-y: scroll;
+}
+
+.event-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+}
+
+.container-event-card {
+    width: 90%;
+    margin: auto;
+    border: 1px solid var(--white);
+    background-color: var(--red);
+    border-radius: 25px;
+    text-align: center;
+    padding: 1.5rem 0;
+}
+
+.event-card-header {
+    width: 100%;
+    font-size: 2rem;
+    font-weight: 600;
+    padding-bottom: 1rem;
+}
+
+.event-card {
+    width: 100%;
+    background-color: var(--black);
+    text-align: left;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 2rem 0;
+}
+
+.event-card-description {
+    background-color: var(--white);
+    margin-top: 1rem;
+}
+
+.event-card p {
+    color: var(--black);
+    padding: 1rem;
+}
+
+.event-card a {
+    background-color: var(--lightGray);
+    padding: .5rem;
+    border-radius: 25px;
+    transition: background-color .5s;
+}
+
+.event-card a:hover {
+    background-color: var(--darkGray);
+}
+
+.event-card-section {
+    background-color: var(--redTrans);
+    width: 90%;
+    margin: auto;
+    border-radius: 25px;
+    padding-top: 1rem;
+    margin-top: 1rem;
+}
+
+.event-card-section h3 {
+    text-align: center;
+    font-weight: 600;
+    font-size: 1.3rem;
+}
+
+
+/*Create Event Styling*/
+.container-create-event {
+    width: 90%;
+    height: calc(100vh - 125px);
+    border: 1px solid var(--white);
     background-color: var(--black);
     margin: auto;
     margin-bottom: 1rem;
@@ -27,13 +111,6 @@
     padding: 1rem;
 }
 
-
-
-/*Calendar Styling*/
-
-
-
-/*Create Event Styling*/
 .container-create-event form {
     background-color: var(--red);
     text-align: left;
@@ -46,18 +123,35 @@
 }
 
 .container-create-event form div label {
-    color: black;
+    color: var(--black);
     font-size: 1rem;
     padding: .5rem 0;
+}
+
+.container-create-event form div input[type="text"] {
+    color: var(--black);
+    border: 1px solid var(--black);
 }
 
 .wrapper-create-date, .wrapper-create-time {
     display: flex;
 }
 
-.container-create-event .wrapper-announcements-button {
-    margin: auto;
-    margin-bottom: 1rem;
+.wrapper-event-button {
+    margin: auto !important;
+    margin-bottom: 1rem !important;
+    width: fit-content;
+}
+
+.wrapper-event-button button {
+    padding: .5rem 1rem;
+    background-color: var(--lightGray);
+    border-radius: 25px;
+    transition: background-color .5s;
+}
+
+.wrapper-event-button button:hover {
+    background-color: var(--darkGray);
 }
 
 /*Responsive Display*/
@@ -66,5 +160,9 @@
 {
     .container-calendar {
         height: calc(100vh - 225px);
+    }
+
+    .event-grid {
+        grid-template-columns: 1fr 1fr;
     }
 }
