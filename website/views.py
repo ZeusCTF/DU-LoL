@@ -2,8 +2,10 @@ from flask import Blueprint, render_template, request, session, redirect, url_fo
 from flask_login import login_required, current_user
 from .models import Announcement, User, Roster
 from . import db
-from .googCal import pullEvent
+from .googCal import pullEvent, addEvent
+from .discordBot import send_announcement
 import json
+
 
 
 #setting up gen blueprint for the app
@@ -22,6 +24,9 @@ def announcements():
         new_announcement = Announcement(data=announcement, team=current_user.playerTeam, authorName=current_user.firstName + " " + current_user.lastName, author=current_user.id)
         db.session.add(new_announcement)
         db.session.commit()
+
+        send_announcement(announcement)
+
     #user=current_user allows us to reference the current user
     return render_template("announcements.html", user=current_user, acc=current_user.userName, adminStatus=current_user.isAdmin)
 
@@ -133,6 +138,29 @@ def vods():
 def schedule():
     return render_template("schedule.html", user=current_user, acc=current_user.userName, adminStatus=current_user.isAdmin, events=[pullEvent()])
 
+@views.route('/add-cal-event', methods=['POST'])
+@login_required
+def addCalEvent():
+    newEvent = json.loads(request.data)
+
+    event = {
+        "title": newEvent.get("title"),
+        "startDate": newEvent.get("startDate"),
+        "endDate": newEvent.get("endDate"),
+        "startTime": newEvent.get("startTime"),
+        "endTime": newEvent.get("endTime"),
+        "location": newEvent.get("location"),
+        "eventDetails": newEvent.get("eventDetails")
+    }
+
+    print("New event to add:")
+    print(event)
+    print("Adding event...")
+    addEvent(event)
+
+    return render_template("schedule.html", user=current_user, acc=current_user.userName, adminStatus=current_user.isAdmin, events=[pullEvent()])
+    
+
 @views.route('/profile')
 @login_required
 def profile():
@@ -147,7 +175,5 @@ def contact():
 def LoLCoach(pid):
     uid = pid
     selectedPlayer = User.query.get(uid)
-
-
 
     return render_template("LoLCoach.html", user=current_user, acc=current_user.userName, adminStatus=current_user.isAdmin, player=selectedPlayer)
