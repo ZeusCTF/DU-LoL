@@ -141,29 +141,6 @@ def schedule():
     else:
         return render_template("schedule.html", user=current_user, acc=current_user.userName, adminStatus=current_user.isAdmin, events=pullEvent())
 
-@views.route('/add-cal-event', methods=['POST'])
-@login_required
-def addCalEvent():
-    newEvent = json.loads(request.data)
-
-    event = {
-        "title": newEvent.get("title"),
-        "startDate": newEvent.get("startDate"),
-        "endDate": newEvent.get("endDate"),
-        "startTime": newEvent.get("startTime"),
-        "endTime": newEvent.get("endTime"),
-        "location": newEvent.get("location"),
-        "eventDetails": newEvent.get("eventDetails")
-    }
-
-    print("New event to add:")
-    print(event)
-    print("Adding event...")
-    addEvent(event)
-
-    return render_template("schedule.html", user=current_user, acc=current_user.userName, adminStatus=current_user.isAdmin, events=[pullEvent()])
-    
-
 @views.route('/profile')
 @login_required
 def profile():

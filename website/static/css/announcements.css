@@ -15,6 +15,7 @@
     width: 90vw;
     min-height: 40vh;
     background-color: var(--red);
+    border: 1px solid var(--white);
     padding: 1rem 0;
     border-radius: 25px;
     display: flex;
@@ -39,6 +40,7 @@
 
 .container-post-announcements h2 {
     font-size: 2rem;
+    margin-bottom: 1rem;
 }
 
 .wrapper-announcements-content {
@@ -55,10 +57,14 @@
 
 .wrapper-announcements-button button {
     padding: .8rem;
-    background-color: gray;
+    background-color: var(--black);
     border-radius: 25px;
+    transition: background-color .5s;
 }
 
+.wrapper-announcements-button button:hover {
+    background-color: rgb(58, 58, 58);
+}
 textarea {
     min-height: 20vh;
     height: 90%;
@@ -81,6 +87,7 @@ textarea {
     max-height: 80vh;
     min-height: 20vh;
     background-color: var(--redTrans);
+    border: 1px solid var(--white);
     overflow-x: hidden;
     overflow-y: scroll;
     border-radius: 25px;
@@ -138,13 +145,15 @@ textarea {
 
     /*Create announcements*/
     .container-post-announcements {
-        width: 25vw;
-        height: 80%;
+        width: 35vw;
+        height: 90%;
+        margin-left: 2.5vw;
     }
 
     /*View announcements*/
     .container-view-announcements {
         width: 60vw;
-        height: 80%;
+        height: 90%;
+        margin-right: 2.5vw;
     }
 }

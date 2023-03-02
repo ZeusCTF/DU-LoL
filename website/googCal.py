@@ -22,11 +22,16 @@ def pullEvent():
     page_token = None
     totalEvents = list()
 
+    
+
     while True:
         events = service.events().list(calendarId='primary', pageToken=page_token).execute()
         for event in events['items']:
-            totalEvents.append(event['start'].get('date'))
-            totalEvents.append((event['summary']))
+            eventInfo = {
+                "summary": (event['summary']),
+                "startDate": event['start'].get('date')
+            }
+            totalEvents.append(eventInfo)
         page_token = events.get('nextPageToken')
         if not page_token:
             return totalEvents
