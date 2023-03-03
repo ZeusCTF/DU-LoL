@@ -126,7 +126,7 @@
 
 .container-create-event form div label {
     color: var(--black);
-    font-size: 1rem;
+    font-size: 1.3rem;
     padding: .5rem 0;
 }
 
@@ -135,8 +135,15 @@
     border: 1px solid var(--black);
 }
 
-.wrapper-create-date, .wrapper-create-time {
-    display: flex;
+.wrapper-date-time-input {
+    width: 60%;
+    display: grid !important;
+    grid-template-columns: 30% 30%;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    gap: 10%;
+    justify-content: center;
+    align-content: center;
 }
 
 .wrapper-event-button {

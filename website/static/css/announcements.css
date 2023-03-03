@@ -65,6 +65,8 @@
 .wrapper-announcements-button button:hover {
     background-color: rgb(58, 58, 58);
 }
+
+/*input styling*/
 textarea {
     min-height: 20vh;
     height: 90%;
