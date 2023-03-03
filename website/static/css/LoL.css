@@ -207,6 +207,22 @@
 }
 
 /*JS inserted*/
+
+/*Game ID Display*/
+.container-match-id {
+    width: 90%;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    color: var(--black);
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.container-match-id p {
+    font-size: 1.2rem;
+}
+
+/*Lobby Display*/
 .container-history-participants {
     width: 100%;
     display: grid;
@@ -285,9 +301,10 @@
 /*Stats section header*/
 .wrapper-stats-main-header {
     display: flex;
-    width: 60%;
+    width: fit-content;
+    gap: 1.5rem;
     margin-left: auto !important;
-    margin-right: 2rem !important;
+    margin-right: auto !important;
     justify-content: space-between;
 }
 
@@ -299,7 +316,6 @@
 .wrapper-item-display {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    border: 1px solid var(--white);
     gap: .5rem;
     justify-content: center;
     align-content: center;
