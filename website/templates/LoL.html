@@ -18,7 +18,7 @@
             <h2>Recent Announcements</h2>
         </div>
         <ul class = "wrapper-announcements">
-            {% for announcement in user.announcement %}
+            {% for announcement in user.announcement|reverse %}
             <li class = "announcement-wrapper">
                 <div class = "wrapper-announcement-data">
                     <p>{{ announcement.data }}</p>
@@ -28,7 +28,7 @@
                     <p>{{ announcement.team }}</p>
                     <p>{{ announcement.date }}</p>
                     {% if user.isAdmin == 1 %}
-                    <button type="button" class="delete-announcement" onclick="deleteAnnouncement(this, 'announcements')" id = "announcement{{ announcement.id }}">Delete Announcement</button>
+                    <button type="button" class="delete-announcement" onclick="deleteObj(this, 'announcements')" id = "announcements{{ announcement.id }}">Delete Announcement</button>
                     {% endif %}
                 </div>
             </li>
