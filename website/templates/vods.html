@@ -16,54 +16,11 @@
 {% endif %}
 
 <section class = "container-vods-display">
+    {% for video in videos %}
     <div class = "video-placeholder">
-
+       <li>{{ video }}</li>
     </div>
-    <div class = "video-placeholder">
-
-    </div>
-    <div class = "video-placeholder">
-
-    </div>
-    <div class = "video-placeholder">
-
-    </div>
-    <div class = "video-placeholder">
-
-    </div>
-    <div class = "video-placeholder">
-
-    </div>
-    <div class = "video-placeholder">
-
-    </div>
-    <div class = "video-placeholder">
-
-    </div>
-    <div class = "video-placeholder">
-
-    </div>
-    <div class = "video-placeholder">
-
-    </div>
-    <div class = "video-placeholder">
-
-    </div>
-    <div class = "video-placeholder">
-
-    </div>
-    <div class = "video-placeholder">
-
-    </div>
-    <div class = "video-placeholder">
-
-    </div>
-    <div class = "video-placeholder">
-
-    </div>
-    <div class = "video-placeholder">
-
-    </div>
+    {% endfor %}
 </section>
 
 <script>
