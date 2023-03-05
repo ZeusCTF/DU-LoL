@@ -71,13 +71,19 @@ def addEvent(summary, startDate, endDate, startTime, endTime, location, eventDet
 
     try:
         #build dateTime strings
-        startDateTime = f'{startDate}' + "T" + f'{startTime}' + ":00-00:00"
+        startDateTime = f'{startDate}' + "T" + f'{startTime}' + ":00-05:00"
         print("Start Date Time String")
         print(startDateTime)
 
-        endDateTime = f'{endDate}' + "T" + f'{endTime}' + ":00-00:00"
+        endDateTime = f'{endDate}' + "T" + f'{endTime}' + ":00-05:00"
         print("End Date Time String")
         print(endDateTime)
+
+        print("Start Time")
+        print(startTime)
+
+        print("End Time")
+        print(endTime)
 
         service = build('calendar', 'v3', credentials=creds)
         event = {
@@ -87,9 +93,11 @@ def addEvent(summary, startDate, endDate, startTime, endTime, location, eventDet
             'start': {
                 #this format 2023-02-16T17:00:00-00:00
                 'dateTime': startDateTime,
+                'timeZone': 'America/Detroit'
             },
             'end': {
-                'dateTime': endDateTime
+                'dateTime': endDateTime,
+                'timeZone': 'America/Detroit'
             }}
 
         event = service.events().insert(calendarId='primary', body=event).execute()
