@@ -5,7 +5,6 @@ from flask_login import LoginManager
 #defines database
 db = SQLAlchemy()
 DB_NAME = 'database.db'
-UPLOAD_FOLDER = '/tmp/uploads'
 
 def create_app():
 
@@ -15,7 +14,6 @@ def create_app():
     #initializes db
     app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
 
-    app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
     db.init_app(app)
     

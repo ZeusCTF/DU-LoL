@@ -1,27 +1,57 @@
-from simple_youtube_api.Channel import Channel
-from simple_youtube_api.LocalVideo import LocalVideo
+import requests
+import json
+import pprint
 
-# loggin into the channel
-channel = Channel()
-channel.login("/Users/barryallen/CodingProjects/DU-LoL/website/credentials.json", "credentials.storage")
 
-# setting up the video that is going to be uploaded
-video = LocalVideo(file_path="/Users/barryallen/CodingProjects/DU-LoL/test.mp4")
+def gatherVideos():
+    r = requests.get('https://youtube.googleapis.com/youtube/v3/search?channelId=UCTHMPvX_wADl18GLtYRxjUQ&maxResults=10&order=date&key=AIzaSyB297x7ugH4cce5TBt1C_uGOLep7kXKCk0')
+    ytURL = 'https://www.youtube.com/watch?v='
 
-# setting snippet
-video.set_title("My Title")
-video.set_description("This is a description")
+    vidLinks = []
 
-# setting status
-video.set_embeddable(True)
-video.set_license("creativeCommon")
-video.set_privacy_status("private")
-video.set_public_stats_viewable(True)
 
-# setting thumbnail
-#video.set_thumbnail_path('test_thumb.png')
+    resp = r.json()
 
-# uploading video and printing the results
-video = channel.upload_video(video)
-print(video.id)
-print(video)
+    x = json.dumps(resp)
+    y = json.loads(x)
+
+    for num in range(0,11):
+        try:
+            #print(y["items"][num]['id']['videoId'])
+            vidLinks.append(ytURL + str(y["items"][num]['id']['videoId']))
+        except:
+            break
+    return vidLinks
+#gatherVideos()
+
+def gatherVideos():
+    r = requests.get('https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=UCTHMPvX_wADl18GLtYRxjUQ&maxResults=10&order=date&key=AIzaSyB297x7ugH4cce5TBt1C_uGOLep7kXKCk0')
+    ytURL = 'https://www.youtube.com/watch?v='
+
+    vidLinks = []
+
+
+    resp = r.json()
+
+    x = json.dumps(resp)
+    y = json.loads(x)
+
+    for num in range(0,11):
+        try:
+            #print(y["items"][num]['id']['videoId'])
+            vidLinks.append(ytURL + str(y["items"][num]['id']['videoId']))
+        except:
+            break
+    #print(vidLinks)
+
+    #json response but pretty
+    #pprint.pprint(y)
+
+    #thumbnail urls
+    #print(y["items"][0]['snippet']['thumbnails']['default']['url'])
+
+    #title
+    #print(y["items"][0]['snippet']['title'])
+
+
+gatherVideos()
