@@ -1,6 +1,6 @@
 const statContainer = document.querySelector(".container-profile-stats");
 
-const API_KEY = "RGAPI-7affe2e8-140e-4f6b-b414-20edd7ed93b3";
+const API_KEY = "RGAPI-587a5294-b771-433f-8e1a-edc443a144f5";
 
 var soloQueueMatches = new Array();
 var flexQueueMatches = new Array();
@@ -355,13 +355,8 @@ function buildLobbyContainer(matchData, queueType) {
     //convert data to html
     //game ID
     let gameIdContainer = document.createElement("div");
-    gameIdContainer.style.width = "90%";
-    gameIdContainer.style.marginLeft = "auto";
-    gameIdContainer.style.marginRight = "auto";
-    gameIdContainer.style.color = "var(--black)";
-    gameIdContainer.style.fontSize = "1.5rem";
-    gameIdContainer.style.fontWeight = "600";
-    let gameIDDisplay = document.createElement("p");
+    gameIdContainer.classList.add("container-match-id");
+    let gameIDDisplay = document.createElement("h3");
 
     gameIDDisplay.innerHTML = queueType;
 
@@ -369,6 +364,20 @@ function buildLobbyContainer(matchData, queueType) {
     
 
     gameIdContainer.append(gameIDDisplay);
+
+    var gameStart = matchData.info.gameCreation;
+    console.log("Game Start: " + gameStart);
+    var currentTime = Date.now();
+    var gameDifMill = currentTime - gameStart;
+    console.log("Current Time: " + currentTime);
+    console.log("Game was played " + gameDifMill + " milliseconds ago");
+
+    const startDateTime = new Date(gameStart);
+    const gameDate = document.createElement("p");
+    gameDate.innerHTML = "" + startDateTime.toString();
+    gameIdContainer.append(gameDate);
+
+    console.log("Time Played: " + startDateTime);
 
     //game participants
     let participantContainer = document.createElement("div");
@@ -417,12 +426,12 @@ function buildLobbyContainer(matchData, queueType) {
         //check win/loss for current player profile
         if(player.puuid == currentPlayer.puuid) {
             if(player.win) {
-                if(queueType == "Solo Queue"){
+                if(queueType == "Solo Queue" && (gameDifMill < 604800000)) {
                     currentPlayer.weekWins += 1;
                 }
                 gameIdContainer.style.backgroundColor = "green";
-            } else{
-                if(queueType == "Solo Queue"){
+            } else {
+                if(queueType == "Solo Queue" && (gameDifMill < 604800000)) {
                     currentPlayer.weekLosses += 1;
                 }
                 gameIdContainer.style.backgroundColor = "red";

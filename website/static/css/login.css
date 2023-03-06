@@ -54,3 +54,9 @@ input[type=email], input[type=password] {
     background-color: rgb(184, 183, 183);
     cursor: pointer;
 }
+
+@media (min-width: 1022px) {
+    .container-login {
+        width: 50vw;
+    }
+}

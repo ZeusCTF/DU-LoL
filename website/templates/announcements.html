@@ -17,7 +17,7 @@
     {% endif %}
     <section class = "container-view-announcements">
         <ul class = "wrapper-announcements">
-            {% for announcement in user.announcement %}
+            {% for announcement in user.announcement|reverse %}
             <li class = "announcement-wrapper">
                 <div class = "wrapper-announcement-data">
                     <p>{{ announcement.data }}</p>

@@ -24,6 +24,14 @@
     gap: 1rem;
 }
 
+.wrapper-schedule-header {
+    width: fit-content;
+    margin: auto;
+    padding: 2rem 0;
+    font-size: 3rem;
+    font-weight: 600;
+}
+
 .container-event-card {
     width: 90%;
     margin: auto;
@@ -92,23 +100,17 @@
 /*Create Event Styling*/
 .container-create-event {
     width: 90%;
-    height: calc(100vh - 125px);
     border: 1px solid var(--white);
-    background-color: var(--black);
+    background-color: var(--red);
     margin: auto;
     margin-bottom: 1rem;
-}
-
-.container-create-event {
-    height: fit-content;
-    text-align: center;
-    background-color: var(--red);
 }
 
 .container-create-event h2 {
     color: var(--black);
     font-size: 1.8rem;
     padding: 1rem;
+    text-align: center;
 }
 
 .container-create-event form {
@@ -124,7 +126,7 @@
 
 .container-create-event form div label {
     color: var(--black);
-    font-size: 1rem;
+    font-size: 1.3rem;
     padding: .5rem 0;
 }
 
@@ -133,8 +135,15 @@
     border: 1px solid var(--black);
 }
 
-.wrapper-create-date, .wrapper-create-time {
-    display: flex;
+.wrapper-date-time-input {
+    width: 60%;
+    display: grid !important;
+    grid-template-columns: 30% 30%;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    gap: 10%;
+    justify-content: center;
+    align-content: center;
 }
 
 .wrapper-event-button {

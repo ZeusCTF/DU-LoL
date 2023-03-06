@@ -126,43 +126,23 @@ def delete_roster():
 @views.route('/LoL')
 @login_required
 def DULoL():
-    return render_template("LoL.html", user=current_user, acc=current_user.userName, adminStatus=current_user.isAdmin, events=[pullEvent()])
+    return render_template("LoL.html", user=current_user, acc=current_user.userName, adminStatus=current_user.isAdmin, events=pullEvent())
 
 @views.route('/schedule', methods=['GET','POST'])
 @login_required
 def schedule():
     if request.method == 'POST':
-        eventDate = request.form.get('eventDate')
+        summary = request.form.get('summary')
+        startDate = request.form.get('startDate')
+        endDate = request.form.get('endDate')
+        startTime = request.form.get('startTime')
+        endTime = request.form.get('endTime')
+        location = request.form.get('location')
         eventDetails = request.form.get('eventDetails')
-        print(eventDetails)
-        print(eventDate)
-        addEvent(eventDetails, eventDate)
+        addEvent(summary, startDate, endDate, startTime, endTime, location, eventDetails)
         return redirect(url_for('views.schedule'))
     else:
         return render_template("schedule.html", user=current_user, acc=current_user.userName, adminStatus=current_user.isAdmin, events=pullEvent())
-
-@views.route('/add-cal-event', methods=['POST'])
-@login_required
-def addCalEvent():
-    newEvent = json.loads(request.data)
-
-    event = {
-        "title": newEvent.get("title"),
-        "startDate": newEvent.get("startDate"),
-        "endDate": newEvent.get("endDate"),
-        "startTime": newEvent.get("startTime"),
-        "endTime": newEvent.get("endTime"),
-        "location": newEvent.get("location"),
-        "eventDetails": newEvent.get("eventDetails")
-    }
-
-    print("New event to add:")
-    print(event)
-    print("Adding event...")
-    addEvent(event)
-
-    return render_template("schedule.html", user=current_user, acc=current_user.userName, adminStatus=current_user.isAdmin, events=[pullEvent()])
-    
 
 @views.route('/profile')
 @login_required
