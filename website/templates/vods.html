@@ -17,8 +17,14 @@
 
 <section class = "container-vods-display">
     {% for video in videos %}
-    <div class = "video-placeholder">
-       <li>{{ video }}</li>
+    <div class = "video-wrapper">
+       <div class ="video-thumbnail">
+        <img src="{{ video.thumbURL }}">
+       </div>
+       <div class = "video-wrapper-info">
+         <h3>{{ video.title }}</h3>
+         <a href="{{ video.videoSRC }}">View Video</a>
+       </div>
     </div>
     {% endfor %}
 </section>
