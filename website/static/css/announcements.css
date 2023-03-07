@@ -143,19 +143,19 @@ textarea {
         flex-direction: row;
         height: 80vh;
         padding: 0;
+        justify-content: space-evenly;
+        gap: 0;
     }
 
     /*Create announcements*/
     .container-post-announcements {
         width: 35vw;
         height: 90%;
-        margin-left: 2.5vw;
     }
 
     /*View announcements*/
     .container-view-announcements {
-        width: 60vw;
+        width: 55vw;
         height: 90%;
-        margin-right: 2.5vw;
     }
 }
