@@ -123,6 +123,33 @@ def delete_roster():
 
     return jsonify({}) 
 
+@views.route('update-user', methods=['POST'])
+@login_required
+def update_user():
+    updateInfo = json.loads(request.data)
+    print(updateInfo)
+    userId = updateInfo['userId']
+    print("userId: " + userId)
+    value = updateInfo['newValue']
+    print("Value: " + value)
+    element = updateInfo['targetElem']
+    print("Element: " + element)
+    user = User.query.get(userId)
+    if user:
+        if element == 'isAdmin':
+            if not user.userName == 'alee38' or user.userName == 'travis':
+                if value == 'true':
+                    value = True
+                elif value == 'false':
+                    value = False
+                user.isAdmin = value
+                db.session.commit()
+                print("Successfully updated user obj")
+
+    return jsonify({})
+
+
+
 @views.route('/LoL')
 @login_required
 def DULoL():
@@ -147,6 +174,16 @@ def schedule():
 @views.route('/profile')
 @login_required
 def profile():
+    if current_user.isAdmin == 1:
+        adminUsers = list()
+        baseUsers = list()
+        allUsers = User.query.all()
+        for user in allUsers:
+            if user.isAdmin == 0:
+                baseUsers.append(user)
+            elif user.isAdmin == 1:
+                adminUsers.append(user)
+        return render_template("profile.html", user=current_user, acc=current_user.userName, adminStatus=current_user.isAdmin, allusers=allUsers, admins=adminUsers, users=baseUsers)
     return render_template("profile.html", user=current_user, acc=current_user.userName, adminStatus=current_user.isAdmin)
 
 @views.route('/contact')

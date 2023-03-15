@@ -1,27 +1,36 @@
-from simple_youtube_api.Channel import Channel
-from simple_youtube_api.LocalVideo import LocalVideo
+import requests
+import json
 
-# loggin into the channel
-channel = Channel()
-channel.login("/Users/barryallen/CodingProjects/DU-LoL/website/credentials.json", "credentials.storage")
+#uses the YT API to get a list of videos uploaded to a playlist
+def gatherVideos():
+    #YT API url, returns a dict
+    r = requests.get('https://youtube.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=PLUzkJoFm5OFqgVgJ16DrwJp8GdEn5Ezgn&maxResults=10&order=date&key=AIzaSyB297x7ugH4cce5TBt1C_uGOLep7kXKCk0')
+    #this is to combine with the video ID links, to create a clickable URL for the user
+    ytURL = 'https://www.youtube.com/watch?v='
 
-# setting up the video that is going to be uploaded
-video = LocalVideo(file_path="/Users/barryallen/CodingProjects/DU-LoL/test.mp4")
+    vidLinks = []
+#UCTHMPvX_wADl18GLtYRxjUQ - project
 
-# setting snippet
-video.set_title("My Title")
-video.set_description("This is a description")
+#loads the response as json so it can be parsed
+    resp = r.json()
+    x = json.dumps(resp)
+    y = json.loads(x)
 
-# setting status
-video.set_embeddable(True)
-video.set_license("creativeCommon")
-video.set_privacy_status("private")
-video.set_public_stats_viewable(True)
+    #range can be adjusted, but needs to match the maxResults value in the URL above
+    for num in range(0,10):
+        try:
+        #creates a 'video' dictionary
+            video = {
+                #accesses the largest thumbnail URL
+                "thumbURL": y["items"][num]['snippet']['thumbnails']['high']['url'],
+                #accesses the video title
+                "title": y["items"][num]['snippet']['title'],
+                #accesses the video id
+                "videoSRC": ytURL + str(y["items"][num]['snippet']['resourceId']['videoId'])
+            }
 
-# setting thumbnail
-#video.set_thumbnail_path('test_thumb.png')
-
-# uploading video and printing the results
-video = channel.upload_video(video)
-print(video.id)
-print(video)
+            vidLinks.append(video)
+        except:
+            pass
+        
+    return vidLinks

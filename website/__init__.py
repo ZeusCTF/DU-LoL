@@ -5,7 +5,6 @@ from flask_login import LoginManager
 #defines database
 db = SQLAlchemy()
 DB_NAME = 'database.db'
-UPLOAD_FOLDER = '/tmp/uploads'
 
 def create_app():
 
@@ -15,19 +14,19 @@ def create_app():
     #initializes db
     app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
 
-    app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-
     db.init_app(app)
     
     #importing blueprints
     from .views import views
     from .auth import auth
     from .fUpload import fUpload
+    from .LoL import LoL
 
     #registering the blueprints
     app.register_blueprint(views, url_prefix='/')
     app.register_blueprint(auth, url_prefix='/')
     app.register_blueprint(fUpload, url_prefix='/')
+    app.register_blueprint(LoL, url_prefix='/')
 
     #makes sure the db models are created
     from .models import User

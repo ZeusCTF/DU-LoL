@@ -1,3 +1,5 @@
+#Code sourced from google calendar API quickstart, some adjustments made
+
 from __future__ import print_function
 from datetime import datetime
 
@@ -12,19 +14,33 @@ from googleapiclient.errors import HttpError
 # If modifying these scopes, delete the file token.json.
 SCOPES = ['https://www.googleapis.com/auth/calendar']
 
-
+#Pulls events listed in the DUAPI calendar
 def pullEvent():
     creds=None
     if os.path.exists('token.json'):
             creds = Credentials.from_authorized_user_file('token.json', SCOPES)
+    # If there are no (valid) credentials available, let the user log in.
+    if not creds or not creds.valid:
+        if creds and creds.expired and creds.refresh_token:
+            creds.refresh(Request())
+        else:
+            flow = InstalledAppFlow.from_client_secrets_file(
+                'C:/xampp/htdocs/flask testing/website/credentials.json', SCOPES)
+            creds = flow.run_local_server(port=0)
+        # Save the credentials for the next run
+        with open('token.json', 'w') as token:
+            token.write(creds.to_json())
     service = build('calendar', 'v3', credentials=creds)
             # Call the Calendar API
     page_token = None
     totalEvents = list()
 
     while True:
+        nowDate = datetime.today().strftime('%Y-%m-%d')
+        nowTime = datetime.today().strftime("%H:%M:%S")
+        curDateTime = (nowDate + "T" + nowTime + "Z")
 
-        events = service.events().list(calendarId='primary', pageToken=page_token).execute()
+        events = service.events().list(calendarId='primary', singleEvents="true", timeMin=curDateTime, pageToken=page_token).execute()
         for event in events['items']:
             #this format 2023-02-16T17:00:00-00:00
             startDateTime = event['start'].get('dateTime')
@@ -63,27 +79,17 @@ def addEvent(summary, startDate, endDate, startTime, endTime, location, eventDet
             creds.refresh(Request())
         else:
             flow = InstalledAppFlow.from_client_secrets_file(
-                'C:/xampp/htdocs/flask testing/website/credentials.json', SCOPES)
+                './credentials.json', SCOPES)
             creds = flow.run_local_server(port=0)
         # Save the credentials for the next run
         with open('token.json', 'w') as token:
             token.write(creds.to_json())
 
     try:
-        #build dateTime strings
-        startDateTime = f'{startDate}' + "T" + f'{startTime}' + ":00-05:00"
-        print("Start Date Time String")
-        print(startDateTime)
+        #build dateTime strings, time will have to be updated to match daylight savings 
+        startDateTime = f'{startDate}' + "T" + f'{startTime}' + ":00-04:00"
 
-        endDateTime = f'{endDate}' + "T" + f'{endTime}' + ":00-05:00"
-        print("End Date Time String")
-        print(endDateTime)
-
-        print("Start Time")
-        print(startTime)
-
-        print("End Time")
-        print(endTime)
+        endDateTime = f'{endDate}' + "T" + f'{endTime}' + ":00-04:00"
 
         service = build('calendar', 'v3', credentials=creds)
         event = {
@@ -101,6 +107,6 @@ def addEvent(summary, startDate, endDate, startTime, endTime, location, eventDet
             }}
 
         event = service.events().insert(calendarId='primary', body=event).execute()
-        print('Event created: %s' % (event.get('htmlLink')))
-    except HttpError as error:
-        print('An error occurred: %s' % error)
+        pass
+    except:
+        pass

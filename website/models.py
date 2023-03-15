@@ -17,6 +17,7 @@ class User(db.Model, UserMixin):
     announcement = db.relationship('Announcement')
     roster = db.relationship('Roster')
 
+#template for how announcements look
 class Announcement(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     data = db.Column(db.String(10000))
@@ -26,6 +27,7 @@ class Announcement(db.Model):
     team = db.Column(db.Integer, db.ForeignKey('user.playerTeam'))
     author = db.Column(db.Integer)
 
+#template for rosters
 class Roster(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(150))
