@@ -1,3 +1,5 @@
+#Code sourced from google calendar API quickstart, some adjustments made
+
 from __future__ import print_function
 from datetime import datetime
 
@@ -12,7 +14,7 @@ from googleapiclient.errors import HttpError
 # If modifying these scopes, delete the file token.json.
 SCOPES = ['https://www.googleapis.com/auth/calendar']
 
-
+#Pulls events listed in the DUAPI calendar
 def pullEvent():
     creds=None
     if os.path.exists('token.json'):
@@ -26,7 +28,6 @@ def pullEvent():
         nowDate = datetime.today().strftime('%Y-%m-%d')
         nowTime = datetime.today().strftime("%H:%M:%S")
         curDateTime = (nowDate + "T" + nowTime + "Z")
-        print("Current Date + Time", curDateTime)
 
         events = service.events().list(calendarId='primary', singleEvents="true", timeMin=curDateTime, pageToken=page_token).execute()
         for event in events['items']:
@@ -67,27 +68,17 @@ def addEvent(summary, startDate, endDate, startTime, endTime, location, eventDet
             creds.refresh(Request())
         else:
             flow = InstalledAppFlow.from_client_secrets_file(
-                'C:/xampp/htdocs/flask testing/website/credentials.json', SCOPES)
+                './credentials.json', SCOPES)
             creds = flow.run_local_server(port=0)
         # Save the credentials for the next run
         with open('token.json', 'w') as token:
             token.write(creds.to_json())
 
     try:
-        #build dateTime strings
-        startDateTime = f'{startDate}' + "T" + f'{startTime}' + ":00-05:00"
-        print("Start Date Time String")
-        print(startDateTime)
+        #build dateTime strings, time will have to be updated to match daylight savings 
+        startDateTime = f'{startDate}' + "T" + f'{startTime}' + ":00-04:00"
 
-        endDateTime = f'{endDate}' + "T" + f'{endTime}' + ":00-05:00"
-        print("End Date Time String")
-        print(endDateTime)
-
-        print("Start Time")
-        print(startTime)
-
-        print("End Time")
-        print(endTime)
+        endDateTime = f'{endDate}' + "T" + f'{endTime}' + ":00-04:00"
 
         service = build('calendar', 'v3', credentials=creds)
         event = {
@@ -105,6 +96,6 @@ def addEvent(summary, startDate, endDate, startTime, endTime, location, eventDet
             }}
 
         event = service.events().insert(calendarId='primary', body=event).execute()
-        print('Event created: %s' % (event.get('htmlLink')))
-    except HttpError as error:
-        print('An error occurred: %s' % error)
+        pass
+    except:
+        pass

@@ -20,11 +20,13 @@ def create_app():
     from .views import views
     from .auth import auth
     from .fUpload import fUpload
+    from .LoL import LoL
 
     #registering the blueprints
     app.register_blueprint(views, url_prefix='/')
     app.register_blueprint(auth, url_prefix='/')
     app.register_blueprint(fUpload, url_prefix='/')
+    app.register_blueprint(LoL, url_prefix='/')
 
     #makes sure the db models are created
     from .models import User
