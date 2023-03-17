@@ -64,7 +64,9 @@ def sign_up():
             #seperates userid from email
             username = email.split('@')
             #update this with admin/coach admin usernames
-            if username[0] == 'testing':
+            if username[0] == 'alee38':
+                adminStatus = True
+            elif username[0] == 'supersecretadminaccount':
                 adminStatus = True
             else:
                 adminStatus = False
