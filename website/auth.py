@@ -66,7 +66,7 @@ def sign_up():
             #update this with admin/coach admin usernames
             if username[0] == 'alee38':
                 adminStatus = True
-            elif username[0] == 'travis':
+            elif username[0] == 'supersecretadminaccount':
                 adminStatus = True
             else:
                 adminStatus = False

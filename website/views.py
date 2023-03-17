@@ -137,7 +137,7 @@ def update_user():
     user = User.query.get(userId)
     if user:
         if element == 'isAdmin':
-            if not user.userName == 'alee38' or user.userName == 'travis':
+            if not user.userName == 'alee38' or user.userName == 'supersecretadminaccount':
                 if value == 'true':
                     value = True
                 elif value == 'false':
@@ -189,11 +189,3 @@ def profile():
 @views.route('/contact')
 def contact():
     return render_template("contact.html", user=current_user)
-
-@views.route('/LoLCoach/<int:pid>')
-@login_required
-def LoLCoach(pid):
-    uid = pid
-    selectedPlayer = User.query.get(uid)
-
-    return render_template("LoLCoach.html", user=current_user, acc=current_user.userName, adminStatus=current_user.isAdmin, player=selectedPlayer)
