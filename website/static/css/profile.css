@@ -22,3 +22,54 @@
 .container-profile-userdata h1 {
     margin: 1rem 0;
 }
+
+
+/*Super Admin Control Panel*/
+.container-sacp {
+    width: 95%;
+    background-color: var(--black);
+    border-radius: 25px;
+    margin: auto;
+    font-size: 1rem;
+    text-align: center;
+    padding: 1rem 0;
+}
+
+.container-sacp h1:first-child {
+    font-size: 2rem;
+}
+
+.container-sacp h1 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    padding: 1rem;
+}
+
+.container-sacp h2 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    padding: 1rem;
+}
+
+.container-sacp table {
+    width: 95%;
+    margin: auto;
+    background-color: var(--red);
+    color: var(--black);
+    border: 2px solid var(--white);
+    padding: 4px;
+    gap: 1rem;
+}
+
+th, td {
+    padding: 1rem 0;
+    text-align: center;
+}
+
+.container-sacp table tr:nth-child(even) {
+    background-color: rgba(0,0,0,.3);
+}
+
+.container-sacp table tr:first-child {
+    border-bottom: 2px solid var(--black);
+}

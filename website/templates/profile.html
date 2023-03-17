@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %} Coach View {% endblock %}
+{% block title %} Profile {% endblock %}
 {% block content %}
 <section class = "container-user-info">
     <div class = "container-info-header">
@@ -17,6 +17,93 @@
         <h1>IGN: {{user.ign}}</h1>
         <h1>Team: {{user.playerTeam}}</h1>
     </div>
+
+    {% if adminStatus == True %}
+    {% if acc == 'alee38'%}
+    <div class = "container-sacp">
+        <h1>Super Admin Control Panel</h1>
+        <section>
+            <h2>All Users</h2>
+            <table>
+                <tr>
+                    <th>UID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>email</th>
+                    <th>IGN</th>
+                    <th>Team</th>
+                    <th>Admin Status</th>
+                </tr>
+                {% for user in allusers %}
+                <tr>
+                    <td>{{user.id}}</td>
+                    <td>{{user.firstName}}</td>
+                    <td>{{user.lastName}}</td>
+                    <td>{{user.email}}</td>
+                    <td>{{user.ign}}</td>
+                    <td>{{user.playerTeam}}</td>
+                    <td>{{user.isAdmin}}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </section>
+        <section>
+            <h2>Administrative Users</h2>
+            <table>
+                <tr>
+                    <th>UID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>email</th>
+                    <th>IGN</th>
+                    <th>Team</th>
+                    <th>Admin Status</th>
+                    <th>Revoke Administrator</th>
+                </tr>
+                {% for admin in admins %}
+                <tr>
+                    <td>{{admin.id}}</td>
+                    <td>{{admin.firstName}}</td>
+                    <td>{{admin.lastName}}</td>
+                    <td>{{admin.email}}</td>
+                    <td>{{admin.ign}}</td>
+                    <td>{{admin.playerTeam}}</td>
+                    <td>{{admin.isAdmin}}</td>
+                    <td><button type="button" onclick="updateUserObj(this, 'isAdmin')" id = "{{ admin.id }}.false">Revoke Admin</button></td>
+                </tr>
+                {% endfor %}
+            </table>
+        </section>
+        <section>
+            <h2>Base Users</h2>
+            <table>
+                <tr>
+                    <th>UID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>email</th>
+                    <th>IGN</th>
+                    <th>Team</th>
+                    <th>Admin Status</th>
+                    <th>Make Administrator</th>
+                </tr>
+                {% for user in users %}
+                <tr>
+                    <td>{{user.id}}</td>
+                    <td>{{user.firstName}}</td>
+                    <td>{{user.lastName}}</td>
+                    <td>{{user.email}}</td>
+                    <td>{{user.ign}}</td>
+                    <td>{{user.playerTeam}}</td>
+                    <td>{{user.isAdmin}}</td>
+                    <td><button type="button" onclick="updateUserObj(this, 'isAdmin')" id = "{{ user.id }}.true">Make Admin</button></td>
+                </tr>
+                {% endfor %}
+            </table>
+        </section>
+    </div>
+    {% endif %}
+    {% endif %}
     
 </section>
 {% endblock %}
