@@ -40,7 +40,7 @@ def pullEvent():
         nowTime = datetime.today().strftime("%H:%M:%S")
         curDateTime = (nowDate + "T" + nowTime + "Z")
 
-        events = service.events().list(calendarId='primary', singleEvents="true", timeMin=curDateTime, pageToken=page_token).execute()
+        events = service.events().list(calendarId='primary', singleEvents="true", timeMin=curDateTime, orderBy='startTime', pageToken=page_token).execute()
         for event in events['items']:
             #this format 2023-02-16T17:00:00-00:00
             startDateTime = event['start'].get('dateTime')
