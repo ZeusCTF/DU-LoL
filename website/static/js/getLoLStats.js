@@ -175,19 +175,19 @@ class playerObj {
 async function getPlayer() {
     currentPlayer.ign = document.getElementById("ign").innerHTML;
 
-    console.log("Player IGN: " + currentPlayer.ign);
+    //console.log("Player IGN: " + currentPlayer.ign);
     //add formatting for replace spaces with URL jargon
     playerURLIGN = currentPlayer.ign.replace(" ", "%20")
-    console.log("URL Player IGN: " + playerURLIGN);
+    //console.log("URL Player IGN: " + playerURLIGN);
 
     //set up API call
     const APICallString = "https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/" + playerURLIGN + "?api_key=" + API_KEY;
-    console.log("APICallString: " + APICallString);
+    //console.log("APICallString: " + APICallString);
 
     //make API call
     const playerResponse = await fetch(APICallString);
     let playerData = await playerResponse.json();
-    console.log("Player Data: " + playerData);
+    //console.log("Player Data: " + playerData);
 
     //handle API call
 
@@ -222,11 +222,11 @@ async function getPlayer() {
 async function getSummonerRankInfo(id) {
     const APICallString = "https://na1.api.riotgames.com/lol/league/v4/entries/by-summoner/" + id + "?api_key=" + API_KEY;
 
-    console.log("APICallString: " + APICallString);
+    //console.log("APICallString: " + APICallString);
 
     const matchResponse = await fetch(APICallString);
     let rankData = await matchResponse.json();
-    console.log(rankData);
+    //console.log(rankData);
 
     rankData.forEach(rankQueue => {
         //get solo/duo rank information object
@@ -235,10 +235,10 @@ async function getSummonerRankInfo(id) {
             currentPlayer.soloRank = rankQueue.rank;
             currentPlayer.soloLP = rankQueue.leaguePoints;
 
-            console.log("Solo 5v5 detected");
-            console.log(currentPlayer.soloTier);
-            console.log(currentPlayer.soloRank);
-            console.log(currentPlayer.soloLP);
+            //console.log("Solo 5v5 detected");
+            //console.log(currentPlayer.soloTier);
+            //console.log(currentPlayer.soloRank);
+            //console.log(currentPlayer.soloLP);
 
             let srcURL = "../static/images/emblem-" + currentPlayer.soloTier.toLowerCase() + ".png";
             let soloQueueRankImgFullSrc = srcURL;
@@ -255,10 +255,10 @@ async function getSummonerRankInfo(id) {
             currentPlayer.flexRank = rankQueue.rank;
             currentPlayer.flexLP = rankQueue.leaguePoints;
 
-            console.log("Flex rank detected");
-            console.log(currentPlayer.flexTier);
-            console.log(currentPlayer.flexRank);
-            console.log(currentPlayer.flexLP);
+            //console.log("Flex rank detected");
+            //console.log(currentPlayer.flexTier);
+            //console.log(currentPlayer.flexRank);
+            //console.log(currentPlayer.flexLP);
 
             let srcURL = "../static/images/emblem-" + currentPlayer.flexTier.toLowerCase() + ".png";
             let flexQueueRankImgFullSrc = srcURL;
@@ -274,13 +274,13 @@ async function getSummonerRankInfo(id) {
 }
 
 async function getMatchHistoryIds(puuid) {
-    console.log("Finding match history ID's with puuid: " + puuid);
+    //console.log("Finding match history ID's with puuid: " + puuid);
     var APICallString = "https://americas.api.riotgames.com/lol/match/v5/matches/by-puuid/" + puuid + "/ids?start=0&count=30&api_key=" + API_KEY;
-    console.log("APICallString: " + APICallString);
+    //console.log("APICallString: " + APICallString);
 
     const fetchMatchList = await fetch(APICallString);
     let matchList = await fetchMatchList.json();
-    console.log(matchList);
+    //console.log(matchList);
 
     readMatchIDs(matchList);
 }
@@ -294,22 +294,22 @@ async function readMatchIDs(matchList)
     for(const matchID of matchList) {
         //get match data from match ID
         APICallString = "https://americas.api.riotgames.com/lol/match/v5/matches/" + matchID + "?api_key=" + API_KEY;
-        console.log("APICallString: " + APICallString);
+        //console.log("APICallString: " + APICallString);
 
         const fetchMatchObj = await fetch(APICallString);
         let matchData = await fetchMatchObj.json();
-        console.log(matchData);
+        //console.log(matchData);
 
         if(matchData.info.queueId == 420) {
-            console.log("Found solo queue game");
+            //console.log("Found solo queue game");
             if(soloQueueTracker < 10)
             {
                 soloQueueMatches[soloQueueTracker] = matchData;
                 soloQueueTracker++;
                 
-            } else {
-                console.log("Max solo queue games reached");
-            }
+            } //else {
+              //  console.log("Max solo queue games reached");
+            //}
             
         } else if(matchData.info.queueId == 440) {
             console.log("Found flex queue game");
@@ -317,9 +317,9 @@ async function readMatchIDs(matchList)
             {
                 flexQueueMatches[flexQueueTracker] = matchData;
                 flexQueueTracker++;
-            } else {
-                console.log("Max flex queue games reached");
-            }
+            } //else {
+           //     console.log("Max flex queue games reached");
+           // }
         }
     }
     
@@ -366,18 +366,18 @@ function buildLobbyContainer(matchData, queueType) {
     gameIdContainer.append(gameIDDisplay);
 
     var gameStart = matchData.info.gameCreation;
-    console.log("Game Start: " + gameStart);
+    //console.log("Game Start: " + gameStart);
     var currentTime = Date.now();
     var gameDifMill = currentTime - gameStart;
-    console.log("Current Time: " + currentTime);
-    console.log("Game was played " + gameDifMill + " milliseconds ago");
+    //console.log("Current Time: " + currentTime);
+    //console.log("Game was played " + gameDifMill + " milliseconds ago");
 
     const startDateTime = new Date(gameStart);
     const gameDate = document.createElement("p");
     gameDate.innerHTML = "" + startDateTime.toString();
     gameIdContainer.append(gameDate);
 
-    console.log("Time Played: " + startDateTime);
+    //console.log("Time Played: " + startDateTime);
 
     //game participants
     let participantContainer = document.createElement("div");
@@ -389,9 +389,9 @@ function buildLobbyContainer(matchData, queueType) {
             player.summonerLevel, player.championName, player.champLevel, player.teamPosition, player.kills, player.deaths,
             player.assists);
 
-        console.log("Created player: " + player.puuid, player.profileIcon, player.summonerName, 
-            player.championName, player.champLevel, player.teamPosition, player.kills, player.deaths,
-            player.assists);
+        //console.log("Created player: " + player.puuid, player.profileIcon, player.summonerName, 
+        //    player.championName, player.champLevel, player.teamPosition, player.kills, player.deaths,
+        //    player.assists);
         //compile data information for display
         //summoner icons
         let participantPfp = document.createElement("img");
@@ -542,10 +542,10 @@ function buildLobbyContainer(matchData, queueType) {
             currentPlayer.allInPings = player.allInPings;
             currentPlayer.assistMePings = player.assistMePings;
 
-            console.log("Updated current player ping data");
+            //console.log("Updated current player ping data");
         }
         updateWeeklySQTracker();
-        console.log("Calculated win-loss: " + currentPlayer.weekWins + " " + currentPlayer.weekLosses);
+        //console.log("Calculated win-loss: " + currentPlayer.weekWins + " " + currentPlayer.weekLosses);
 
         //compile summoner data into container
         let playerContainer = document.createElement("div");
@@ -1042,15 +1042,15 @@ function buildLobbyContainer(matchData, queueType) {
 
         //find selected stats container and set maxheight to fit-content
         const gameID = this.id;
-        console.log("gameID from button: " + gameID);
+        //console.log("gameID from button: " + gameID);
         const containerID = gameID + "stats";
-        console.log("Searching for container by ID: " + containerID);
+        //console.log("Searching for container by ID: " + containerID);
         try {
             const statsContainer = document.getElementById(containerID);
             statsContainer.classList.toggle("display-match-stats");
-            console.log("toggled match stats for container: " + containerID);
+            //console.log("toggled match stats for container: " + containerID);
         } catch (e) {
-            console.log("could not locate stat containers: " + e);
+            //console.log("could not locate stat containers: " + e);
         }
     })
     
@@ -1127,6 +1127,6 @@ function getSummonerSpellIcon(sumId) {
             break;
     }
 
-    console.log("Summoner Spell Icon Link: " + sumSpellLink);
+    //console.log("Summoner Spell Icon Link: " + sumSpellLink);
     return sumSpellLink;
 }

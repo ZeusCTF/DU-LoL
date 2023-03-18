@@ -25,7 +25,8 @@ def announcements():
         db.session.add(new_announcement)
         db.session.commit()
 
-        send_announcement(announcement)
+        #discord bot is not working correctly at the moment.  Commenting this out until a solution is found
+        #send_announcement(announcement)
 
     #user=current_user allows us to reference the current user
     return render_template("announcements.html", user=current_user, acc=current_user.userName, adminStatus=current_user.isAdmin)
