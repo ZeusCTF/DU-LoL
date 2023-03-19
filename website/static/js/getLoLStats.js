@@ -1,6 +1,6 @@
 const statContainer = document.querySelector(".container-profile-stats");
 
-const API_KEY = "RGAPI-64bf4914-2bce-4b32-a667-8ae44e058d6a";
+const API_KEY = "RGAPI-a78424e2-ebbd-4592-b565-45f814aea25f";
 
 var soloQueueMatches = new Array();
 var flexQueueMatches = new Array();
@@ -244,7 +244,7 @@ async function getSummonerRankInfo(id) {
             let soloQueueRankImgFullSrc = srcURL;
             document.getElementById("soloRankIcon").src = soloQueueRankImgFullSrc;
 
-            document.getElementById("soloRank").innerText = currentPlayer.soloTier;
+            document.getElementById("soloRank").innerText = currentPlayer.soloTier + " " + currentPlayer.soloRank;
             document.getElementById("soloLP").innerText = currentPlayer.soloLP;
             //soloQueueRank.innerHTML = currentPlayer.soloTier + ": " + currentPlayer.soloRank + " " + currentPlayer.soloLP + " LP";
         }
@@ -264,7 +264,7 @@ async function getSummonerRankInfo(id) {
             let flexQueueRankImgFullSrc = srcURL;
             document.getElementById("flexRankIcon").src = flexQueueRankImgFullSrc;
 
-            document.getElementById("flexRank").innerText = currentPlayer.flexTier;
+            document.getElementById("flexRank").innerText = currentPlayer.flexTier + " " + currentPlayer.flexRank;
             document.getElementById("flexLP").innerText = currentPlayer.flexLP;
 
             //flexQueueRank.innerHTML = currentPlayer.flexTier + ": " + currentPlayer.flexRank  + " " + currentPlayer.flexLP + " LP";
@@ -312,7 +312,7 @@ async function readMatchIDs(matchList)
             //}
             
         } else if(matchData.info.queueId == 440) {
-            console.log("Found flex queue game");
+            //console.log("Found flex queue game");
             if(flexQueueTracker < 10)
             {
                 flexQueueMatches[flexQueueTracker] = matchData;

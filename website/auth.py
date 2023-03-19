@@ -13,7 +13,7 @@ auth = Blueprint('auth', __name__)
 @auth.route('/login', methods=['GET','POST'])
 def login():
     if request.method == 'POST':
-        email = request.form.get('email')
+        email = (request.form.get('email')).lower()
         password = request.form.get('password')
 
         #grabs the first email instance of the provided email, checks if pass hash matches
@@ -43,7 +43,7 @@ def logout():
 def sign_up():
     if request.method == 'POST':
         #getting email/password data from the request
-        email = request.form.get('email')
+        email = request.form.get('email').lower()
         firstName = request.form.get('firstName')
         lastName = request.form.get('lastName')
         ign = request.form.get('ign')
