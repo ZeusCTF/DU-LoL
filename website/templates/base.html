@@ -22,8 +22,7 @@
     <script src = "{{ url_for('static',filename='/js/left_nav.js') }}"></script>
     <script src = "{{ url_for('static',filename='/js/current_page.js') }}"></script>
     <script src = "{{ url_for('static',filename='/js/modifyDBObj.js') }}"></script>
-    <script defer src = "{{ url_for('static',filename='/js/riftplanner.js') }}"></script>
-
+    <script defer onload = "populateChampGallery()" src = "{{ url_for('static',filename='/js/riftplanner.js') }}"></script>
     {% block css %}
     {% endblock %}
 </head>

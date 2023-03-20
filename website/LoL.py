@@ -27,4 +27,5 @@ def LoLCoach(pid):
 @LoL.route('/riftplanner')
 @login_required
 def riftplanner():
+    #get champion images here & return in template
     return render_template("riftplanner.html", user=current_user, acc=current_user.userName, adminStatus=current_user.isAdmin)
