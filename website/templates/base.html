@@ -17,10 +17,13 @@
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='/css/roster.css') }}">
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='/css/profile.css') }}">
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='/css/contact.css') }}">
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='/css/riftplanner.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src = "{{ url_for('static',filename='/js/left_nav.js') }}"></script>
     <script src = "{{ url_for('static',filename='/js/current_page.js') }}"></script>
     <script src = "{{ url_for('static',filename='/js/modifyDBObj.js') }}"></script>
+    <script defer src = "{{ url_for('static',filename='/js/riftplanner.js') }}"></script>
+
     {% block css %}
     {% endblock %}
 </head>
@@ -44,6 +47,7 @@
             {% endif %}
             {% if user.is_authenticated == True %}
             {% if user.playerTeam == "League of Legends" %}
+            <li><a href="/riftplanner" class = "nav-link" id="riftplanner">Rift Planner</a></li>
             <li><a href="/LoL" class = "nav-link" id="profile">Player Profile</a></li>
             {% endif %}
             {% endif %}
@@ -94,6 +98,7 @@
                 {% endif %}
                 {% if user.is_authenticated == True %}
                 {% if user.playerTeam == "League of Legends" %}
+                <li><a href="/riftplanner" class = "nav-link" id="riftplanner">Rift Planner</a></li>
                 <li><a href="/LoL" class = "nav-link" id="profile">Player Profile</a></li>
                 {% endif %}
                 {% endif %}

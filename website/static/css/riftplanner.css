@@ -1,0 +1,84 @@
+/*General*/
+.selected-marker {
+    border: 2px solid var(--white);
+}
+
+/*Edit Marker*/
+.container-select-marker {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 5vh 5vh;
+    row-gap: 2rem;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.container-select-marker button {
+    width: 50%;
+    margin: 0 auto;
+    cursor: pointer;
+}
+
+.container-select-marker div h1 {
+    margin: auto;
+}
+
+.blue-marker {
+    background-color: blue;
+}
+
+.red-marker {
+    background-color: red;
+}
+
+/*Player Markers*/
+.container-player-markers {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 5vh 5vh;
+    row-gap: 2rem;
+    margin: 2rem 0;
+}
+
+.player-marker {
+    cursor: move;
+    display: flex;
+    flex-direction: column;
+    background-color: orange;
+    width: 25px;
+    height: 25px;
+    text-align: center;
+    border-radius: 50%;
+    margin: auto;
+    z-index: 50;
+}
+
+@media (min-width: 768px) {
+    .player-marker {
+        width: 50px;
+        height: 50px;
+    }
+}
+
+.player-marker.dragging {
+    opacity: .5;
+}
+
+.player-marker.dragged {
+    
+    position: absolute;
+}
+
+.player-marker p {
+    margin: auto;
+}
+
+.player-marker-blue {
+    background-color: blue;
+    color: var(--white);
+}
+
+.player-marker-red {
+    background-color: red;
+    color: var(--black);
+}

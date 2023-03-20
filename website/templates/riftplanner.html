@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block title %} Rift Strats {% endblock %}
+{% block content %}
+<section class = "container-riftplanner">
+    <section class = "container-select-marker">
+        <button class = "blue-marker" id ="tblueselect" onclick="selectMarker(this)">Top</button>
+        <button class = "blue-marker" id ="jblueselect" onclick="selectMarker(this)">Jungle</button>
+        <button class = "blue-marker" id ="mblueselect" onclick="selectMarker(this)">Mid</button>
+        <button class = "blue-marker" id ="ablueselect" onclick="selectMarker(this)">Carry</button>
+        <button class = "blue-marker" id ="sblueselect" onclick="selectMarker(this)">Support</button>
+        <button class = "red-marker" id ="tredselect" onclick="selectMarker(this)">Top</button>
+        <button class = "red-marker" id ="jredselect" onclick="selectMarker(this)">Jungle</button>
+        <button class = "red-marker" id ="mredselect" onclick="selectMarker(this)">Mid</button>
+        <button class = "red-marker" id ="aredselect" onclick="selectMarker(this)">Carry</button>
+        <button class = "red-marker" id ="sredselect" onclick="selectMarker(this)">Support</button>
+    </section>
+    <section class = "container-sr">
+        <img src = "{{ url_for('static',filename='/images/riftplanner/summonersrift.webp') }}">
+    </section>
+    <section>
+        <div class = "container-player-markers">
+            <div class = "player-marker player-marker-blue" draggable = "true" id ="tblue">
+                <p>T</p>
+            </div>
+            <div class = "player-marker player-marker-blue" draggable = "true" id ="jblue">
+                <p>J</p>
+            </div>
+            <div class = "player-marker player-marker-blue" draggable = "true" id ="mblue">
+                <p>M</p>
+            </div>
+            <div class = "player-marker player-marker-blue" draggable = "true" id ="ablue">
+                <p>A</p>
+            </div>
+            <div class = "player-marker player-marker-blue" draggable = "true" id ="sblue">
+                <p>S</p>
+            </div>
+            <div class = "player-marker player-marker-red" draggable = "true" id ="tred">
+                <p>T</p>
+            </div>
+            <div class = "player-marker player-marker-red" draggable = "true" id ="jred">
+                <p>J</p>
+            </div>
+            <div class = "player-marker player-marker-red" draggable = "true" id ="mred">
+                <p>M</p>
+            </div>
+            <div class = "player-marker player-marker-red" draggable = "true" id ="ared">
+                <p>A</p>
+            </div>
+            <div class = "player-marker player-marker-red" draggable = "true" id ="sred">
+                <p>S</p>
+            </div>
+        </div>
+    </section>
+</section>
+
+<script>
+    selectLinks("riftstrats");
+</script>
+{% endblock %}

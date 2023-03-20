@@ -22,3 +22,9 @@ def LoLCoach(pid):
     selectedPlayer = User.query.get(uid)
 
     return render_template("LoLCoach.html", user=current_user, acc=current_user.userName, adminStatus=current_user.isAdmin, player=selectedPlayer)
+
+#routing for Rift Planner
+@LoL.route('/riftplanner')
+@login_required
+def riftplanner():
+    return render_template("riftplanner.html", user=current_user, acc=current_user.userName, adminStatus=current_user.isAdmin)
