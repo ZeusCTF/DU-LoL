@@ -134,9 +134,9 @@
     {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}
       {% for message in messages %}
-      <div role="alert"> 
+      <div class = "alert-container" role="alert"> 
         {{ message }} 
-        <button type="button" class="close">
+        <button type="button" class="close-alert" onclick="removeAlert()">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -150,4 +150,16 @@
       {% endblock %}
     </div>
 </body>
+
+<script>
+
+  function removeAlert() {
+    const alerts = document.querySelectorAll(".alert-container");
+    alerts.forEach(alert => {
+      alert.remove();
+    })
+  }
+
+</script>
+
 </html>

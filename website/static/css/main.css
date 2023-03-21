@@ -42,7 +42,35 @@ a:hover, button:hover {
 }
 
 
+/*Message Alerts*/
+.alert-container {
+  position: absolute;
+  width: 90%;
+  z-index: 1000;
+  padding: 1rem;
+  top: 10%;
+  left: 50%;
+  transform: translate(-50%, -10%);
+  background-color: var(--redTrans);
+  border: 1px solid var(--black);
+  display: flex;
+  justify-content: space-evenly;
+  color: var(--black);
+}
 
+.alert-container button {
+  background-color: var(--black);
+  border: 1px solid var(--white);
+  color: var(--white);
+  padding: 0 .5rem;
+}
+
+@media (min-width: 768px) {
+  .alert-container {
+    top: 20%;
+    transform: translate(-50%, -20%);
+  }
+}
 
 
 

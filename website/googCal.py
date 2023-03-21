@@ -47,13 +47,21 @@ def pullEvent():
             startDateTime = str(startDateTime)
 
             startTime = startDateTime[11:16]
-            startDate = startDateTime[0:10]
+            #convert from 24 hour time to 12 hour time + am/pm
+            startTime = convertTime(startTime)
+            #move year to end of string for M/D/Y format
+            startDate = convertDate(startDateTime[0:10])
 
             endDateTime = event['end'].get('dateTime')
             endDateTime = str(endDateTime)
+            
 
             endTime = endDateTime[11:16]
-            endDate = endDateTime[0:10]
+            #convert from 24 hour time to 12 hour time + am/pm
+            endTime = convertTime(endTime)
+            #move year to end of string for M/D/Y format
+            endDate = convertDate(endDateTime[0:10])
+
 
             eventInfo = {
                 "summary": (event['summary']),
@@ -110,3 +118,21 @@ def addEvent(summary, startDate, endDate, startTime, endTime, location, eventDet
         pass
     except:
         pass
+
+#convert from 24 hour time to 12 hour time + am/pm
+def convertTime(timeString):
+    splitTimeString = timeString.split(':')
+    ampm = " am"
+    if((int(splitTimeString[0]) - 12) > 0):
+        ampm = " pm"
+        splitTimeString[0] = str(int(splitTimeString[0]) - 12).strip()
+        splitTimeString[1] = splitTimeString[1].strip()
+        newTimeString = splitTimeString[0] + ":" + splitTimeString[1] + ampm
+        return newTimeString
+    else:
+        newTimeString = splitTimeString[0] + ":" + splitTimeString[1] + ampm
+        return newTimeString
+
+#move year to end of string for M/D/Y format
+def convertDate(dateString):
+    return dateString[5:10] + "-" + dateString[0:4]
