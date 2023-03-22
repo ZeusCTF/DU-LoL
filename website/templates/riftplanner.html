@@ -41,16 +41,33 @@
     
         </canvas>
     </section>
+    <!--Leave this in.  Pulling src info to riftplanner.js-->
+    <img style="display: none !important" src="{{ url_for('static',filename='images/riftplanner/summonersrift.webp') }}" id="riftImg">
+    
     <section class = "container-riftplanner-draw">
         <div class = "toggle-riftplanner-drawmenu" onclick="toggleDrawMenu()">
             <i class="fa-solid fa-paintbrush"></i>
         </div>
         <div class = "container-riftplanner-drawmenu">
-            <div class = "color-grid">
-                <button style="background-color: green" onclick="toggleColor(this)" id="green"></button>
-                <button style="background-color: red" onclick="toggleColor(this)" id="red"></button>
-                <button style="background-color: blue" onclick="toggleColor(this)" id="blue"></button>
-                <button style="background-color: rgb(190, 190, 4)" onclick="toggleColor(this)" id="yellow"></button>
+            <div class="wrapper-drawmenu-tools">
+                <div class = "container-drawmenu-linewidth">
+                    <button style="width: 5px; height: 5px;" class = "linewidth-selection selected-linewidth" onclick="changeStroke(this)" id="5"></button>
+                    <button style="width: 10px; height: 10px;" class = "linewidth-selection" onclick="changeStroke(this)" id="10"></button>
+                    <button style="width: 15px; height: 15px;" class = "linewidth-selection" onclick="changeStroke(this)" id="15"></button>
+                    <button style="width: 20px; height: 20px;" class = "linewidth-selection" onclick="changeStroke(this)" id="20"></button>
+                    <button style="width: 25px; height: 25px;" class = "linewidth-selection" onclick="changeStroke(this)" id="25"></button>
+                </div>
+                <div class = "color-grid">
+                    <button style="background-color: #000000" class="selected-color" onclick="toggleColor(this)" id="#000000"></button>
+                    <button style="background-color: #ffffff" onclick="toggleColor(this)" id="#ffffff"></button>
+                    <button style="background-color: #38761d" onclick="toggleColor(this)" id="#38761d"></button>
+                    <button style="background-color: #cc0000" onclick="toggleColor(this)" id="#cc0000"></button>
+                    <button style="background-color: #3d85c6" onclick="toggleColor(this)" id="#3d85c6"></button>
+                    <button style="background-color: #F2DC23" onclick="toggleColor(this)" id="#F2DC23"></button>
+                </div>
+                <div class = "container-riftmap-reset">
+                    <button onclick="clearRiftMap()">Reset Rift Map</button>
+                </div>
             </div>
         </div>
         

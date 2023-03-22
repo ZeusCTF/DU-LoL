@@ -1,5 +1,4 @@
 const dragItems = document.querySelectorAll(".player-marker");
-const riftmap = document.querySelector("canvas");
 
 dragItems.forEach(dragItem => {
     dragItem.addEventListener('dragstart', () => {
@@ -10,17 +9,24 @@ dragItems.forEach(dragItem => {
 
     dragItem.addEventListener('dragend', e => {
         e.preventDefault();
-        marker.style.left = (e.pageX) + "px";
-        marker.style.top = (e.pageY) + "px";
+        dragItem.style.left = (e.pageX) + "px";
+        dragItem.style.top = (e.pageY) + "px";
         console.log("X: " + e.pageX + "px")
         console.log("Y: " + e.pageY + "px")
         dragItem.classList.remove('dragging');
+        console.log("Drag item removed");
     })
 })
 
 function selectMarker(btn) {
     if(btn.classList.contains("selected-marker")) {
-        btn.classList.remove("selected-marker");
+        console.log("entered removing markers");
+        const selectedMarkers = document.querySelectorAll(".selected-marker");
+        selectedMarkers.forEach(selectedMarker => {
+            console.log("removing markers");
+            selectedMarker.classList.remove("selected-marker");
+        })
+        
     } else {
         //fetch Id of current button clicked
         const selectId = btn.id;
@@ -70,47 +76,99 @@ function setMarkerIcon(champIcon) {
     })
 }
 
+
+const canvas = document.querySelector("canvas");
+const ctx = canvas.getContext('2d');
+
+const canvasOffsetX = canvas.offsetLeft;
+const canvasOffsetY = canvas.offsetTop;
+
+canvas.width = window.innerWidth - canvasOffsetX;
+canvas.height = window.innerHeight - canvasOffsetY;
+
+const riftImg = document.getElementById("riftImg");
+let riftmap2 = new Image();
+riftmap2.onload = function () {
+    canvas.height = riftmap2.height;
+    ctx.drawImage(riftmap2, 0, 0, window.innerWidth, riftmap2.height);
+};
+riftmap2.src = riftImg.src;
+riftmap2.classList.add("container-sr");
+
+let color = "#000000";
+let lineWidth = 5;
+let drawing = false;
+let startX;
+let startY;
+
+canvas.addEventListener('mousedown', e => {
+    drawing = true;
+    startX = e.clientX;
+    startY = e.clientY;
+});
+
+canvas.addEventListener('mouseup', e => {
+    drawing = false;
+    ctx.stroke();
+    ctx.beginPath();
+});
+
+canvas.addEventListener('mousemove', e => {
+    if(!drawing) {
+        return;
+    }
+
+    ctx.lineWidth = lineWidth;
+    ctx.lineCap = 'round';
+    ctx.strokeStyle = color;
+    const {x, y} = getMousePos(e);
+    ctx.lineTo(x, y);
+    ctx.stroke();
+})
+
+//gets cursor position relative to the location of the canvas
+//otherwise, canvas resizing breaks mouse location due to aspect ratios
+function getMousePos(e) {
+    var rect = canvas.getBoundingClientRect();
+    return {
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top
+    };
+}
+
+//Toolbar methods
+function changeStroke(stroke) {
+    lineWidth = parseInt(stroke.id);
+    console.log("Toggled linewidth to: " + lineWidth);
+    const strokeBtns = document.querySelectorAll(".linewidth-selection");
+    strokeBtns.forEach(strokeBtn => {
+        if(strokeBtn.classList.contains("selected-linewidth"))
+            strokeBtn.classList.remove("selected-linewidth");
+        strokeBtn.style.borderColor = color;
+        strokeBtn.style.backgroundColor = "transparent";
+    })
+    stroke.classList.add("selected-linewidth");
+}
+
 function toggleColor(btn) {
-    var color = btn.id;
+    color = btn.id;
+    console.log("color set to: " + color);
     const colorBtns = document.querySelector(".color-grid").querySelectorAll("button");
     colorBtns.forEach(colorBtn => {
         if(colorBtn.classList.contains("selected-color"))
             colorBtn.classList.remove("selected-color")
     })
     btn.classList.add("selected-color");
+    const strokeBtns = document.querySelectorAll(".linewidth-selection");
+    strokeBtns.forEach(strokeBtn => {
+        strokeBtn.style.borderColor = color;
+        strokeBtn.style.backgroundColor = "transparent";
+    })
 }
 
-var drawing = false;
-const canvas = riftmap.getContext('2d');
-riftmap.addEventListener('mousedown', e => {
-    drawing = true;
-    console.log("drawing true");
-})
-
-riftmap.addEventListener('mouseup', e => {
-    drawing = false;
-    console.log("drawing false");
-})
-
-riftmap.addEventListener('mousemove', e => {
-    var mousePos = getMousePos(e);
-    var posX = mousePos.x;
-    var posY = mousePos.y;
-    draw(posX, posY)
-})
-
-function getMousePos(e) {
-    console.log("X: " + e.clientX + " Y: " + e.clientY);
-    return {
-        x: e.clientX,
-        y: e.clientY
-    }
-}
-
-function draw(posX, posY) {
-    if(drawing) {
-        canvas.fillStyle = "blue";
-        canvas.fillRect(posX, posY, 10, 10);
-        console.log("Drew Rectangle at: " + posX + " " + posY);
-    }
+function clearRiftMap() {
+    console.log("entered clear rift map");
+    canvas.height = riftmap2.height;
+    canvas.width = window.innerWidth;
+    ctx.drawImage(riftmap2, 0, 0, canvas.width, canvas.height);
 }
