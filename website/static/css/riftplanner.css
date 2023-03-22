@@ -1,6 +1,6 @@
 /*General*/
 .selected-marker {
-    border: 2px solid var(--white);
+    border: 2px solid var(--white) !important;
 }
 
 /*Edit Marker*/
@@ -9,14 +9,18 @@
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     grid-template-rows: 5vh 5vh;
     row-gap: 2rem;
-    margin-bottom: 2rem;
+    margin: 10% 0;
     text-align: center;
+    pointer-events: all;
 }
 
 .container-select-marker button {
     width: 50%;
     margin: 0 auto;
     cursor: pointer;
+    background-repeat: none;
+    background-position: center;
+    background-size: cover;
 }
 
 .container-select-marker div h1 {
@@ -25,10 +29,28 @@
 
 .blue-marker {
     background-color: blue;
+    border: 2px solid blue;
 }
 
 .red-marker {
     background-color: red;
+    border: 2px solid red;
+}
+
+/*Summoners Rift Map*/
+.container-sr {
+    display: flex;
+    width: 90vw;
+    height: 80vh;
+    margin: auto;
+    background-image: url('../images/riftplanner/summonersrift.webp');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.container-sr img {
+    margin: auto;
 }
 
 /*Player Markers*/
@@ -44,13 +66,15 @@
     cursor: move;
     display: flex;
     flex-direction: column;
-    background-color: orange;
     width: 25px;
     height: 25px;
     text-align: center;
     border-radius: 50%;
     margin: auto;
     z-index: 50;
+    background-repeat: none;
+    background-position: center;
+    background-size: cover;
 }
 
 @media (min-width: 768px) {
@@ -74,11 +98,134 @@
 }
 
 .player-marker-blue {
-    background-color: blue;
     color: var(--white);
+    background-color: blue;
+    border: 2px solid blue;
 }
 
 .player-marker-red {
-    background-color: red;
     color: var(--black);
+    background-color: red;
+    border: 2px solid red;
+}
+
+/*Champion Icon Selection*/
+.container-riftplanner-champsmenu {
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    left: calc(100vw - 35px);
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    pointer-events: none;
+    transition: all .5s;
+}
+
+.container-select-champ {
+    background-color: var(--blackTrans);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.toggle-champselect-menu {
+    display: flex;
+    width: 40px;
+    height: 40px;
+    margin-top: 2rem;
+    background-color: red;
+    cursor: pointer;
+    pointer-events: all;
+}
+
+@media (min-width: 768px) {
+    .toggle-champselect-menu {
+        margin-top: 10rem;
+    }
+}
+
+.container-riftplanner-champsmenu i {
+    margin: auto;
+}
+
+.wrapper-riftplanner-champs {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    margin-left: 20px;
+    row-gap: 2rem;
+    pointer-events: all;
+    height: 70%;
+    overflow-y: scroll;
+}
+
+.wrapper-riftplanner-champs img {
+    margin: auto;
+    cursor: pointer;
+}
+
+
+/*Draw Menu*/
+.container-riftplanner-draw {
+    display: flex;
+    width: calc(20vw + 40px);
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: calc(100vw - 35px);
+    z-index: 1000;
+    justify-content: space-between;
+    pointer-events: none;
+    transition: all .5s;
+    width: 300px;
+}
+
+.container-riftplanner-drawmenu {
+    width: calc(100% - 40px);
+    background-color: var(--blackTrans);
+    display: flex;
+    flex-direction: column;
+}
+
+.color-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    pointer-events: all;
+    margin: auto
+}
+
+.color-grid button {
+    width: 50px;
+    height: 50px;
+    margin: auto;
+}
+
+.toggle-riftplanner-drawmenu {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    background-color: red;
+    pointer-events: all;
+    margin-top: calc(2rem + 45px);
+    cursor: pointer;
+}
+
+@media (min-width: 768px) {
+    .toggle-riftplanner-drawmenu {
+        margin-top: calc(10rem + 45px);
+    }
+}
+
+.toggle-riftplanner-drawmenu i {
+    margin: auto;
+}
+
+.show-draw-menu {
+    left: calc(100vw - 300px) !important;
+}
+
+.selected-color {
+    border: 2px solid white;
 }

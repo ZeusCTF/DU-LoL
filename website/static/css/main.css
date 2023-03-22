@@ -72,7 +72,10 @@ a:hover, button:hover {
   }
 }
 
-
+/*Generic Show Right Menu*/
+.show-right-menu {
+  left: 10px !important;
+}
 
 /*Mobile, Tablet, Desktop, hide/show display*/
 .show-from-left {

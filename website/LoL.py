@@ -3,6 +3,7 @@ from flask import render_template, Blueprint
 from flask_login import login_required, current_user
 from .models import User
 from .googCal import pullEvent
+import os
 
 
 #setting up League-specific blueprint for the app
@@ -27,5 +28,7 @@ def LoLCoach(pid):
 @LoL.route('/riftplanner')
 @login_required
 def riftplanner():
-    #get champion images here & return in template
-    return render_template("riftplanner.html", user=current_user, acc=current_user.userName, adminStatus=current_user.isAdmin)
+    #get champion images stored in riftplanner/champions folder & return in template as champIcons
+    champIcons = os.listdir('C:/xampp/htdocs/flask testing/website/static/images/riftplanner/champions')
+    champIconSrc = ['images/riftplanner/champions/' + champIcon for champIcon in champIcons]
+    return render_template("riftplanner.html", user=current_user, acc=current_user.userName, adminStatus=current_user.isAdmin, champIcons = champIconSrc)
