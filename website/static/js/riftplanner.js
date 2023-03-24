@@ -89,6 +89,9 @@ canvas.height = window.innerHeight - canvasOffsetY;
 const riftImg = document.getElementById("riftImg");
 let riftmap2 = new Image();
 riftmap2.onload = function () {
+    const canvasContainer = document.querySelector(".container-sr");
+    canvasContainer.style.width = "80vw";
+    canvasContainer.style.height = riftmap2.height;
     canvas.height = riftmap2.height;
     ctx.drawImage(riftmap2, 0, 0, window.innerWidth, riftmap2.height);
 };
@@ -168,6 +171,9 @@ function toggleColor(btn) {
 
 function clearRiftMap() {
     console.log("entered clear rift map");
+    const canvasContainer = document.querySelector(".container-sr");
+    canvasContainer.style.width = "80vw";
+    canvasContainer.style.height = riftmap2.height;
     canvas.height = riftmap2.height;
     canvas.width = window.innerWidth;
     ctx.drawImage(riftmap2, 0, 0, canvas.width, canvas.height);
