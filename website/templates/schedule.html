@@ -42,45 +42,56 @@
     </div>
 </section>
 {% if adminStatus == True %}
-<section class = "container-create-event">
-    <h2>Create an Event</h2>
-    <form method="POST">
-        <div>
-            <label for="summary">Event Title</label>
-            <input type="text" id="summary" name="summary" required placeholder="Input title...">
-        </div>
-        <div class = "wrapper-date-time-input">
+<div style = "display: flex; flex-direction: row;">
+    <section class = "container-create-event">
+        <h2>Create an Event</h2>
+        <form method="POST">
             <div>
-                <label for="startDate">Start Date</label>
-                <input type="date" id="startDate" name="startDate" required>
+                <label for="summary">Event Title</label>
+                <input type="text" id="summary" name="summary" required placeholder="Input title...">
+            </div>
+            <div class = "wrapper-date-time-input">
+                <div>
+                    <label for="startDate">Start Date</label>
+                    <input type="date" id="startDate" name="startDate" required>
+                </div>
+                <div>
+                    <label for="endDate">End Date</label>
+                    <input type="date" id="endDate" name="endDate" required>
+                </div>
+                <div>
+                    <label for="startTime">Start Time</label>
+                    <input type="time" id="startTime" name="startTime" required>
+                </div>
+                <div>
+                    <label for="endTime">End Time</label>
+                    <input type="time" id="endTime" name="endTime" required>
+                </div>
             </div>
             <div>
-                <label for="endDate">End Date</label>
-                <input type="date" id="endDate" name="endDate" required>
+                <label for="location">Location</label>
+                <input type="text" id="location" name="location" required placeholder="Input location...">
             </div>
             <div>
-                <label for="startTime">Start Time</label>
-                <input type="time" id="startTime" name="startTime" required>
+                <label for="eventDetails">Event Details</label>
+                <textarea name = "eventDetails" id="eventDetails" required Placeholder = "Provide a description of the event..."></textarea>
             </div>
-            <div>
-                <label for="endTime">End Time</label>
-                <input type="time" id="endTime" name="endTime" required>
-            </div>
-        </div>
-        <div>
-            <label for="location">Location</label>
-            <input type="text" id="location" name="location" required placeholder="Input location...">
-        </div>
-        <div>
-            <label for="eventDetails">Event Details</label>
-            <textarea name = "eventDetails" id="eventDetails" required Placeholder = "Provide a description of the event..."></textarea>
-        </div>
-        <div class = "wrapper-event-button">
-            <button type="submit">Create Event</button> 
-        </div> 
-    </form>
-</section>
+            <div class = "wrapper-event-button">
+                <button type="submit">Create Event</button> 
+            </div> 
+        </form>
+    </section>
+    <button class = "toggle-create-event" onclick="toggleCreateEvent()">
+        <i class="fa-regular fa-calendar-days"></i>
+    </button>
+</div>
 {% endif %}
+<script type="text/javascript">
+    function toggleCreateEvent() {
+        document.querySelector(".toggle-create-event").classList.toggle("create-event-active-btn");
+        document.querySelector(".container-create-event").classList.toggle("create-event-active-cont");
+    }
+</script>
 <script>
     selectLinks("schedule");
 </script>

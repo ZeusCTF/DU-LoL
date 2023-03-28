@@ -22,6 +22,7 @@
     <script src = "{{ url_for('static',filename='/js/left_nav.js') }}"></script>
     <script src = "{{ url_for('static',filename='/js/current_page.js') }}"></script>
     <script src = "{{ url_for('static',filename='/js/modifyDBObj.js') }}"></script>
+    <script src = "{{ url_for('static',filename='/js/dropdown.js') }}"></script>
     <script defer src = "{{ url_for('static',filename='/js/riftplanner.js') }}"></script>
     {% block css %}
     {% endblock %}
@@ -33,7 +34,7 @@
         <h1>Davenport University Esports</h1>
       </div>
       <div class = "container-header-nav">
-        <div>
+        <div class = "container-desktab-nav-link">
           <ul>
             <li><a href="/" class = "nav-link" id="home">Home</a></li>
             {% if user.is_authenticated == False %}
@@ -43,21 +44,26 @@
             <li><a href="/schedule" class = "nav-link" id="schedule">Schedule</a></li>
             <li><a href="/announcements" class = "nav-link" id="announcements">Announcements</a></li>
             <li><a href="/vods" class = "nav-link" id="vods">Vods</a></li>
-            {% endif %}
-            {% if user.is_authenticated == True %}
-            {% if user.playerTeam == "League of Legends" %}
-            <li><a href="/riftplanner" class = "nav-link" id="riftplanner">Rift Planner</a></li>
-            <li><a href="/LoL" class = "nav-link" id="profile">Player Profile</a></li>
-            {% endif %}
-            {% endif %}
-            {% if user.is_authenticated == True %}
-            {% if user.isAdmin == 1 %}
-            <li><a href="/roster" class = "nav-link" id="roster">Roster Stats</a></li>
-            {% endif %}
-            {% endif %}
+            <li class = "dropdown-menu">
+              <a onclick="toggleDropdown('LoLDropdown')" class="dropdown-btn">LoL</a>
+              <ul id="LoLDropdown" class = "dropdown-items">
+                {% if user.is_authenticated == True %}
+                {% if user.playerTeam == "League of Legends" %}
+                <li><a href="/riftplanner" class = "nav-link" id="riftplanner">Rift Planner</a></li>
+                <li><a href="/LoL" class = "nav-link" id="profile">Player Profile</a></li>
+                {% endif %}
+                {% endif %}
+                {% if user.is_authenticated == True %}
+                {% if user.isAdmin == 1 %}
+                <li><a href="/roster" class = "nav-link" id="roster">Roster Stats</a></li>
+                {% endif %}
+                {% endif %}
+                {% endif %}
+              </ul>
+            </li>
           </ul>
         </div>
-        <div>
+        <div class = "container-desktab-auth-link">
           <ul>
             {% if user.is_authenticated == False %}
             <li><a href="/login" class = "nav-link" id="login">Login</a></li>
@@ -72,11 +78,9 @@
       </div>
     </nav>
 
-    <section class = "container-left-nav-toggle show-on-mobile">
-      <div class = "wrapper-left-nav-toggle">
-        <button onclick = "toggleLeftNav()"><i class="fa-solid fa-bars"></i></button>
-      </div>
-    </section>
+    <button onclick = "toggleLeftNav()" class = "container-left-nav-toggle show-on-mobile">
+      <i class="fa-solid fa-bars"></i>
+    </button>
 
     <nav class = "main-left-nav show-on-mobile">
       <div class = "container-left-nav">

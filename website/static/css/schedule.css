@@ -99,11 +99,48 @@
 
 /*Create Event Styling*/
 .container-create-event {
-    width: 90%;
+    width: calc(90vw - 4px);
     border: 1px solid var(--white);
     background-color: var(--red);
-    margin: auto;
-    margin-bottom: 1rem;
+    max-height: 100vh;
+    overflow-y: scroll;
+    overflow-x: visible;
+    position: fixed;
+    top: 0;
+    left: -90vw;
+    z-index: 500;
+    transition: all .25s;
+}
+
+.create-event-active-cont {
+    left: 0;
+    z-index: 1500;
+}
+
+.toggle-create-event {
+    width: 40px;
+    height: 40px;
+    background-color: var(--red);
+    display: flex;
+    position: fixed;
+    left: -2px;
+    top: 10vh;
+    border: 1px solid var(--white);
+    justify-content: center;
+    align-items: center;
+    color: var(--black);
+    z-index: 500;
+    transition: all .25s;
+}
+
+@media (min-width: 768px) {
+    .toggle-create-event {
+        top: 25vh;
+    }
+}
+
+.create-event-active-btn {
+    left: calc(90vw - 5px);
 }
 
 .container-create-event h2 {

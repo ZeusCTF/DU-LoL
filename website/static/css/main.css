@@ -72,10 +72,56 @@ a:hover, button:hover {
   }
 }
 
+
+
+
+
+
+
+
+
+
 /*Generic Show Right Menu*/
 .show-right-menu {
   left: 10px !important;
 }
+
+
+
+
+
+
+
+
+/*Generic dropdown menu*/
+.dropdown-menu {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-items {
+  position: absolute;
+  display: none;
+  min-width: 160px;
+  z-index: 1100;
+  background-color: var(--red);
+}
+
+.dropdown-items li {
+  width: 100%;
+}
+
+.display-items {
+  display: block;
+}
+
+
+
+
+
+
+
+
 
 /*Mobile, Tablet, Desktop, hide/show display*/
 .show-from-left {
@@ -132,6 +178,7 @@ a:hover, button:hover {
   justify-content: space-between;
   text-align: center;
   z-index: 1000;
+  overflow: visible;
 }
 
 .container-header-title {
@@ -145,8 +192,13 @@ a:hover, button:hover {
   text-decoration: underline solid 1px var(--black);
 }
 
+.container-desktab-nav-link, .container-desktab-auth-link {
+  max-width: 50%;
+}
+
 .container-header-nav {
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
 }
 
@@ -159,7 +211,6 @@ a:hover, button:hover {
   list-style-type: none;
   margin: auto;
   padding: 0;
-  overflow: hidden;
   width: fit-content;
 }
 
@@ -188,26 +239,26 @@ a:hover, button:hover {
 
 
 
+
+
+
+
+
 /*Main left nav toggle button*/
 .container-left-nav-toggle {
   z-index: 500;
-  width: 100%;
+  width: 40px;
+  height: 40px;
   position: absolute;
-  margin-top: 2rem;
-}
-
-.wrapper-left-nav-toggle {
+  left: -3px;
+  top: 5vh;
   background-color: var(--red);
-  width: 2rem;
-  height: 2rem;
-  border-radius: 10px;
-  margin-left: 2rem;
-  text-align: center;
+  border: 1px solid var(--white);
+  color: black;
 }
 
-.wrapper-left-nav-toggle button {
-  width: 2rem;
-  height: 2rem;
+.container-left-nav-toggle i {
+  margin: auto;
 }
 
 /*Main left nav menu*/
