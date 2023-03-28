@@ -89,9 +89,18 @@
                 <button class = "red-marker" id ="aredselect" onclick="selectMarker(this)">Carry</button>
                 <button class = "red-marker" id ="sredselect" onclick="selectMarker(this)">Support</button>
             </div>
+            <div class = "container-champ-search">
+                <label for="champSearch">Search for champion: </label>
+                <!-- The name field is important here, this is what the info is called that gets passed to the backend -->
+                <input
+                    type="text"
+                    id="champSearch"
+                    name="champSearch"
+                    placeholder="Enter champion name...">
+            </div>
             <div class = "wrapper-riftplanner-champs">
                 {% for champIcon in champIcons %}
-                <img src="{{url_for('static', filename=champIcon)}}" onclick="setMarkerIcon(this)">
+                <img class = "champ-icon-img" src="{{url_for('static', filename=champIcon)}}" onclick="setMarkerIcon(this)">
                 {% endfor %}
             </div>
         </div>

@@ -76,6 +76,38 @@ function setMarkerIcon(champIcon) {
     })
 }
 
+//search for champion
+const search = document.getElementById("champSearch");
+
+search.onkeyup = function() {
+    displayAllChamps();
+    queryChamps(search.value);
+}
+
+function displayAllChamps() {
+    const imgs = document.querySelectorAll("img");
+    imgs.forEach(img => {
+        if(img.classList.contains("hide-champ")) {
+            img.classList.remove("hide-champ");
+        }
+    })
+}
+
+function queryChamps(input) {
+    let imgs = document.querySelectorAll(".champ-icon-img");
+    imgs.forEach(curImg => {
+        var champName = curImg.src;
+        console.log(champName);
+        champName = champName.split("/champions/")[1];
+        console.log(champName);
+        champName = champName.split("Square")[0];
+        console.log(champName);
+        if(!(champName.substring(0,input.length).toLowerCase() == input.toLowerCase()))
+            curImg.classList.add("hide-champ");
+    });
+}
+
+
 
 const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext('2d');

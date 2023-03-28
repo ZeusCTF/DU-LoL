@@ -3,30 +3,6 @@
     border: 2px solid var(--white) !important;
 }
 
-/*Edit Marker*/
-.container-select-marker {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-    grid-template-rows: 5vh 5vh;
-    row-gap: 2rem;
-    margin: 10% 0;
-    text-align: center;
-    pointer-events: all;
-}
-
-.container-select-marker button {
-    width: 50%;
-    margin: 0 auto;
-    cursor: pointer;
-    background-repeat: none;
-    background-position: center;
-    background-size: cover;
-}
-
-.container-select-marker div h1 {
-    margin: auto;
-}
-
 .blue-marker {
     background-color: blue;
     border: 2px solid blue;
@@ -129,7 +105,7 @@
     background-color: var(--red);
     cursor: pointer;
     pointer-events: all;
-    position: absolute;
+    position: fixed;
     top: 20vh;
     left: 0;
     transition: all .5s;
@@ -143,6 +119,30 @@
     margin: auto;
 }
 
+/*Edit Marker*/
+.container-select-marker {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 5vh 5vh;
+    row-gap: 2rem;
+    margin: 2rem 0;
+    text-align: center;
+    pointer-events: all;
+}
+
+.container-select-marker button {
+    width: 50%;
+    margin: 0 auto;
+    cursor: pointer;
+    background-repeat: none;
+    background-position: center;
+    background-size: cover;
+}
+
+.container-select-marker div h1 {
+    margin: auto;
+}
+
 .wrapper-riftplanner-champs {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -153,6 +153,37 @@
     overflow-y: scroll;
 }
 
+/*search for champion*/
+.container-champ-search {
+    pointer-events: all;
+    margin: 0 auto;
+    margin-bottom: 3rem;
+    width: 80%;
+    font-size: 1.3rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+}
+
+.container-champ-search label {
+    width: fit-content;
+    margin: auto 0;
+}
+
+.container-champ-search input {
+    color: var(--black);
+    margin-left: 2rem;
+    width: 60%;
+}
+
+.hide-champ {
+    display: none;
+}
+
+
+
+/*Display available champion token images*/
 .wrapper-riftplanner-champs img {
     margin: auto;
     cursor: pointer;
@@ -229,7 +260,7 @@
     display: flex;
     background-color: var(--red);
     pointer-events: all;
-    position: absolute;
+    position: fixed;
     top: calc(20vh + 45px);
     left: 0;
     cursor: pointer;
