@@ -44,10 +44,11 @@
     <!--Leave this in.  Pulling src info to riftplanner.js-->
     <img style="display: none !important" src="{{ url_for('static',filename='images/riftplanner/summonersrift.webp') }}" id="riftImg">
     
+    <div class = "toggle-riftplanner-drawmenu" onclick="toggleDrawMenu(this)">
+        <i class="fa-solid fa-paintbrush"></i>
+    </div>
+
     <section class = "container-riftplanner-draw">
-        <div class = "toggle-riftplanner-drawmenu" onclick="toggleDrawMenu()">
-            <i class="fa-solid fa-paintbrush"></i>
-        </div>
         <div class = "container-riftplanner-drawmenu">
             <div class="wrapper-drawmenu-tools">
                 <div class = "container-drawmenu-linewidth">
@@ -70,12 +71,11 @@
                 </div>
             </div>
         </div>
-        
     </section>
+    <div class = "toggle-champselect-menu" onclick="toggleChampMenu(this)">
+        <i class="fa-solid fa-users"></i>
+    </div>
     <section class = "container-riftplanner-champsmenu">
-        <div class = "toggle-champselect-menu" onclick="toggleChampMenu()">
-            <i class="fa-solid fa-users"></i>
-        </div>
         <div class="container-select-champ">
             <div class = "container-select-marker">
                 <button class = "blue-marker" id ="tblueselect" onclick="selectMarker(this)">Top</button>

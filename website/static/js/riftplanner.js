@@ -51,16 +51,16 @@ function selectMarker(btn) {
     }
 }
 
-function toggleChampMenu() {
+function toggleChampMenu(btn) {
     console.log("Entered toggle champ select");
-    const containerCS = document.querySelector(".container-riftplanner-champsmenu");
-    containerCS.classList.toggle("show-right-menu");
+    document.querySelector(".container-riftplanner-champsmenu").classList.toggle("show-left-menu");
+    btn.classList.toggle("champselect-active");
 }
 
-function  toggleDrawMenu() {
+function  toggleDrawMenu(btn) {
     console.log("Entered toggle draw menu");
-    const containerDraw = document.querySelector(".container-riftplanner-draw");
-    containerDraw.classList.toggle("show-draw-menu");
+    document.querySelector(".container-riftplanner-draw").classList.toggle("show-draw-menu");
+    btn.classList.toggle("show-draw-menu-btn");
 }
 
 function setMarkerIcon(champIcon) {

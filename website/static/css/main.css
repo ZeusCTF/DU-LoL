@@ -82,8 +82,8 @@ a:hover, button:hover {
 
 
 /*Generic Show Right Menu*/
-.show-right-menu {
-  left: 10px !important;
+.show-left-menu {
+  left: 0 !important;
 }
 
 

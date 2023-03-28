@@ -105,12 +105,13 @@
     position: fixed;
     z-index: 1000;
     top: 0;
-    left: calc(100vw - 35px);
-    width: 100vw;
+    left: -100vw;
+    width: calc(100vw - 45px);
     height: 100vh;
     display: flex;
     pointer-events: none;
     transition: all .5s;
+    border-right: 1px solid var(--red);
 }
 
 .container-select-champ {
@@ -125,19 +126,20 @@
     display: flex;
     width: 40px;
     height: 40px;
-    margin-top: 2rem;
-    background-color: red;
+    background-color: var(--red);
     cursor: pointer;
     pointer-events: all;
+    position: absolute;
+    top: 20vh;
+    left: 0;
+    transition: all .5s;
 }
 
-@media (min-width: 768px) {
-    .toggle-champselect-menu {
-        margin-top: 10rem;
-    }
+.champselect-active {
+    left: calc(100vw - 45px);
 }
 
-.container-riftplanner-champsmenu i {
+.toggle-champselect-menu i {
     margin: auto;
 }
 
@@ -160,22 +162,23 @@
 /*Draw Menu*/
 .container-riftplanner-draw {
     display: flex;
-    width: calc(20vw + 40px);
+    width: 20vw !important;
     height: 100vh;
     position: fixed;
     top: 0;
-    left: calc(100vw - 35px);
+    left: -20vw;
     z-index: 1000;
     justify-content: space-between;
     pointer-events: none;
     transition: all .5s;
     width: 300px;
+    background-color: var(--blackTrans);
+    border-right: 1px solid var(--red);
 }
 
 
 .container-riftplanner-drawmenu {
     width: calc(100% - 40px);
-    background-color: var(--blackTrans);
     display: flex;
     flex-direction: column;
 }
@@ -224,16 +227,13 @@
     width: 40px;
     height: 40px;
     display: flex;
-    background-color: red;
+    background-color: var(--red);
     pointer-events: all;
-    margin-top: calc(2rem + 45px);
+    position: absolute;
+    top: calc(20vh + 45px);
+    left: 0;
     cursor: pointer;
-}
-
-@media (min-width: 768px) {
-    .toggle-riftplanner-drawmenu {
-        margin-top: calc(10rem + 45px);
-    }
+    transition: all .5s;
 }
 
 .toggle-riftplanner-drawmenu i {
@@ -241,7 +241,11 @@
 }
 
 .show-draw-menu {
-    left: calc(100vw - 300px) !important;
+    left: 0;
+}
+
+.show-draw-menu-btn {
+    left: 20vw;
 }
 
 .selected-color {
