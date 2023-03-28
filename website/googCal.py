@@ -25,7 +25,7 @@ def pullEvent():
             creds.refresh(Request())
         else:
             flow = InstalledAppFlow.from_client_secrets_file(
-                'C:/xampp/htdocs/flask testing/website/credentials.json', SCOPES)
+                './website/credentials.json', SCOPES)
             creds = flow.run_local_server(port=0)
         # Save the credentials for the next run
         with open('token.json', 'w') as token:
@@ -79,7 +79,7 @@ def addEvent(summary, startDate, endDate, startTime, endTime, location, eventDet
             creds.refresh(Request())
         else:
             flow = InstalledAppFlow.from_client_secrets_file(
-                './credentials.json', SCOPES)
+                './website/credentials.json', SCOPES)
             creds = flow.run_local_server(port=0)
         # Save the credentials for the next run
         with open('token.json', 'w') as token:
