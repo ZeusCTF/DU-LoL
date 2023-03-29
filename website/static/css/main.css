@@ -192,10 +192,6 @@ a:hover, button:hover {
   text-decoration: underline solid 1px var(--black);
 }
 
-.container-desktab-nav-link, .container-desktab-auth-link {
-  max-width: 50%;
-}
-
 .container-header-nav {
   display: flex;
   flex-direction: row;

@@ -1,22 +1,85 @@
 const dragItems = document.querySelectorAll(".player-marker");
 
-dragItems.forEach(dragItem => {
-    dragItem.addEventListener('dragstart', () => {
-        dragItem.classList.add('dragging');
-        if(!dragItem.classList.contains('dragged'))
-            dragItem.classList.add('dragged');
-    })
+//remove screen scrolling & place canvas (until canvas offset issue is fixed) 
+if(dragItems) {
+    let baseCont = document.querySelector(".container-base-content");
+    // baseCont.style.maxHeight = "100vh";
+    // baseCont.style.overflowY = "hidden";
+    baseCont.style.margin = "0";
+    if(window.innerWidth >= 768)
+         baseCont.style.marginTop = "calc(15vh)";
+    document.querySelector("body").style.maxHeight = "fit-content";
+}
 
+var fromLeftRed = 100;
+var fromLeftBlue = 100;
+
+
+//align markers on screen load
+dragItems.forEach(dragItem => {
+    if(window.innerWidth < 768) {
+        if(dragItem.classList.contains("player-marker-red")){
+            //place on mobile
+            dragItem.style.top = "2rem";
+            dragItem.style.left = fromLeftRed + "px";
+            fromLeftRed += 50;
+        }
+        else if(dragItem.classList.contains("player-marker-blue")) {
+            //place on mobile
+            dragItem.style.bottom = "2rem";
+            dragItem.style.left = fromLeftBlue + "px";
+            fromLeftBlue += 50;
+        }
+    } else {
+        if(dragItem.classList.contains("player-marker-red")){
+            //place on mobile
+            dragItem.style.top = "20vh";
+            dragItem.style.left = fromLeftRed + "px";
+            fromLeftRed += 75;
+        }
+        else if(dragItem.classList.contains("player-marker-blue")) {
+            //place on mobile
+            dragItem.style.bottom = "2rem";
+            dragItem.style.left = fromLeftBlue + "px";
+            fromLeftBlue += 75;
+    }
+}  
+})
+
+
+//GLOBAL DRAG VARS
+let mouseDown = false; //needs to be true for mousemove activation
+
+dragItems.forEach(dragItem => {
+    //drag player markers
+    dragItem.addEventListener('dragstart', e => {
+        mouseDown = true;
+        dragItem.classList.add('dragging');
+    });
+
+    //dragging player markers
+    dragItem.addEventListener('mousemove', e => {
+        if(mouseDown == true) {
+            e.preventDefault();
+            dragItem.style.left = (e.clientX) + "px";
+            dragItem.style.top = (e.clientY) + "px";
+            console.log("X: " + e.clientX + "px");
+            console.log("Y: " + e.clientY + "px");
+        }
+    });
+
+    //drop player markers
     dragItem.addEventListener('dragend', e => {
         e.preventDefault();
-        dragItem.style.left = (e.pageX) + "px";
-        dragItem.style.top = (e.pageY) + "px";
-        console.log("X: " + e.pageX + "px")
-        console.log("Y: " + e.pageY + "px")
+        dragItem.style.left = e.clientX + "px";
+        dragItem.style.top = e.clientY + document.documentElement.scrollTop + "px";
+        console.log("X: " + e.clientX + "px");
+        console.log("Y: " + e.clientY + "px");
         dragItem.classList.remove('dragging');
         console.log("Drag item removed");
-    })
-})
+        mouseDown = false;
+    });
+});
 
 function selectMarker(btn) {
     if(btn.classList.contains("selected-marker")) {
@@ -55,6 +118,7 @@ function removeSelectedMarkers() {
      }
 }
 
+//Open champ icon select menu
 function toggleChampMenu(btn) {
     console.log("Entered toggle champ select");
     document.querySelector(".container-riftplanner-champsmenu").classList.toggle("show-left-menu");
@@ -62,12 +126,14 @@ function toggleChampMenu(btn) {
     removeSelectedMarkers();
 }
 
+//Open draw menu
 function  toggleDrawMenu(btn) {
     console.log("Entered toggle draw menu");
     document.querySelector(".container-riftplanner-draw").classList.toggle("show-draw-menu");
     btn.classList.toggle("show-draw-menu-btn");
 }
 
+//set icon of selected marker as selected champion icon
 function setMarkerIcon(champIcon) {
     console.log("entered setmarkericon")
     var curMarkers = document.querySelectorAll('.selected-marker');
@@ -98,6 +164,7 @@ search.onkeyup = function() {
     queryChamps(search.value);
 }
 
+//loads all champ images onto the page
 function displayAllChamps() {
     const imgs = document.querySelectorAll("img");
     imgs.forEach(img => {
@@ -107,6 +174,7 @@ function displayAllChamps() {
     })
 }
 
+//hide champs whose substring does not match the current search input
 function queryChamps(input) {
     let imgs = document.querySelectorAll(".champ-icon-img");
     imgs.forEach(curImg => {
@@ -215,6 +283,7 @@ function toggleColor(btn) {
     })
 }
 
+//paints a new riftmap image onto the canvas
 function clearRiftMap() {
     console.log("entered clear rift map");
     const canvasContainer = document.querySelector(".container-sr");
