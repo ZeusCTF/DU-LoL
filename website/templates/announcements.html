@@ -3,6 +3,9 @@
 {% block content %}
 <div class = "container-announcements">
     {% if adminStatus == True %}
+    <button class = "create-announcement-btn" onclick = "toggleCreateAnnouncement(this)">
+        <i class="fa-solid fa-pen-to-square"></i>
+    </button>
     <section class = "container-post-announcements">  
         <h2>Create an Announcement</h2>
         <form method="POST">
@@ -35,6 +38,14 @@
         </ul>
     </section>
 </div>
+
+<script type="text/javascript">
+    function toggleCreateAnnouncement(btn) {
+        document.querySelector(".container-post-announcements").classList.toggle("show-left-menu");
+        btn.classList.toggle("create-announcement-toggled");
+    }
+</script>
+
 
 <script>
     selectLinks("announcements");

@@ -11,18 +11,50 @@
 
 
 /*Create announcements*/
-.container-post-announcements {
-    width: 90vw;
-    min-height: 40vh;
+.create-announcement-btn {
+    width: 40px;
+    height: 40px;
+    position: fixed;
+    left: -3px;
+    top: calc(10% + 10px);
     background-color: var(--red);
     border: 1px solid var(--white);
-    padding: 1rem 0;
-    border-radius: 25px;
+    color: var(--black);
+    display: flex;
+    transition: all .5s;
+    z-index: 500;
+    border-left-color: var(--red);
+    border-left-width: 3px;
+}
+
+@media (min-width: 768px) {
+    .create-announcement-btn {
+        top: 25vh;
+    }
+}
+
+.create-announcement-btn i {
+    margin: auto;
+}
+
+.create-announcement-toggled {
+    left: calc(90vw - 3px);
+}
+
+.container-post-announcements {
+    width: 90vw;
+    height: 100vh;
+    background-color: var(--red);
+    border: 1px solid var(--white);
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     text-align: center;
-    margin: auto;
+    position: fixed;
+    top: 0;
+    left: -100vw;
+    z-index: 500;
+    transition: all .5s;
 }
 
 .container-post-announcements form {

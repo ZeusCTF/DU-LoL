@@ -34,14 +34,7 @@ function selectMarker(btn) {
         const markerId = selectId.split("select")[0];
         console.log(selectId);
         console.log(markerId);
-        //query for currently selected markers
-        var curMarkers = document.querySelectorAll('.selected-marker');
-        if(curMarkers) {
-            curMarkers.forEach(curMarker => {
-                //remove currently selected markers
-                curMarker.classList.remove('selected-marker');
-            })
-        }
+        removeSelectedMarkers();
         //select the targeted button
         btn.classList.add('selected-marker');
         //find the equivalent marker token
@@ -51,10 +44,22 @@ function selectMarker(btn) {
     }
 }
 
+function removeSelectedMarkers() {
+     //query for currently selected markers
+     var curMarkers = document.querySelectorAll('.selected-marker');
+     if(curMarkers) {
+         curMarkers.forEach(curMarker => {
+             //remove currently selected markers
+             curMarker.classList.remove('selected-marker');
+         })
+     }
+}
+
 function toggleChampMenu(btn) {
     console.log("Entered toggle champ select");
     document.querySelector(".container-riftplanner-champsmenu").classList.toggle("show-left-menu");
     btn.classList.toggle("champselect-active");
+    removeSelectedMarkers();
 }
 
 function  toggleDrawMenu(btn) {
@@ -67,9 +72,18 @@ function setMarkerIcon(champIcon) {
     console.log("entered setmarkericon")
     var curMarkers = document.querySelectorAll('.selected-marker');
     console.log(champIcon.src);
-    const curChampion = champIcon.src.split("champions/")[1];
+    let curChampion = champIcon.src.split("champions/")[1];
+    //ensure apostraphe's are correctly backspaced for javascript syntax
+    if(curChampion.indexOf("\'") >= 0) {
+        console.log("Champ contains apostraphe");
+        const curChampionSplit = curChampion.split("\'");
+        const newChampName = curChampionSplit.join("\\\'");
+        console.log("Rejoined champ name: " + newChampName);
+        curChampion = newChampName;
+    }
     console.log(curChampion);
     newImgUrl = "url('../static/images/riftplanner/champions/" + curChampion + "')";
+    
     curMarkers.forEach(curMarker => {
         curMarker.style.backgroundImage = newImgUrl;
         curMarker.innerText = "";
