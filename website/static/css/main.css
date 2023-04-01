@@ -245,7 +245,7 @@ a:hover, button:hover {
   z-index: 500;
   width: 40px;
   height: 40px;
-  position: absolute;
+  position: fixed;
   left: -3px;
   top: 5vh;
   background-color: var(--red);

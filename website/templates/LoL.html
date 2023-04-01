@@ -9,7 +9,7 @@
         <div class = "wrapper-user-desc">
             <h1>{{user.firstName}} {{user.lastName}}</h1>
             <!--!LEAVE ON PAGE! getLoLStats.js must pull info-->
-            <h2 id="ign" style="display: none">{{user.ign}}</h2>
+            <h2 id="ign" class="hidden-sumname" style="display: none">{{user.ign}}</h2>
         </div>
     </div>
     
@@ -77,38 +77,38 @@
         </div>
     </div>
 
-    <div class = "container-profile-stats">
+    <section class = "container-profile-stats">
         <div class = "wrapper-profile-section-header">
             <h2>Summoner Stats</h2>
         </div>
         <div class = "wrapper-summoner-icon">
-            <img id="sumIcon" src = "">
+            <img id="sumIcon" src = "{{ current_player_profile.profile.profileIconID }}">
         </div>
-        <div class = "container-summoner-info">
+        <section class = "container-summoner-info">
             <div class = "wrapper-summoner-info">
                 <h1>Summoner Name:</h1>
-                <h1 id = "sumName"></h1>
+                <h1>{{ current_player_profile.profile.ign }}</h1>
                 <h2>Summoner Level:</h2>
-                <h2 id = "sumLevel"></h2>
+                <h2 id="sumLevel">{{ current_player_profile.profile.summonerLevel }}</h2>
                 <div class = "container-current-ranks">
                     <div class = "container-rank-display">
-                        <img src = "../static/images/emblem-iron.png" id="soloRankIcon">
+                        <img src = "{{ current_player_profile.profile.rankStats.solo.rankIcon }}">
                         <div style="display: flex; flex-direction: column; text-align: left; align-content: center; justify-content: center;">
                             <p>Solo Queue</p>
-                            <p><span id="soloRank">Unranked</span>: <span id="soloLP">0</span> LP</p>
+                            <p>{{ current_player_profile.profile.rankStats.solo.rank }} {{ current_player_profile.profile.rankStats.solo.tier }}: {{ current_player_profile.profile.rankStats.solo.lp }} LP</p>
                         </div>
                     </div>
                     <div class = "container-rank-display">
-                        <img src = "../static/images/emblem-iron.png" id="flexRankIcon">
+                        <img src = "{{ current_player_profile.profile.rankStats.flex.rankIcon }}">
                         <div style="display: flex; flex-direction: column; text-align: left; align-content: center; justify-content: center;">
                             <p>Flex Queue</p>
-                            <p><span id="flexRank">Unranked</span>: <span id="flexLP">0</span> LP</p>
+                            <p>{{ current_player_profile.profile.rankStats.flex.rank }} {{ current_player_profile.profile.rankStats.flex.tier }}: {{ current_player_profile.profile.rankStats.flex.lp }} LP</p>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class = "container-weekly-sq-tracking">
+        </section>
+        <section class = "container-weekly-sq-tracking">
             <h1>Weekly Solo Queue Tracking</h1>
             <div class = "sq-tracking-bar">
                 <div class = "sq-progress-bar">
@@ -121,28 +121,157 @@
             <div class = "wrapper-sq-winloss">
                 <p id="sqWinLoss">0 Wins / 0 Losses</p>
             </div>
-        </div>
-        <div class = "container-solo-match-history">
-            <div class = "wrapper-match-history-header">
-                <h1>Last 10 Solo Queue Games</h1>
-            </div>
-            <div class = "wrapper-match-history" id="soloQueueWrapper">
+        </section>
+        
+        {% for match in current_player_profile.soloQueue.matchList %}
+        <section class = "container-match-history">
+            <div class = "container-match-summary">
+                <div class = "container-match-summary-curplayer">
+                    <!--Current Player Match Summary-->
+                    {% for player in match.info.participants%}
+                    {% if player.summonerName == current_player_profile.profile.ign %}
+                    <div class ="wrapper-champIcon-summoners">
+                        <img id="curPlayerChampIcon" src = "http://ddragon.leagueoflegends.com/cdn/13.6.1/img/champion/{{ player.championName }}.png">
+                        <div class = "wrapper-summoners">
+                            <img src = "../static/images/sum-spells/{{ player.summoner1Id }}.webp">
+                            <img src = "../static/images/sum-spells/{{ player.summoner2Id }}.webp">
+                        </div>
+                    </div>
+                    <div class = "container-items">
+                        <div class = "item-grid">
+                            <img src = "http://ddragon.leagueoflegends.com/cdn/13.4.1/img/item/{{ player.item0 }}.png">
+                            <img src = "http://ddragon.leagueoflegends.com/cdn/13.4.1/img/item/{{ player.item1 }}.png">
+                            <img src = "http://ddragon.leagueoflegends.com/cdn/13.4.1/img/item/{{ player.item2 }}.png">
+                            <img src = "http://ddragon.leagueoflegends.com/cdn/13.4.1/img/item/{{ player.item3 }}.png">
+                            <img src = "http://ddragon.leagueoflegends.com/cdn/13.4.1/img/item/{{ player.item4 }}.png">
+                            <img src = "http://ddragon.leagueoflegends.com/cdn/13.4.1/img/item/{{ player.item5 }}.png">
+                        </div>
+                        <div class = "item-trinket">
+                            <img src = "http://ddragon.leagueoflegends.com/cdn/13.4.1/img/item/{{ player.item6 }}.png">
+                        </div>
+                    </div>
+                    <div class = "container-stat-summary">
+                        <p>{{ player.championName }}</p>
+                        <p>Lvl {{ player.champLevel }}</p>
+                        <p class = "curPlayer-summary-KDA">{{ player.kills }} / {{ player.deaths }} / {{ player.assists }}</p>
+                    </div>
+                    <div class = "container-stat-summary">
+                        <p><span class="curPlayer-summary-cs">{{ player.totalMinionsKilled }}</span> CS <span class="curPlayer-summary-cs-per-min">(0.0)</span></p>
+                        <p class = "curPlayer-summary-KDA-avg">KDA: 0.00</p>
+                        <p>Vision: {{ player.visionScore }}</p>
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+                <button>
 
+                </button>
+                <!--Full Lobby Summary-->
+                <div class = "container-match-summary-lobby">
+                    <div class = "grid-match-summary-lobby">
+                        {% for player in match.info.participants%}
+                        <div class = "wrapper-player-summary">
+                            <div class="container-match-summary-curplayer-lobby">
+                                <div class ="wrapper-champIcon-summoners">
+                                    <img id="curPlayerChampIcon" src = "http://ddragon.leagueoflegends.com/cdn/13.6.1/img/champion/{{ player.championName }}.png">
+                                    <div class = "wrapper-summoners">
+                                        <img src = "../static/images/sum-spells/{{ player.summoner1Id }}.webp">
+                                        <img src = "../static/images/sum-spells/{{ player.summoner2Id }}.webp">
+                                    </div>
+                                </div>
+                                <div class = "container-items">
+                                    <div class = "item-grid">
+                                        <img src = "http://ddragon.leagueoflegends.com/cdn/13.4.1/img/item/{{ player.item0 }}.png">
+                                        <img src = "http://ddragon.leagueoflegends.com/cdn/13.4.1/img/item/{{ player.item1 }}.png">
+                                        <img src = "http://ddragon.leagueoflegends.com/cdn/13.4.1/img/item/{{ player.item2 }}.png">
+                                        <img src = "http://ddragon.leagueoflegends.com/cdn/13.4.1/img/item/{{ player.item3 }}.png">
+                                        <img src = "http://ddragon.leagueoflegends.com/cdn/13.4.1/img/item/{{ player.item4 }}.png">
+                                        <img src = "http://ddragon.leagueoflegends.com/cdn/13.4.1/img/item/{{ player.item5 }}.png">
+                                    </div>
+                                    <div class = "item-trinket">
+                                        <img src = "http://ddragon.leagueoflegends.com/cdn/13.4.1/img/item/{{ player.item6 }}.png">
+                                    </div>
+                                </div>
+                                <div class = "container-stat-summary">
+                                    <p>{{ player.championName }}</p>
+                                    <p>Lvl {{ player.champLevel }}</p>
+                                    <p>{{ player.kills }} / {{ player.deaths }} / {{ player.assists }}</p>
+                                </div>
+                            </div>
+                            <div class = "lobby-summary-player-info">
+                                <p>{{ player.summonerName }}</p>
+                                <div class = "wrapper-lobby-summary-player-rank-info">
+                                    <!--Global tracker prevents curPlayer name from appearing multiple times in 
+                                        match lobby summary containers due to parsing multiple lobbies at one time-->
+                                    {% set curPlayer = namespace(tracker = 0) %}
+                                    {% for lobby in current_player_profile.soloQueue.lobbyPlayerInfo %}
+                                    {% for searchPlayer in lobby %}
+                                    {% if searchPlayer.ign == player.summonerName %}
+                                        {% if searchPlayer.ign == current_player_profile.profile.ign and curPlayer.tracker == 0%}
+                                        <img src = "{{ searchPlayer.rankStats.solo.rankIcon }}">
+                                        <p>{{ searchPlayer.rankStats.solo.rank }} {{ searchPlayer.rankStats.solo.tier }}: {{ searchPlayer.rankStats.solo.lp }}  LP</p>
+                                        {% set curPlayer.tracker = 1 %}
+                                        {% elif searchPlayer.ign != current_player_profile.profile.ign %}
+                                        <img src = "{{ searchPlayer.rankStats.solo.rankIcon }}">
+                                        <p>{{ searchPlayer.rankStats.solo.rank }} {{ searchPlayer.rankStats.solo.tier }}: {{ searchPlayer.rankStats.solo.lp }}  LP</p>
+                                    {% endif %}
+                                    {% endif %}
+                                    {% endfor %}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <!--Stats Display-->
+                <div class = "container-match-stats">
+                    <!--Game information to pull from flask into JavaScript-->
+                    <div class = "hidden-js-vars" style="display: flex; flex-direction: column;">
+                        <p>Data pulled into JS</p>
+                        <p id = "RAPIgameCreation">{{ match.info.gameCreation }}</p>
+                        <p id= "RAPIgameEndTimestamp">{{ match.info.gameEndTimestamp }}</p>
+                        <p id= "RAPIgameStartTimestamp">{{ match.info.gameStartTimestamp }}</p>
+                        <p class = "RAPIgameDuration" id= "RAPIgameDuration">{{ match.info.gameDuration }}</p>
+                        <p id= "RAPIgameId">{{ match.info.gameId }}</p>
+                        {% for player in match.info.participants%}
+                        {% if player.summonerName == current_player_profile.profile.ign %}
+                            <p class = "RAPIwin" id= "RAPIwin">{{ player.win }}</p>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                    <div class = "match-stats-charts">
+                        <div class = "chart-container">
+                            <canvas id="{{ match.info.gameId }}goldGraph"></canvas>
+                        </div>
+                        <div class = "chart-container">
+                            <canvas id="{{ match.info.gameId }}damageGraph"></canvas>
+                        </div>
+                        <div class = "chart-container">
+                            <canvas id="{{ match.info.gameId }}KDAGraph"></canvas>
+                        </div>
+                        <div class = "chart-container">
+                            <canvas id="{{ match.info.gameId }}visionGraph"></canvas>
+                        </div>
+                        <script>
+                            //looks like an error but jinja will replace the text before the script is processed
+                            //JS pulls canvas based off of gameID, then parses match list data into graph
+                            loadGoldGraph({{ match.info.gameId }}, {{ match | tojson | safe }});
+                            loadDamageGraph({{ match.info.gameId }}, {{ match | tojson | safe }});
+                            loadKDAGraph({{ match.info.gameId }}, {{ match | tojson | safe }});
+                            loadVisionGraph({{ match.info.gameId }}, {{ match | tojson | safe }});
+                        </script>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class = "container-flex-match-history">
-            <div class = "wrapper-match-history-header">
-                <h1>Last 10 Flex Queue Games</h1>
-            </div>
-            <div class = "wrapper-match-history" id="flexQueueWrapper">
+        </section>
+        {% endfor %}
 
-            </div>
-        </div>
-    </div>
+    </section>
     
 </section>
 
-<script defer onload = "getPlayer()" src = "{{ url_for('static',filename='/js/getLoLStats.js') }}"></script>
+<script defer onload = "cleanAPI()" src = "{{ url_for('static',filename='/js/LoLPostAPI.js') }}"></script>
 <script>
     selectLinks("profile");
 </script>

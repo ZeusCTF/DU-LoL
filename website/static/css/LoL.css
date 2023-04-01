@@ -141,10 +141,12 @@
 }
 
 .container-rank-display {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
     gap: 1rem;
     justify-content: center;
-    align-content: center;
+    align-items: center;
 }
 
 .container-weekly-sq-tracking {
@@ -178,195 +180,199 @@
     transition: width .5s;
 }
 
-.container-solo-match-history, .container-flex-match-history {
+
+/*Match History*/
+/*full match history container*/
+.container-match-history {
+    display: flex;
+    flex-direction: column;
     width: 100%;
-    margin: 0;
-    padding: 0;
-    max-height: 80vh;
-    overflow-y: scroll;
-    overflow-x: hidden;
-    border: 2px solid var(--white);
+    padding: 1rem 10px;
 }
 
-.wrapper-match-history-header {
-    background-color: var(--black);
-    font-size: 1.5rem;
-    width: 90%;
-    margin: auto;
-    margin-top: 1rem;
-    padding: 1rem 0;
-}
-
-.wrapper-match-history {
+/*match summary container*/
+.container-match-summary {
+    display: flex;
+    flex-direction: column;
     width: 100%;
 }
 
-.wrapper-match-history div {
-    margin: 1rem 0;
-    padding: 1rem 0;
-}
-
-/*JS inserted*/
-
-/*Game ID Display*/
-.container-match-id {
-    width: 90%;
-    margin-left: auto !important;
-    margin-right: auto !important;
-    color: var(--black);
-    font-size: 1.5rem;
-    font-weight: 600;
-}
-
-.container-match-id p {
+/*current player match summary*/
+.container-match-summary-curplayer {
+    background-color: gray;
+    display: grid;
+    grid-template-columns: 20% 40% 20% 20%;
+    height: fit-content;
+    justify-content: center;
+    align-items: center;
+    color: var(--white);
     font-size: 1.2rem;
+    border-radius: 3px;
+    border: 2px solid var(--white);
 }
 
-/*Lobby Display*/
-.container-history-participants {
+.container-match-summary-curplayer-lobby {
+    display: grid;
+    grid-template-columns: 25% 50% 25%;
+    justify-content: center;
+    align-items: center;
     width: 100%;
+}
+
+.wrapper-summoners {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.wrapper-summoners img {
+    width: 40%;
+    max-width: 40px;
+}
+
+.wrapper-champIcon-summoners {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 0;
+    margin: auto;
+    width: fit-content;
+}
+
+#curPlayerChampIcon {
+    width: 100px;
+    min-width: 50px;
+    margin: 0 auto;
+    border-radius: 50%;
+}
+
+.wrapper-champIcon-summoners div {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    padding: 10px;
+}
+
+.container-items {
+    display: flex;
+    flex-direction: row;
+    min-width: 120px;
+    justify-content: center;
+    align-items: center;
+}
+
+.item-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: repeat(5, auto);
+    grid-template-columns: repeat(3, auto);
+    grid-template-rows: repeat(2, auto);
+    gap: 10px;
+    height: fit-content;
+    max-width: 100%;
+    margin-left: 10px;
+}
+
+.item-grid img {
+    max-width: 50px;
+    max-height: 50px;
+    width: 100%;
+}
+
+.item-grid img, .item-trinket img {
+    border: 2px solid var(--black);
+    min-width: 20px;
+    min-height: 20px;
+}
+
+.item-trinket {
+    height: 110px;
+    width: fit-content;
+    margin: auto 10px;
+    display: flex;
+}
+
+.item-trinket img {
+    width: 100%;
+    height: auto;
+    max-width: 40px;
+    margin: auto 0;
+}
+
+.container-stat-summary {
+    text-align: center;
+    width: 100%;
+    height: fit-content;
+    font-size: 1.2rem;
+    margin-right: 10px;
+}
+
+/*match all players summary*/
+.container-match-summary-lobby {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.grid-match-summary-lobby {
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: repeat(10, auto);
     grid-auto-flow: column;
-    justify-content: center !important;
-    align-content: center !important;
-    gap: .5rem;
-    background-image: linear-gradient(to right, blue , red);
-}
-
-.container-match-player {
-    display: grid;
-    grid-template-columns: auto auto;
     gap: 1rem;
-    justify-content: center;
-    align-content: center;
+    padding: .5rem;
+    overflow: hidden;
+    width: 100%;
+    margin: 0 auto;
 }
 
-.wrapper-lobby-player-information {
+.wrapper-player-summary {
     display: flex;
     flex-direction: column;
-    max-width: fit-content;
+    width: 100%;
+    align-items: center;
+    border: 2px solid var(--white);
+    padding: .5rem;
 }
 
-.wrapper-lobby-player-desc {
-    width: fit-content;
+.lobby-summary-player-info  {
     display: flex;
     flex-direction: column;
-    justify-self: center;
-    align-self: center;
-    gap: 1rem;
-    background-color: var(--black);
+    justify-content: space-evenly;
+    align-items: center;
 }
 
-.wrapper-lobby-player-desc img {
-    height: 50px;
-    width: 50px;
-    margin: auto;
+.wrapper-lobby-summary-player-rank-info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 10px;
+    padding-top: 10px;
 }
 
-.container-match-player p {
-    margin: auto;
+.wrapper-lobby-summary-player-rank-info img {
+    max-height: 30px;
 }
 
-
-/*general stat section styling*/
+/*player stats for matches*/
 .container-match-stats {
-    width: 90%;
-    max-height: 115px;
-    margin-left: auto !important;
-    margin-right: auto !important;
-    border: 2px solid var(--white);
-    overflow-y: hidden;
+    background-color: black;
 }
 
-.display-match-stats {
-    max-height: fit-content !important;
-    overflow-y: scroll !important;
-}
-
-.wrapper-stats-section, .container-ping-stats {
-    margin: 1rem auto !important;
-    padding: 0 1rem !important;
-    border: 2px solid var(--white);
-    width: 90%;
-    text-align: left;
-}
-
-.wrapper-stats-header {
-    text-align: center !important;
-    padding-bottom: 0 !important;
-}
-
-/*Stats section header*/
-.wrapper-stats-main-header {
-    display: flex;
-    width: fit-content;
-    gap: 1.5rem;
-    margin-left: auto !important;
-    margin-right: auto !important;
-    justify-content: space-between;
-}
-
-.wrapper-stats-main-header h3 {
-    font-size: 2rem;
-}
-
-/*item & gold stats*/
-.wrapper-item-display {
+.match-stats-charts {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: .5rem;
-    justify-content: center;
-    align-content: center;
-}
-
-.wrapper-stats-income {
-    text-align: center !important;
-}
-
-.wrapper-item-display img {
-    margin: auto;
-}
-
-.wrapper-summoner-spell-info {
-    display: flex;
-}
-
-.wrapper-summoner-spells {
-    width: 50%;
-    display: flex;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
     gap: 1rem;
-    justify-content: center;
-    align-content: center;
+    padding: 1rem;
 }
 
-/*macro stats*/
-.container-macro-stats {
-    border: 2px solid var(--red);
-    width: 90%;
-    margin-left: auto !important;
-    margin-right: auto !important;
+.chart-container {
+    position: relative;
+    max-width: 100%;
+    height: auto;
 }
 
-/*ping stats*/
-.wrapper-stats-header {
-    font-size: 1.5rem;
-    font-weight: 600;
-    text-decoration: 2px solid underline var(--white);
-    text-align: center !important;
-}
 
-.wrapper-ping-stats, .wrapper-stats-obj, .wrapper-stats-turret, .wrapper-stats-vision, 
-.wrapper-stats-combat {
-    font-size: 1.1rem;
-    display: grid;
-    grid-template-columns: auto auto;
-    text-align: left !important;
-    gap: .5rem;
-    padding: 0 1rem !important;
-    grid-auto-flow: row;
-}
 
 /*Responsive Layouts*/
 
@@ -386,18 +392,13 @@
        margin: auto !important;
     }
 
-    .container-solo-match-history, .container-flex-match-history, .wrapper-profile-section-header, .container-weekly-sq-tracking {
+    .container-match-history, .container-flex-match-history, .wrapper-profile-section-header, .container-weekly-sq-tracking {
         grid-column: span 2;
     }
 
-    .wrapper-lobby-player-desc {
-        flex-direction: row;
-        padding: 1rem !important;
-    }
-
-    /*JS Inserts*/
-    .wrapper-ping-stats {
-        text-align: center !important;
+    .grid-match-summary-lobby {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(5, auto);
     }
 }
 

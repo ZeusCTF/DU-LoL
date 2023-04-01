@@ -148,13 +148,6 @@ def update_user():
 
     return jsonify({})
 
-
-
-@views.route('/LoL')
-@login_required
-def DULoL():
-    return render_template("LoL.html", user=current_user, acc=current_user.userName, adminStatus=current_user.isAdmin, events=pullEvent())
-
 @views.route('/schedule', methods=['GET','POST'])
 @login_required
 def schedule():

@@ -1,6 +1,6 @@
 const statContainer = document.querySelector(".container-profile-stats");
 
-const API_KEY = "RGAPI-fa0d209c-bb0b-4e3c-96c6-ae56a4975e5e";
+//const API_KEY = "RGAPI-c409430e-690e-45a9-8f25-d218fa1b4256";
 
 var soloQueueMatches = new Array();
 var flexQueueMatches = new Array();
@@ -203,7 +203,7 @@ async function getPlayer() {
     sumIconImg.src = ("http://ddragon.leagueoflegends.com/cdn/13.3.1/img/profileicon/" + currentPlayer.profileIconId + ".png");
 
     //set summoner name
-    let sumName = document.getElementById("sumName");
+    let sumName = document.querySelector(".hidden-sumname");
     sumName.innerHTML = currentPlayer.ign;
     
     //set summoner level
@@ -299,6 +299,13 @@ async function readMatchIDs(matchList)
         const fetchMatchObj = await fetch(APICallString);
         let matchData = await fetchMatchObj.json();
         //console.log(matchData);
+
+        console.log(matchData.info);
+        const participants = matchData.info.participants;
+
+        participants.forEach(participant => {
+            console.log(participant.summonerName)
+        })
 
         if(matchData.info.queueId == 420) {
             //console.log("Found solo queue game");
