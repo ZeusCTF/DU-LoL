@@ -127,47 +127,53 @@
         <section class = "container-match-history">
             <div class = "container-match-summary">
                 <div class = "container-match-summary-curplayer">
-                    <!--Current Player Match Summary-->
-                    {% for player in match.info.participants%}
-                    {% if player.summonerName == current_player_profile.profile.ign %}
-                    <div class ="wrapper-champIcon-summoners">
-                        <img id="curPlayerChampIcon" src = "http://ddragon.leagueoflegends.com/cdn/13.6.1/img/champion/{{ player.championName }}.png">
-                        <div class = "wrapper-summoners">
-                            <img src = "../static/images/sum-spells/{{ player.summoner1Id }}.webp">
-                            <img src = "../static/images/sum-spells/{{ player.summoner2Id }}.webp">
+                    <div class = "container-match-summary-curplayer-data">
+                        <!--Current Player Match Summary-->
+                        {% for player in match.info.participants%}
+                        {% if player.summonerName == current_player_profile.profile.ign %}
+                        <div class ="wrapper-champIcon-summoners">
+                            <img id="curPlayerChampIcon" src = "http://ddragon.leagueoflegends.com/cdn/13.6.1/img/champion/{{ player.championName }}.png">
+                            <div class = "wrapper-summoners">
+                                <img src = "../static/images/sum-spells/{{ player.summoner1Id }}.webp">
+                                <img src = "../static/images/sum-spells/{{ player.summoner2Id }}.webp">
+                            </div>
                         </div>
-                    </div>
-                    <div class = "container-items">
-                        <div class = "item-grid">
-                            <img src = "http://ddragon.leagueoflegends.com/cdn/13.4.1/img/item/{{ player.item0 }}.png">
-                            <img src = "http://ddragon.leagueoflegends.com/cdn/13.4.1/img/item/{{ player.item1 }}.png">
-                            <img src = "http://ddragon.leagueoflegends.com/cdn/13.4.1/img/item/{{ player.item2 }}.png">
-                            <img src = "http://ddragon.leagueoflegends.com/cdn/13.4.1/img/item/{{ player.item3 }}.png">
-                            <img src = "http://ddragon.leagueoflegends.com/cdn/13.4.1/img/item/{{ player.item4 }}.png">
-                            <img src = "http://ddragon.leagueoflegends.com/cdn/13.4.1/img/item/{{ player.item5 }}.png">
+                        <div class = "container-items">
+                            <div class = "item-grid">
+                                <img src = "http://ddragon.leagueoflegends.com/cdn/13.4.1/img/item/{{ player.item0 }}.png">
+                                <img src = "http://ddragon.leagueoflegends.com/cdn/13.4.1/img/item/{{ player.item1 }}.png">
+                                <img src = "http://ddragon.leagueoflegends.com/cdn/13.4.1/img/item/{{ player.item2 }}.png">
+                                <img src = "http://ddragon.leagueoflegends.com/cdn/13.4.1/img/item/{{ player.item3 }}.png">
+                                <img src = "http://ddragon.leagueoflegends.com/cdn/13.4.1/img/item/{{ player.item4 }}.png">
+                                <img src = "http://ddragon.leagueoflegends.com/cdn/13.4.1/img/item/{{ player.item5 }}.png">
+                            </div>
+                            <div class = "item-trinket">
+                                <img src = "http://ddragon.leagueoflegends.com/cdn/13.4.1/img/item/{{ player.item6 }}.png">
+                            </div>
                         </div>
-                        <div class = "item-trinket">
-                            <img src = "http://ddragon.leagueoflegends.com/cdn/13.4.1/img/item/{{ player.item6 }}.png">
+                        <div class = "container-stat-summary">
+                            <p>{{ player.championName }}</p>
+                            <p>Lvl {{ player.champLevel }}</p>
+                            <p class = "curPlayer-summary-KDA">{{ player.kills }} / {{ player.deaths }} / {{ player.assists }}</p>
                         </div>
+                        <div class = "container-stat-summary">
+                            <p><span class="curPlayer-summary-cs">{{ player.totalMinionsKilled }}</span> CS <span class="curPlayer-summary-cs-per-min">(0.0)</span></p>
+                            <p class = "curPlayer-summary-KDA-avg">KDA: 0.00</p>
+                            <p>Vision: {{ player.visionScore }}</p>
+                        </div>
+                        {% endif %}
+                        {% endfor %}
                     </div>
-                    <div class = "container-stat-summary">
-                        <p>{{ player.championName }}</p>
-                        <p>Lvl {{ player.champLevel }}</p>
-                        <p class = "curPlayer-summary-KDA">{{ player.kills }} / {{ player.deaths }} / {{ player.assists }}</p>
+                    <div class = "container-curPlayer-lobby-metadata">
+                        <p class = "dispGameDate">3/23/23</p>
+                        <p class = "dispGameLength">30:33</p>
+                        <p class = "dispGameWin">Win</p>
                     </div>
-                    <div class = "container-stat-summary">
-                        <p><span class="curPlayer-summary-cs">{{ player.totalMinionsKilled }}</span> CS <span class="curPlayer-summary-cs-per-min">(0.0)</span></p>
-                        <p class = "curPlayer-summary-KDA-avg">KDA: 0.00</p>
-                        <p>Vision: {{ player.visionScore }}</p>
-                    </div>
-                    {% endif %}
-                    {% endfor %}
                 </div>
-                <button>
-
-                </button>
+                <!--Toggle Lobby Summary Btn-->
+                <button id = "{{ match.info.gameId }}toggLobbySummaryDrpdwn" class = "toggle-lobby-summary-drpdwn" onclick = "toggleDropdown('{{ match.info.gameId }}lobbySummary', this)">Open Lobby Summary <i class="fa-solid fa-caret-down"></i></button>
                 <!--Full Lobby Summary-->
-                <div class = "container-match-summary-lobby">
+                <div id = "{{ match.info.gameId }}lobbySummary" class = "container-match-summary-lobby">
                     <div class = "grid-match-summary-lobby">
                         {% for player in match.info.participants%}
                         <div class = "wrapper-player-summary">
@@ -223,14 +229,16 @@
                         </div>
                         {% endfor %}
                     </div>
+                    <!--toggle stats container-->
+                    <button id = "{{ match.info.gameId }}toggLobbyStatsDrpdwn" class = "toggle-lobby-stats-drpdwn" onclick = "toggleDropdown('{{ match.info.gameId }}statsContainer', this)">Open Stats <i class="fa-solid fa-caret-down"></i></button>
                 </div>
                 <!--Stats Display-->
-                <div class = "container-match-stats">
+                <div id="{{ match.info.gameId }}statsContainer" class = "container-match-stats">
                     <!--Game information to pull from flask into JavaScript-->
-                    <div class = "hidden-js-vars" style="display: flex; flex-direction: column;">
+                    <div class = "hidden-js-vars" style="display: none;">
                         <p>Data pulled into JS</p>
                         <p id = "RAPIgameCreation">{{ match.info.gameCreation }}</p>
-                        <p id= "RAPIgameEndTimestamp">{{ match.info.gameEndTimestamp }}</p>
+                        <p class = "RAPIgameEndTimestamp" id= "RAPIgameEndTimestamp">{{ match.info.gameEndTimestamp }}</p>
                         <p id= "RAPIgameStartTimestamp">{{ match.info.gameStartTimestamp }}</p>
                         <p class = "RAPIgameDuration" id= "RAPIgameDuration">{{ match.info.gameDuration }}</p>
                         <p id= "RAPIgameId">{{ match.info.gameId }}</p>
@@ -244,8 +252,24 @@
                         <div class = "chart-container">
                             <canvas id="{{ match.info.gameId }}goldGraph"></canvas>
                         </div>
+                        <div class = "container-pie-charts">
+                            <div class = "chart-container">
+                                <canvas id="{{ match.info.gameId }}blueGoldPieGraph"></canvas>
+                            </div>
+                            <div class = "chart-container">
+                                <canvas id="{{ match.info.gameId }}redGoldPieGraph"></canvas>
+                            </div>
+                        </div>
                         <div class = "chart-container">
                             <canvas id="{{ match.info.gameId }}damageGraph"></canvas>
+                        </div>
+                        <div class = "container-pie-charts">
+                            <div class = "chart-container">
+                                <canvas id="{{ match.info.gameId }}blueDamagePieGraph"></canvas>
+                            </div>
+                            <div class = "chart-container">
+                                <canvas id="{{ match.info.gameId }}redDamagePieGraph"></canvas>
+                            </div>
                         </div>
                         <div class = "chart-container">
                             <canvas id="{{ match.info.gameId }}KDAGraph"></canvas>
@@ -257,7 +281,11 @@
                             //looks like an error but jinja will replace the text before the script is processed
                             //JS pulls canvas based off of gameID, then parses match list data into graph
                             loadGoldGraph({{ match.info.gameId }}, {{ match | tojson | safe }});
+                            loadGoldPieGraph({{ match.info.gameId }}, {{ match | tojson | safe }}, "blue");
+                            loadGoldPieGraph({{ match.info.gameId }}, {{ match | tojson | safe }}, "red");
                             loadDamageGraph({{ match.info.gameId }}, {{ match | tojson | safe }});
+                            loadDamagePieGraph({{ match.info.gameId }}, {{ match | tojson | safe }}, "blue");
+                            loadDamagePieGraph({{ match.info.gameId }}, {{ match | tojson | safe }}, "red");
                             loadKDAGraph({{ match.info.gameId }}, {{ match | tojson | safe }});
                             loadVisionGraph({{ match.info.gameId }}, {{ match | tojson | safe }});
                         </script>

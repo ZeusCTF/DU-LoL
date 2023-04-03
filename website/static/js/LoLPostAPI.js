@@ -13,6 +13,16 @@ function cleanAPI() {
 
     //calculated avg KDA & CS per minute.  Populates the calculations into correct location in HTML
     setCurPlayerSummary();
+
+    //ddragon is case sensitive and uses different names for some champions
+    //FiddleSticks - Fiddlesticks, Wukong - MonkeyKing
+    renameImgSrcs();
+
+    //calculate win/loss for solo queue games played in the last 7 days
+    updateWeeklySoloQueue();
+
+    //display game date (month/day/year or < 24 hours ago), 
+    //game length (min:sec), game win (Win/Loss)
 }
 
 function cleanItems() {
@@ -78,11 +88,23 @@ function setCurPlayerSummary() {
     
     const totalCSs = document.querySelectorAll(".curPlayer-summary-cs");
     const totalCSPMs = document.querySelectorAll(".curPlayer-summary-cs-per-min");
-    const gameDurations = document.querySelectorAll(".RAPIgameDuration");
     
+    const dispGameDates = document.querySelectorAll(".dispGameDate");
+    const dispGameLengths = document.querySelectorAll(".dispGameLength");
+    const dispGameWins = document.querySelectorAll(".dispGameWin");
+
+    const gameEndTimes = document.querySelectorAll(".RAPIgameEndTimestamp");
+    const gameDurations = document.querySelectorAll(".RAPIgameDuration");
+    const gameWinBools = document.querySelectorAll(".RAPIwin");
+
+    const currentTime = Date.now();
+        
     //utlize same loop since all stats appear in same containers, thus having
     //equal indices
     for(var i = 0; i < KDAs.length; i++) {
+        //referenced in multiple calculations
+        const gameLengthSec = parseInt(gameDurations[i].innerText);
+
         //traverses all KDAs, calculated avg KDA, then sets KDA display to calculation
         const KDAstring = KDAs[i].innerText;
         const KDAsplit = KDAstring.split(' / ');
@@ -93,10 +115,102 @@ function setCurPlayerSummary() {
         //traverses all totalCS displays.  Calculate cs/minute based off of game
         //length, hidden in stats container for JS pull
         const totalCS = parseInt(totalCSs[i].innerText);
-        const gameLengthSec = parseInt(gameDurations[i].innerText);
         const gameLengthMin = Math.round((gameLengthSec/60) * 100) / 100;
         const CSPerMin = Math.round((totalCS/gameLengthMin) * 100) / 100;
         totalCSPMs[i].innerHTML = "(" + CSPerMin + ")";
+
+        //traverses all gameEndTimes, converts from Unix to m/d/y then updates
+        //all dispGameDate
+        const endDate = convertEndGameTimestamp(parseInt(gameEndTimes[i].innerText), currentTime);
+        dispGameDates[i].innerHTML = "" + endDate;
+
+        //traverses all gameDurationTimes, converts from Unix to m:s then updates
+        //all dispGameDuration
+        const gameDur = convertGameDurationTimestamp(parseInt(gameDurations[i].innerText));
+        console.log(gameDur);
+        dispGameLengths[i].innerHTML = "Length: " + gameDur;
+
+        //traverses all gameWinBools, converts "True" to "Win" and 
+        //"False" to "Loss" then updates dispGameWins
+        if(gameWinBools[i].innerText == "True") {
+            dispGameWins[i].innerHTML = "Win";
+            dispGameWins[i].style.color = "green";
+        } else if (gameWinBools[i].innerText = "False") {
+            dispGameWins[i].innerHTML = "Loss";
+            dispGameWins[i].style.color = "red";
+        } 
+        else {
+            dispGameWins[i].innerHTML = "Unknown";
+        }
     }
 
+}
+
+function renameImgSrcs() {
+    const imgs = document.querySelectorAll("img");
+    imgs.forEach(img => {
+        if(img.src == "http://ddragon.leagueoflegends.com/cdn/13.6.1/img/champion/FiddleSticks.png") {
+            img.src = "http://ddragon.leagueoflegends.com/cdn/13.6.1/img/champion/Fiddlesticks.png"
+        } else if (img.src == "http://ddragon.leagueoflegends.com/cdn/13.6.1/img/champion/Wukong.png") {
+            img.src = "http://ddragon.leagueoflegends.com/cdn/13.6.1/img/champion/MonkeyKing.png"
+        }
+    })
+}
+
+function updateWeeklySoloQueue() {
+    const gameEndTimes = document.querySelectorAll(".RAPIgameEndTimestamp");
+    const winBools = document.querySelectorAll(".RAPIwin");
+    const currentTime = Date.now();
+
+    var totalGames = 0, wins = 0, losses = 0;
+
+    for (var i = 0; i < gameEndTimes.length; i++) {
+        var gameDifMill = currentTime - parseInt(gameEndTimes[i].innerText);
+        if(winBools[i].innerText == "True" && gameDifMill < 604800000) {
+            wins++;
+        } else if (winBools[i].innerText == "False" && gameDifMill < 604800000) {
+            losses++;
+        }
+    }
+
+    let progBar = document.querySelector(".sq-progress-bar");
+    let sqAmount = document.getElementById("sqAmount");
+    let sqWinLoss = document.getElementById("sqWinLoss");
+
+    totalGames = wins + losses;
+
+    progWidth = (totalGames / 20)*100;
+    progBar.style.width = progWidth + "%";
+
+    sqAmount.innerHTML = totalGames + " / 20 games played";
+    
+    sqWinLoss.innerHTML = wins + " Wins / " + losses + " Losses";
+}
+
+
+
+function convertEndGameTimestamp(UNIX_timestamp, currentTime){
+    const fullDate = new Date(UNIX_timestamp);
+    var date = "";
+
+    if((UNIX_timestamp - currentTime) < 86400) {
+        const subFullDate = new Date((currentTime - UNIX_timestamp))
+        var hours = subFullDate.getHours();
+        date = hours + " hours ago";
+    } else {
+        var month = fullDate.getMonth()+1;
+        var day = fullDate.getDate();
+        var year = fullDate.getFullYear();
+        date = month + "/" + day + "/" + year;
+    }
+    return date;
+}
+
+function convertGameDurationTimestamp(UNIX_timestamp) {
+    const minutes = Math.floor(UNIX_timestamp / 60);
+    const seconds = UNIX_timestamp - minutes * 60;
+
+    var duration = minutes + ":" + seconds;
+
+    return duration;
 }

@@ -2,7 +2,7 @@ from flask import jsonify
 import requests
 import json
 
-devkey = "RGAPI-33247a01-7e9d-44d4-8f32-8b8912b2bf7b"
+devkey = "RGAPI-b479bc79-9beb-4463-bec4-3c1b898223a3"
 
 def buildPlayerProfile(ign):
     #returns player info - puuid, sumId, summoner name, summoner level, etc.
@@ -94,7 +94,7 @@ def getPlayerRankStats(sumId):
 
     rankInfo = {
         "solo": {
-            "rankIcon": "iron",
+            "rankIcon": "../static/images/emblem-iron.png",
             "rank": "Iron",
             "tier": "IV",
             "lp": "0",
@@ -113,12 +113,12 @@ def getPlayerRankStats(sumId):
     for queueType in RankData:
         if(queueType['queueType'] == "RANKED_SOLO_5x5"):
             rankInfo['solo']['rankIcon'] = getRankIconSrc(queueType['tier'])
-            rankInfo['solo']['rank'] = queueType['tier']
+            rankInfo['solo']['rank'] = queueType['tier'].capitalize()
             rankInfo['solo']['tier'] = queueType['rank']
             rankInfo['solo']['lp'] = queueType['leaguePoints']
         elif(queueType['queueType'] == "RANKED_FLEX_SR"):
             rankInfo['flex']['rankIcon'] = getRankIconSrc(queueType['tier'])
-            rankInfo['flex']['rank'] = queueType['tier']
+            rankInfo['flex']['rank'] = queueType['tier'].capitalize()
             rankInfo['flex']['tier'] = queueType['rank']
             rankInfo['flex']['lp'] = queueType['leaguePoints']
 

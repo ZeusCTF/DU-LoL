@@ -112,7 +112,7 @@ a:hover, button:hover {
 }
 
 .display-items {
-  display: block;
+  display: block !important;
 }
 
 
