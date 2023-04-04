@@ -22,14 +22,58 @@
     font-weight: 600;
 }
 
-
-/*Video Display*/
-.container-vods-display {
+/*video container*/
+.container-vods {
     background-color: var(--redTrans);
     width: 90%;
     height: 90%;
     margin: auto;
     border-radius: 25px;
+}
+
+/*vod header*/
+.wrapper-vods-header {
+    display: flex;
+    padding: 1rem 0;
+    width: fit-content;
+    margin: auto;
+    color: var(--black);
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+/*Search for vod*/
+.container-vod-search {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    margin: auto;
+}
+
+.container-vod-search input {
+    color: var(--black);
+}
+
+.hide-vod {
+    display: none !important;
+}
+
+@media (min-width: 768px) {
+    .container-vod-search {
+        flex-direction: row;
+        width: 60%;
+    }
+
+    .container-vod-search input {
+        width: 60%;
+        margin-left: 1rem;
+    }
+}
+
+/*Video Display*/
+.container-vods-display {
     display: grid;
     padding: 1rem 0;
     grid-template-columns: 1fr;

@@ -2,7 +2,7 @@ from flask import jsonify
 import requests
 import json
 
-devkey = "RGAPI-b479bc79-9beb-4463-bec4-3c1b898223a3"
+devkey = "RGAPI-82725493-3db3-4f6d-9d78-cde5148a9683"
 
 def buildPlayerProfile(ign):
     #returns player info - puuid, sumId, summoner name, summoner level, etc.
@@ -101,7 +101,7 @@ def getPlayerRankStats(sumId):
 
         },
         "flex": {
-            "rankIcon": "iron",
+            "rankIcon": "../static/images/emblem-iron.png",
             "rank": "Iron",
             "tier": "IV",
             "lp": "0",
@@ -129,8 +129,8 @@ def getRankIconSrc(tier):
     return "../static/images/emblem-" + str(tier).lower() + ".png"
 
 def getmatchHistoryIds(puuid):
-    #Call Riot API for match data by player unique ID.  Set to pull last 2 player matches (all game modes)
-    MatchRequest = requests.get('https://americas.api.riotgames.com/lol/match/v5/matches/by-puuid/' + puuid + '/ids?start=0&count=2&api_key=' + devkey)
+    #Call Riot API for match data by player unique ID.  Set to pull last 4 player matches (all game modes)
+    MatchRequest = requests.get('https://americas.api.riotgames.com/lol/match/v5/matches/by-puuid/' + puuid + '/ids?start=0&count=4&api_key=' + devkey)
     #loads the response as json so it can be parsed
     resp = MatchRequest.json()
     x = json.dumps(resp)

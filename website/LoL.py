@@ -22,7 +22,7 @@ def DULoL():
 def LoLCoach(pid):
     selectedPlayer = User.query.get(pid)
 
-    return render_template("LoLCoach.html", user=current_user, acc=current_user.userName, adminStatus=current_user.isAdmin, player=selectedPlayer)
+    return render_template("LoLCoach.html", user=current_user, acc=current_user.userName, adminStatus=current_user.isAdmin, current_player_profile = buildPlayerProfile(selectedPlayer.ign))
 
 #routing for Rift Planner
 @LoL.route('/riftplanner')

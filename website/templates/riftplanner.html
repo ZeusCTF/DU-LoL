@@ -76,16 +76,16 @@
     <section class = "container-riftplanner-champsmenu">
         <div class="container-select-champ">
             <div class = "container-select-marker">
-                <button class = "blue-marker" id ="tblueselect" onclick="selectMarker(this)">Top</button>
-                <button class = "blue-marker" id ="jblueselect" onclick="selectMarker(this)">Jungle</button>
-                <button class = "blue-marker" id ="mblueselect" onclick="selectMarker(this)">Mid</button>
-                <button class = "blue-marker" id ="ablueselect" onclick="selectMarker(this)">Carry</button>
-                <button class = "blue-marker" id ="sblueselect" onclick="selectMarker(this)">Support</button>
-                <button class = "red-marker" id ="tredselect" onclick="selectMarker(this)">Top</button>
-                <button class = "red-marker" id ="jredselect" onclick="selectMarker(this)">Jungle</button>
-                <button class = "red-marker" id ="mredselect" onclick="selectMarker(this)">Mid</button>
-                <button class = "red-marker" id ="aredselect" onclick="selectMarker(this)">Carry</button>
-                <button class = "red-marker" id ="sredselect" onclick="selectMarker(this)">Support</button>
+                <button class = "blue-marker" id ="tblueselect" onclick="selectMarker(this)">T</button>
+                <button class = "blue-marker" id ="jblueselect" onclick="selectMarker(this)">J</button>
+                <button class = "blue-marker" id ="mblueselect" onclick="selectMarker(this)">M</button>
+                <button class = "blue-marker" id ="ablueselect" onclick="selectMarker(this)">C</button>
+                <button class = "blue-marker" id ="sblueselect" onclick="selectMarker(this)">S</button>
+                <button class = "red-marker" id ="tredselect" onclick="selectMarker(this)">T</button>
+                <button class = "red-marker" id ="jredselect" onclick="selectMarker(this)">J</button>
+                <button class = "red-marker" id ="mredselect" onclick="selectMarker(this)">M</button>
+                <button class = "red-marker" id ="aredselect" onclick="selectMarker(this)">C</button>
+                <button class = "red-marker" id ="sredselect" onclick="selectMarker(this)">S</button>
             </div>
             <div class = "container-champ-search">
                 <label for="champSearch">Search for champion: </label>
@@ -104,6 +104,8 @@
         </div>
     </section>
 </section>
+
+<script defer src = "{{ url_for('static',filename='/js/riftplanner.js') }}"></script>
 
 <script>
     selectLinks("riftstrats");

@@ -97,7 +97,7 @@
     height: 100vh;
     display: flex;
     transition: all .5s;
-    border-right: 1px solid var(--red);
+    border-right: 1px solid var(--white);
 }
 
 .container-select-champ {
@@ -117,9 +117,11 @@
     pointer-events: all;
     position: fixed;
     top: 20vh;
-    left: 0;
+    left: -3px;
     transition: all .5s;
     z-index: 500;
+    border: 1px solid var(--white);
+    color: var(--black);
 }
 
 .champselect-active {
@@ -136,9 +138,9 @@
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     grid-template-rows: 5vh 5vh;
     row-gap: 2rem;
-    margin: 2rem 0;
     text-align: center;
     pointer-events: all;
+    margin: 2rem 0;
 }
 
 .container-select-marker button {
@@ -148,6 +150,7 @@
     background-repeat: none;
     background-position: center;
     background-size: cover;
+    font-size: .8rem;
 }
 
 .container-select-marker div h1 {
@@ -156,12 +159,24 @@
 
 .wrapper-riftplanner-champs {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
     margin-left: 20px;
     row-gap: 2rem;
     pointer-events: all;
     height: 70%;
     overflow-y: scroll;
+}
+
+@media (min-width: 768px) {
+    .wrapper-riftplanner-champs {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
+
+@media (min-width: 1028px) {
+    .wrapper-riftplanner-champs {
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
 }
 
 /*search for champion*/
@@ -204,18 +219,23 @@
 /*Draw Menu*/
 .container-riftplanner-draw {
     display: flex;
-    width: 20vw !important;
+    width: 80vw;
     height: 100vh;
     position: fixed;
     top: 0;
-    left: -20vw;
+    left: -80vw;
     z-index: 1000;
     justify-content: space-between;
-    pointer-events: none;
     transition: all .5s;
-    width: 300px;
     background-color: var(--red);
-    border-right: 1px solid var(--red);
+    border-right: 1px solid var(--white);
+}
+
+@media (min-width: 768px) {
+    .container-riftplanner-draw {
+        width: 40vw;
+        left: -40vw;
+    }
 }
 
 
@@ -273,10 +293,12 @@
     pointer-events: all;
     position: fixed;
     top: calc(20vh + 45px);
-    left: 0;
+    left: -3px;
     cursor: pointer;
     transition: all .5s;
     z-index: 500;
+    border: 1px solid var(--white);
+    color: var(--black);
 }
 
 .toggle-riftplanner-drawmenu i {
@@ -288,7 +310,13 @@
 }
 
 .show-draw-menu-btn {
-    left: 20vw;
+    left: 80vw;
+}
+
+@media (min-width: 768px) {
+    .show-draw-menu-btn {
+        left: 40vw;
+    }
 }
 
 .selected-color {

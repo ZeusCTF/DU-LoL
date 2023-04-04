@@ -1,6 +1,9 @@
 {% extends "base.html" %}
 {% block title %} Roster {% endblock %}
 {% block content %}
+<button class = "toggle-create-roster" onclick="toggleCreateRoster()">
+    <i class="fa-regular fa-solid fa-users"></i>
+</button>
 <section class = "container-roster-cards">
     <!--Potential solution - creating a separate roster DB with enough info to pull data?-->
     <section class = "container-create-roster">
@@ -90,6 +93,13 @@
     </div>
     
 </section>
+
+<script type="text/javascript">
+    function toggleCreateRoster() {
+        document.querySelector(".toggle-create-roster").classList.toggle("create-roster-active-btn");
+        document.querySelector(".container-create-roster").classList.toggle("container-create-roster-active");
+    }
+</script>
 
 <script>
     selectLinks("roster");

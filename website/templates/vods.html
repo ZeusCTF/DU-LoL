@@ -17,19 +17,34 @@
 {% endif %}
 -->
 
-<section class = "container-vods-display">
-    {% for video in videos %}
-    <div class = "video-wrapper">
-       <div class ="video-thumbnail">
-        <img src="{{ video.thumbURL }}">
-       </div>
-       <div class = "video-wrapper-info">
-         <h3>{{ video.title }}</h3>
-         <a href="{{ video.videoSRC }}">View Video</a>
-       </div>
+<section class = "container-vods">
+    <div class = "wrapper-vods-header">
+        <h1>{{ current_user.playerTeam }} VODs</h1>
     </div>
-    {% endfor %}
+    <div class = "container-vod-search">
+        <label for="vodSearch">Search for VOD</label>
+        <input
+            type="text"
+            id="vodSearch"
+            name="vodSearch"
+            placeholder="Enter VOD title...">
+    </div>
+    <div class = "container-vods-display">
+        {% for video in videos %}
+        <div class = "video-wrapper">
+           <div class ="video-thumbnail">
+            <img src="{{ video.thumbURL }}">
+           </div>
+           <div class = "video-wrapper-info">
+             <h3>{{ video.title }}</h3>
+             <a href="{{ video.videoSRC }}">View Video</a>
+           </div>
+        </div>
+        {% endfor %}
+    </div>
 </section>
+
+<script defer src = "{{ url_for('static',filename='/js/vods.js') }}"></script>
 
 <script>
     selectLinks("vods");

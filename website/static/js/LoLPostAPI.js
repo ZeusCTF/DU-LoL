@@ -97,7 +97,8 @@ function setCurPlayerSummary() {
     const gameDurations = document.querySelectorAll(".RAPIgameDuration");
     const gameWinBools = document.querySelectorAll(".RAPIwin");
 
-    const currentTime = Date.now();
+    var currentTime = new Date();
+    currentTime = currentTime.getTime();
         
     //utlize same loop since all stats appear in same containers, thus having
     //equal indices
@@ -166,12 +167,16 @@ function updateWeeklySoloQueue() {
 
     for (var i = 0; i < gameEndTimes.length; i++) {
         var gameDifMill = currentTime - parseInt(gameEndTimes[i].innerText);
+        console.log("Current time: " + currentTime + " " + currentTime.toString());
+        console.log("End game time: " + parseInt(gameEndTimes[i].innerText))
+        console.log("gameDifMill" + gameDifMill);
         if(winBools[i].innerText == "True" && gameDifMill < 604800000) {
             wins++;
         } else if (winBools[i].innerText == "False" && gameDifMill < 604800000) {
             losses++;
         }
     }
+    console.log("Wins: " + wins + " Losses: " + losses);
 
     let progBar = document.querySelector(".sq-progress-bar");
     let sqAmount = document.getElementById("sqAmount");
@@ -194,7 +199,7 @@ function convertEndGameTimestamp(UNIX_timestamp, currentTime){
     var date = "";
 
     if((UNIX_timestamp - currentTime) < 86400) {
-        const subFullDate = new Date((currentTime - UNIX_timestamp))
+        const subFullDate = new Date((currentTime/1000 - (UNIX_timestamp)))
         var hours = subFullDate.getHours();
         date = hours + " hours ago";
     } else {
@@ -208,7 +213,10 @@ function convertEndGameTimestamp(UNIX_timestamp, currentTime){
 
 function convertGameDurationTimestamp(UNIX_timestamp) {
     const minutes = Math.floor(UNIX_timestamp / 60);
-    const seconds = UNIX_timestamp - minutes * 60;
+    var seconds = UNIX_timestamp - minutes * 60 + "";
+    if(seconds.length < 2) {
+        seconds = "0" + seconds;
+    }
 
     var duration = minutes + ":" + seconds;
 

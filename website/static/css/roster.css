@@ -8,21 +8,51 @@
     padding: 1rem 0;
 }
 
+/*toggle create roster menu*/
+.toggle-create-roster {
+    width: 40px;
+    height: 40px;
+    position: fixed;
+    left: -3px;
+    top: calc(5vh + 45px);
+    z-index: 500;
+    border: 1px solid var(--white);
+    background-color: var(--red);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all .5s;
+    color: var(--black);
+}
+
+.create-roster-active-btn {
+    left: 80vw;
+}
+
 /*Roster creation form*/
 .container-create-roster {
-    width: 90%;
-    margin: auto;
-    background-color: var(--black);
-    border-radius: 25px;
-    margin-bottom: 1rem;
+    width: 80vw;
+    height: 100vh;
+    position: fixed;
+    left: -80vw;
+    top: 0;
+    background-color: var(--red);
+    border-right: 1px solid var(--white);
     padding: 1rem 0;
     text-align: center;
+    transition: all .5s;
+    z-index: 500;
+}
+
+.container-create-roster-active {
+    left: 0;
 }
 
 #createRosHeader {
     font-size: 2rem;
     font-weight: 600;
     margin-bottom: 1rem;
+    color: var(--black);
 }
 
 .container-create-roster form div {
@@ -40,7 +70,16 @@
     text-align: center !important;
 }
 
+@media(min-width: 768px) {
+    .toggle-create-roster {
+        top: calc(5vh + 125px);
+    }
 
+    .container-create-roster {
+        height: calc(100vh - 125px);
+        top: 125px;
+    }
+}
 
 
 /*ROSTER DISPLAY*/

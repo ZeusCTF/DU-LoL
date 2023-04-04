@@ -4,6 +4,7 @@ from .models import Announcement, User, Roster
 from . import db
 from .googCal import pullEvent, addEvent
 from .discordBot import send_announcement
+from .YouTubeAPI import gatherVideos
 import json
 
 
@@ -144,7 +145,6 @@ def update_user():
                     value = False
                 user.isAdmin = value
                 db.session.commit()
-                print("Successfully updated user obj")
 
     return jsonify({})
 
@@ -178,6 +178,11 @@ def profile():
                 adminUsers.append(user)
         return render_template("profile.html", user=current_user, acc=current_user.userName, adminStatus=current_user.isAdmin, allusers=allUsers, admins=adminUsers, users=baseUsers)
     return render_template("profile.html", user=current_user, acc=current_user.userName, adminStatus=current_user.isAdmin)
+
+@views.route('/vods')
+@login_required
+def vods():
+    return render_template("vods.html", user=current_user, acc=current_user.userName, adminStatus=current_user.isAdmin, videos=gatherVideos())
 
 @views.route('/contact')
 def contact():
