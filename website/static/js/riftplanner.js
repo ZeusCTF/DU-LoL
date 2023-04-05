@@ -1,18 +1,12 @@
 const dragItems = document.querySelectorAll(".player-marker");
 
-//remove screen scrolling & place canvas (until canvas offset issue is fixed) 
-if(dragItems) {
-    let baseCont = document.querySelector(".container-base-content");
-    // baseCont.style.maxHeight = "100vh";
-    // baseCont.style.overflowY = "hidden";
-    baseCont.style.margin = "0";
-    if(window.innerWidth >= 768)
-         baseCont.style.marginTop = "calc(15vh)";
-    document.querySelector("body").style.maxHeight = "fit-content";
-}
+//find mid point of window, -25px marker, -25px marker, -12.5px (center middle button), -50px gap, -50px gap
+var fromLeftRedMobile = ((window.innerWidth/2) - 62.5 - 100);
+var fromLeftBlueMobile = ((window.innerWidth/2) - 62.5 - 100);
 
-var fromLeftRed = 100;
-var fromLeftBlue = 100;
+//find mid point of window, -50px marker, -50px marker, -25px (center middle button), -75px gap, -75px gap
+var fromLeftRedDeskTab = ((window.innerWidth/2) - 125 - 150);
+var fromLeftBlueDeskTab = ((window.innerWidth/2) - 125 - 150);
 
 
 //align markers on screen load
@@ -21,27 +15,27 @@ dragItems.forEach(dragItem => {
         if(dragItem.classList.contains("player-marker-red")){
             //place on mobile
             dragItem.style.top = "2rem";
-            dragItem.style.left = fromLeftRed + "px";
-            fromLeftRed += 50;
+            dragItem.style.left = fromLeftRedMobile + "px";
+            fromLeftRedMobile += 50;
         }
         else if(dragItem.classList.contains("player-marker-blue")) {
             //place on mobile
             dragItem.style.bottom = "2rem";
-            dragItem.style.left = fromLeftBlue + "px";
-            fromLeftBlue += 50;
+            dragItem.style.left = fromLeftBlueMobile + "px";
+            fromLeftBlueMobile += 50;
         }
     } else {
         if(dragItem.classList.contains("player-marker-red")){
-            //place on mobile
+            //place on desktop/tablet
             dragItem.style.top = "20vh";
-            dragItem.style.left = fromLeftRed + "px";
-            fromLeftRed += 75;
+            dragItem.style.left = fromLeftRedDeskTab + "px";
+            fromLeftRedDeskTab += 75;
         }
         else if(dragItem.classList.contains("player-marker-blue")) {
-            //place on mobile
+            //place on desktop/tablet
             dragItem.style.bottom = "2rem";
-            dragItem.style.left = fromLeftBlue + "px";
-            fromLeftBlue += 75;
+            dragItem.style.left = fromLeftBlueDeskTab + "px";
+            fromLeftBlueDeskTab += 75;
     }
 }  
 })
@@ -194,23 +188,20 @@ function queryChamps(input) {
 const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext('2d');
 
-const canvasOffsetX = canvas.offsetLeft;
-const canvasOffsetY = canvas.offsetTop;
-
-canvas.width = window.innerWidth - canvasOffsetX;
-canvas.height = window.innerHeight - canvasOffsetY;
-
 const riftImg = document.getElementById("riftImg");
 let riftmap2 = new Image();
 riftmap2.onload = function () {
-    const canvasContainer = document.querySelector(".container-sr");
-    canvasContainer.style.width = "80vw";
-    canvasContainer.style.height = riftmap2.height;
-    canvas.height = riftmap2.height;
-    ctx.drawImage(riftmap2, 0, 0, window.innerWidth, riftmap2.height);
+    const containerSR = document.querySelector(".container-sr");
+
+    canvas.width = containerSR.offsetWidth;
+    canvas.height = containerSR.offsetHeight;
+
+    ctx.imageSmoothingEnabled = false;
+    riftmap2.width = canvas.width;
+    riftmap2.height = canvas.height;
+    ctx.drawImage(riftmap2, 0, 0, canvas.width, canvas.height);
 };
 riftmap2.src = riftImg.src;
-riftmap2.classList.add("container-sr");
 
 let color = "#000000";
 let lineWidth = 5;
@@ -285,11 +276,13 @@ function toggleColor(btn) {
 
 //paints a new riftmap image onto the canvas
 function clearRiftMap() {
-    console.log("entered clear rift map");
-    const canvasContainer = document.querySelector(".container-sr");
-    canvasContainer.style.width = "80vw";
-    canvasContainer.style.height = riftmap2.height;
-    canvas.height = riftmap2.height;
-    canvas.width = window.innerWidth;
+    const containerSR = document.querySelector(".container-sr");
+
+    canvas.width = containerSR.offsetWidth;
+    canvas.height = containerSR.offsetHeight;
+
+    ctx.imageSmoothingEnabled = false;
+    riftmap2.width = canvas.width;
+    riftmap2.height = canvas.height;
     ctx.drawImage(riftmap2, 0, 0, canvas.width, canvas.height);
 }

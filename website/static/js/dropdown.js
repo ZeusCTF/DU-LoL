@@ -1,10 +1,7 @@
-function toggleDropdown(itemsId) {
-    document.getElementById(itemsId).classList.toggle("display-items");
-}
-
 //meant for lobby/stat containers to simulate stat container being nested in lobby summary
+//also functional for dropdown menus, will skip the lobby block and btn block
 function toggleDropdown(itemsId, btn) {
-    //toggle the indicated lobby or stats container
+    //toggle the indicated dropdown menu, lobby, or stats container
     const selectedContainer = document.getElementById(itemsId)
     selectedContainer.classList.toggle("display-items");
 
@@ -23,8 +20,10 @@ function toggleDropdown(itemsId, btn) {
         }
     }
 
-    //update down arrow icon to up arrow icon
-    const icon = btn.querySelector("i");
-    icon.classList.toggle("fa-caret-down");
-    icon.classList.toggle("fa-caret-up");
+    if(btn) {
+        //update down arrow icon to up arrow icon
+        const icon = btn.querySelector("i");
+        icon.classList.toggle("fa-caret-down");
+        icon.classList.toggle("fa-caret-up");
+    }
 }

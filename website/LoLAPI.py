@@ -129,8 +129,8 @@ def getRankIconSrc(tier):
     return "../static/images/emblem-" + str(tier).lower() + ".png"
 
 def getmatchHistoryIds(puuid):
-    #Call Riot API for match data by player unique ID.  Set to pull last 4 player matches (all game modes)
-    MatchRequest = requests.get('https://americas.api.riotgames.com/lol/match/v5/matches/by-puuid/' + puuid + '/ids?start=0&count=4&api_key=' + devkey)
+    #Call Riot API for match data by player unique ID.  Set to pull last 1 player matches (all game modes)
+    MatchRequest = requests.get('https://americas.api.riotgames.com/lol/match/v5/matches/by-puuid/' + puuid + '/ids?start=0&count=1&api_key=' + devkey)
     #loads the response as json so it can be parsed
     resp = MatchRequest.json()
     x = json.dumps(resp)

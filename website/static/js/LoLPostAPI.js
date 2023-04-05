@@ -96,9 +96,6 @@ function setCurPlayerSummary() {
     const gameEndTimes = document.querySelectorAll(".RAPIgameEndTimestamp");
     const gameDurations = document.querySelectorAll(".RAPIgameDuration");
     const gameWinBools = document.querySelectorAll(".RAPIwin");
-
-    var currentTime = new Date();
-    currentTime = currentTime.getTime();
         
     //utlize same loop since all stats appear in same containers, thus having
     //equal indices
@@ -122,7 +119,7 @@ function setCurPlayerSummary() {
 
         //traverses all gameEndTimes, converts from Unix to m/d/y then updates
         //all dispGameDate
-        const endDate = convertEndGameTimestamp(parseInt(gameEndTimes[i].innerText), currentTime);
+        const endDate = convertEndGameTimestamp(parseInt(gameEndTimes[i].innerText));
         dispGameDates[i].innerHTML = "" + endDate;
 
         //traverses all gameDurationTimes, converts from Unix to m:s then updates
@@ -194,20 +191,35 @@ function updateWeeklySoloQueue() {
 
 
 
-function convertEndGameTimestamp(UNIX_timestamp, currentTime){
-    const fullDate = new Date(UNIX_timestamp);
+function convertEndGameTimestamp(UNIX_timestamp) {
+    //Unix = seconds
+    const endGameStamp = new Date(UNIX_timestamp);
+    const endGameTime = endGameStamp.getTime();
+    //currentTime = milliseconds
+    const currentDate = new Date();
+    const currentTime = currentDate.getTime();
     var date = "";
 
-    if((UNIX_timestamp - currentTime) < 86400) {
-        const subFullDate = new Date((currentTime/1000 - (UNIX_timestamp)))
-        var hours = subFullDate.getHours();
-        date = hours + " hours ago";
-    } else {
-        var month = fullDate.getMonth()+1;
-        var day = fullDate.getDate();
-        var year = fullDate.getFullYear();
-        date = month + "/" + day + "/" + year;
-    }
+    console.log("End Game: " + endGameTime + " Current Time: " + currentTime);
+
+    //TODO: implement < 24 hours, format to X hours ago... instead of m/d/y
+
+    // if((currentTime - endGameTime) < 86400) {
+    //     const difDate = new Date(currentTime - endGameTime);
+    //     var hours = difDate.getHours();
+    //     date = hours + " hours ago";
+    // } else {
+    //     var month = endGameStamp.getMonth()+1;
+    //     var day = endGameStamp.getDate();
+    //     var year = endGameStamp.getFullYear();
+    //     date = month + "/" + day + "/" + year;
+    // }
+
+    var month = endGameStamp.getMonth()+1;
+    var day = endGameStamp.getDate();
+    var year = endGameStamp.getFullYear();
+    date = month + "/" + day + "/" + year;
+
     return date;
 }
 

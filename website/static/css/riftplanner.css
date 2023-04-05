@@ -18,19 +18,37 @@
     border: 2px solid red;
 }
 
+.container-riftplanner {
+    width: 100vw;
+    height: 100vh;
+}
+
+
 /*Summoners Rift Map*/
+/*SR image has width/height ratio of 1.405*/
 .container-sr {
     display: flex;
     background-color: white;
+    width: 90vw;
+    height: 64.01vw;
+    max-width: 1200px;
+    max-height: 854px;
+    margin: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 768px) {
     .container-sr {
-        overflow: hidden;
-        width: 1200px;
-        height: 800px;
-        margin: 0 auto;
+        top: 125px;
+        transform: translateX(-50%);
     }
+}
+
+.container-sr canvas {
+    position: relative;
 }
 
 /*Player Markers
